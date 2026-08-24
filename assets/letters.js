@@ -9,7 +9,7 @@
 
   // ── Configuration ───────────────────────────────────────────────────────────
   var SUBSCRIBE_ENDPOINT = "https://maisondvue-chat.masiela23.workers.dev/";
-  var DELAY_MS       = 4000;               // appears four seconds after landing
+  var DELAY_MS       = 2000;               // appears two seconds after landing
   var COOKIE         = "mdv_letters_seen"; // shared across every page
   var DISMISS_DAYS   = 7;                  // merely seen it -> ask again in a week
   var SUBSCRIBED_DAYS = 365;               // actually joined -> never nag again
@@ -197,7 +197,8 @@
   }
 
   .letters-modal.submitted .letters-form,
-  .letters-modal.submitted .letters-consent {
+  .letters-modal.submitted .letters-consent,
+  .letters-modal.submitted .letters-rules {
     display: none;
   }
 
@@ -222,7 +223,7 @@
     <button class="letters-close" type="button" aria-label="Close">&times;</button>
 
     <p class="letters-label">Welcome to MAISON D&rsquo;VUE</p>
-    <p class="letters-headline" id="lettersHeadline">Subscribe for first looks at each Allocation, letters from the maison, and rare access.</p>
+    <p class="letters-headline" id="lettersHeadline">Join the waitlist for a chance to win a sapphire necklace.</p>
 
     <form class="letters-form" id="lettersForm" novalidate>
       <div class="letters-input-row">
@@ -242,6 +243,8 @@
       <input type="checkbox" id="lettersConsent" checked>
       <span>By clicking submit, I agree to MAISON D&rsquo;VUE&rsquo;s <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms &amp; Conditions of Use</a>.</span>
     </label>
+
+    <p class="letters-rules" style="margin-top: 10px; font-family: var(--font-display); font-size: 11px; color: var(--mid); letter-spacing: 0.01em;">No purchase necessary. See <a href="rules.html" style="color: var(--navy); text-decoration: underline;">official rules</a>.</p><!-- TODO: link official sweepstakes rules once legal/Masiela confirms the mechanism -->
 
     <p class="letters-feedback" id="lettersFeedback" role="status" aria-live="polite"></p>
   </div>
