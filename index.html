@@ -127,9 +127,8 @@
     padding:0;
   }
 
-  /* No smooth-scroll on the snap container — it makes mandatory snap glide
-     loosely instead of locking. !important overrides the shared house.css. */
-  html{ scroll-snap-type:y mandatory; scroll-behavior:auto !important; }
+  /* No smooth-scroll on html element — smooth scroll is managed by Lenis JS engine. */
+  html{ scroll-behavior:auto !important; }
 
   html,body{
     background:var(--paper);
@@ -2067,7 +2066,18 @@
         else if (e.key === 'ArrowRight') { go(index + 1); }
       });
 
-      function start(x) { dragging = true; startX = x; dx = 0; width = root.clientWidth || 1; track.style.transition = 'none'; }
+      function onMouseMove(e) { move(e.clientX); }
+      function onMouseUp() {
+        end();
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+      }
+
+      function start(x) {
+        dragging = true; startX = x; dx = 0; width = root.clientWidth || 1; track.style.transition = 'none';
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+      }
       function move(x) {
         if (!dragging) return;
         dx = x - startX;
@@ -2086,8 +2096,6 @@
       root.addEventListener('touchcancel', end);
 
       root.addEventListener('mousedown', function (e) { start(e.clientX); e.preventDefault(); });
-      window.addEventListener('mousemove', move);
-      window.addEventListener('mouseup', end);
     });
   })();
 
@@ -2097,7 +2105,7 @@
   const MDV_HERO_FRAME_PATH = (n) => "assets/hero-frames-webp/frame-" + String(n).padStart(4, "0") + ".webp";
   const MDV_HERO_MOBILE_VIDEO_SRC = "assets/hero-fallback/hero-mobile.mp4";
   const MDV_HERO_SCROLL_HEIGHT = "clamp(1400px, 220vh, 3000px)";
-  const MDV_HERO_PRELOAD_CONCURRENCY = 16;
+  const MDV_HERO_PRELOAD_CONCURRENCY = 8;
   const MDV_HERO_BEATS = [];
 
   class MdvHeroEngine {
@@ -2109,6 +2117,7 @@
       this.poster = stickyEl.querySelector("#heroStaticPoster");
       this.ctx = this.canvas ? this.canvas.getContext("2d", { alpha: false, desynchronized: true }) : null;
       this.frameBitmaps = new Array(MDV_HERO_TOTAL_FRAMES + 1);
+      this.loadingPromises = {};
       this.lastDrawnFrame = 0;
       this.targetProgress = 0;
       this.drawRafId = null;
@@ -2201,14 +2210,21 @@
 
     loadFrame(n) {
       if (this.frameBitmaps[n]) return Promise.resolve(this.frameBitmaps[n]);
-      return fetch(MDV_HERO_FRAME_PATH(n))
+      if (this.loadingPromises[n]) return this.loadingPromises[n];
+
+      this.loadingPromises[n] = fetch(MDV_HERO_FRAME_PATH(n))
         .then((r) => r.blob())
         .then((b) => createImageBitmap(b))
         .then((bmp) => {
           this.frameBitmaps[n] = bmp;
+          delete this.loadingPromises[n];
           return bmp;
         })
-        .catch(() => null);
+        .catch(() => {
+          delete this.loadingPromises[n];
+          return null;
+        });
+      return this.loadingPromises[n];
     }
 
     findNearestLoadedFrame(requested) {
@@ -2251,6 +2267,9 @@
         smoothWheel: true,
         wheelMultiplier: 1,
         touchMultiplier: 1.6
+      });
+      this.lenis.on('scroll', () => {
+        this.updateTargetProgress();
       });
       const raf = (time) => {
         if (this.destroyed) return;

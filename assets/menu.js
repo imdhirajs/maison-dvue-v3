@@ -85,13 +85,16 @@
     // Match the hamburger to the nav's logo colour so it's legible on every
     // page (light over dark hero, navy on a light/scrolled nav).
     var sampler = nav.querySelector(".nav-logo") || nav.querySelector("a");
+    var lastState = null;
     function syncBurger() {
-      // Solidify the nav once scrolled past the hero, then match the hamburger
-      // to the (now updated) logo colour. Light pages stay solid regardless.
+      var isScrolled = window.scrollY > 60;
       if (!nav.classList.contains("mdv-nav--light") && !nav.classList.contains("mdv-nav--overlay")) {
-        nav.classList.toggle("scrolled", window.scrollY > 60);
+        nav.classList.toggle("scrolled", isScrolled);
       }
-      if (sampler) burger.style.color = getComputedStyle(sampler).color;
+      if (isScrolled !== lastState) {
+        lastState = isScrolled;
+        if (sampler) burger.style.color = getComputedStyle(sampler).color;
+      }
     }
     syncBurger();
     setTimeout(syncBurger, 60);
