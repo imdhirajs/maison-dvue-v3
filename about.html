@@ -184,9 +184,8 @@ body:has(#panel-house.active) .mdv-nav.mdv-nav--light:not(.scrolled) .nav-group 
 .slide:has(.slide-image-wrap.color-image) .slide-body .slide-chapter-label{display:block}
 
 .slide-chapter{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-body);font-weight:400;font-size:clamp(28px,3.4vw,44px);letter-spacing:0.02em;text-transform:uppercase;color:var(--cream);text-shadow:0 2px 30px rgba(0,0,0,0.65);line-height:1;text-align:center;pointer-events:none;white-space:nowrap;z-index:2}
-.slide-image-wrap.no-image{background:rgba(255,255,255,0.03);border:1px solid rgba(240,230,208,0.12);display:flex;align-items:center;justify-content:center;padding:32px}
-.slide-image-wrap.no-image::after{display:none}
-.slide-image-wrap.no-image .slide-chapter{position:relative;top:auto;left:auto;transform:none;text-shadow:none}
+.slide.text-only{grid-template-columns:1fr}
+.slide.text-only .slide-body .slide-chapter-label{display:block}
 .slide-body{padding-top:24px;max-width:100%;overflow-wrap:break-word}
 .slide-lede{font-family:var(--font-body);font-weight:400;font-size:clamp(11px,0.85vw,13px);line-height:1.7;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream);margin-bottom:24px}
 .slide-text{font-family:var(--font-body);font-weight:300;font-size:14px;line-height:1.85;color:rgba(240,230,208,0.82);letter-spacing:0.005em}
@@ -531,11 +530,9 @@ footer{padding:64px 0 36px}
         <div class="slide-track">
           <div class="slide-rail" data-rail="founder">
 
-            <article class="slide">
-              <div class="slide-image-wrap no-image">
-                <div class="slide-chapter">Origin</div>
-              </div>
+            <article class="slide text-only">
               <div class="slide-body">
+                <p class="slide-chapter-label">Origin</p>
                 <p class="slide-lede">A European sensibility, cultivated across three cities.</p>
                 <div class="slide-text">
                   <p>Masiela&rsquo;s sensibility was cultivated across Tirana, Budapest, and Vienna &mdash; three storied cities that taught her the texture of an older Europe, where craft is a habit and slowness is a discipline. By the time her family arrived in Michigan, she had already lived inside three languages and three sovereign cultures.</p>
@@ -545,11 +542,9 @@ footer{padding:64px 0 36px}
               </div>
             </article>
 
-            <article class="slide">
-              <div class="slide-image-wrap no-image">
-                <div class="slide-chapter">The Writer</div>
-              </div>
+            <article class="slide text-only">
               <div class="slide-body">
+                <p class="slide-chapter-label">The Writer</p>
                 <p class="slide-lede">Seven books. A discipline of selection.</p>
                 <div class="slide-text">
                   <p>Her first book of poetry, <em>Inner Thoughts</em>, was published when she was twelve, in two languages &mdash; making her, by the Michigan press&rsquo;s account, the youngest author in the world to publish in two languages simultaneously. She was named among North America&rsquo;s Top Ten Talented Poets and received recognition from President Bill Clinton before graduating high school at fifteen. She was admitted to UCLA as a junior at eighteen and graduated with a degree in English.</p>
@@ -560,11 +555,9 @@ footer{padding:64px 0 36px}
               </div>
             </article>
 
-            <article class="slide">
-              <div class="slide-image-wrap no-image">
-                <div class="slide-chapter">The Actress</div>
-              </div>
+            <article class="slide text-only">
               <div class="slide-body">
+                <p class="slide-chapter-label">The Actress</p>
                 <p class="slide-lede">Carmen Lopez. Seventy countries. A generation that grew up alongside her.</p>
                 <div class="slide-text">
                   <p>Audiences recognize Masiela as an actress. She made her television debut at fifteen and went on to portray Carmen Lopez in the Warner Bros. television series <em>George Lopez</em>, which aired on ABC for five seasons and was globally syndicated across more than seventy countries. The role earned her two consecutive Young Artist Awards.</p>
@@ -574,11 +567,9 @@ footer{padding:64px 0 36px}
               </div>
             </article>
 
-            <article class="slide">
-              <div class="slide-image-wrap no-image">
-                <div class="slide-chapter">The Humanitarian</div>
-              </div>
+            <article class="slide text-only">
               <div class="slide-body">
+                <p class="slide-chapter-label">The Humanitarian</p>
                 <p class="slide-lede">Continuous, since her early twenties.</p>
                 <div class="slide-text">
                   <p>Masiela&rsquo;s humanitarian work has been continuous since her early twenties. She was named the <strong>first Global Goodwill Ambassador</strong> of the World Assembly of Youth &mdash; the inaugural appointee to a role created for her, at the United Nations&rsquo; principal coordinating body for global youth, founded at Westminster Hall in 1949 and granted general consultative status with the UN Economic and Social Council.</p>
