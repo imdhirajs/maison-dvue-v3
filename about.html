@@ -184,6 +184,9 @@ body:has(#panel-house.active) .mdv-nav.mdv-nav--light:not(.scrolled) .nav-group 
 .slide:has(.slide-image-wrap.color-image) .slide-body .slide-chapter-label{display:block}
 
 .slide-chapter{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-body);font-weight:400;font-size:clamp(28px,3.4vw,44px);letter-spacing:0.02em;text-transform:uppercase;color:var(--cream);text-shadow:0 2px 30px rgba(0,0,0,0.65);line-height:1;text-align:center;pointer-events:none;white-space:nowrap;z-index:2}
+.slide-image-wrap.no-image{background:rgba(255,255,255,0.03);border:1px solid rgba(240,230,208,0.12);display:flex;align-items:center;justify-content:center;padding:32px}
+.slide-image-wrap.no-image::after{display:none}
+.slide-image-wrap.no-image .slide-chapter{position:relative;top:auto;left:auto;transform:none;text-shadow:none}
 .slide-body{padding-top:24px;max-width:100%;overflow-wrap:break-word}
 .slide-lede{font-family:var(--font-body);font-weight:400;font-size:clamp(11px,0.85vw,13px);line-height:1.7;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream);margin-bottom:24px}
 .slide-text{font-family:var(--font-body);font-weight:300;font-size:14px;line-height:1.85;color:rgba(240,230,208,0.82);letter-spacing:0.005em}
@@ -529,8 +532,7 @@ footer{padding:64px 0 36px}
           <div class="slide-rail" data-rail="founder">
 
             <article class="slide">
-              <div class="slide-image-wrap">
-                <img src="masiela-lusha-mozart-vienna.jpg" alt="Masiela Lusha as a child at the Mozart Denkmal in Vienna's Burggarten, during the European years that shaped the founder of MAISON D'VUE">
+              <div class="slide-image-wrap no-image">
                 <div class="slide-chapter">Origin</div>
               </div>
               <div class="slide-body">
@@ -539,13 +541,12 @@ footer{padding:64px 0 36px}
                   <p>Masiela&rsquo;s sensibility was cultivated across Tirana, Budapest, and Vienna &mdash; three storied cities that taught her the texture of an older Europe, where craft is a habit and slowness is a discipline. By the time her family arrived in Michigan, she had already lived inside three languages and three sovereign cultures.</p>
                   <p>English was Masiela&rsquo;s fourth language. The slowness of finding emotion and sentiment through language &mdash; of learning a people by learning their words &mdash; is the formative discipline of her working life.</p>
                 </div>
-                <div class="slide-caption">Vienna. The Mozart Denkmal, Burggarten. The European years.</div>
+                <div class="slide-caption">Vienna &middot; Tirana &middot; Budapest. The European years.</div>
               </div>
             </article>
 
             <article class="slide">
-              <div class="slide-image-wrap">
-                <img src="masiela-lusha-boopity-boop-book-signing.jpg" alt="Masiela Lusha with a young reader holding her children's book Boopity Boop! Writes Her First Poem, illustrated by Romi Caron — one of seven books authored by the founder of MAISON D'VUE">
+              <div class="slide-image-wrap no-image">
                 <div class="slide-chapter">The Writer</div>
               </div>
               <div class="slide-body">
@@ -560,8 +561,7 @@ footer{padding:64px 0 36px}
             </article>
 
             <article class="slide">
-              <div class="slide-image-wrap">
-                <img src="masiela-lusha-interview-beverly-hills.jpg" alt="Masiela Lusha during a filmed interview in a Beverly Hills residence — a career in front of the camera">
+              <div class="slide-image-wrap no-image">
                 <div class="slide-chapter">The Actress</div>
               </div>
               <div class="slide-body">
@@ -575,8 +575,7 @@ footer{padding:64px 0 36px}
             </article>
 
             <article class="slide">
-              <div class="slide-image-wrap">
-                <img src="masiela-lusha-world-assembly-of-youth-melaka-malaysia.jpg" alt="Masiela Lusha at the World Assembly of Youth gathering in Melaka, Malaysia, where she served as the first Global Goodwill Ambassador — part of the humanitarian work that shaped the founder of MAISON D'VUE">
+              <div class="slide-image-wrap no-image">
                 <div class="slide-chapter">The Humanitarian</div>
               </div>
               <div class="slide-body">
