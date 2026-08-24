@@ -9,6 +9,7 @@
      so the logo and nav never land on an outdated version of the site. */
   window.addEventListener('pageshow', function (e) { if (e.persisted) window.location.reload(); });
 </script>
+<script src="https://unpkg.com/lenis/dist/lenis.min.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="facebook-domain-verification" content="xovk96y253pwkwx7uffhiztogf5oob" />
 <title>MAISON D&rsquo;VUE &mdash; The House of Affinity Compositions&trade;</title>
@@ -1589,6 +1590,48 @@
     .card-tag { font-size: 15px; }
     .card-price { font-size: 26px; }
   }
+
+  /* ═══════════════════════════════════════════════════════════
+     SCROLL-SCRUB HERO (PORTED FROM V2)
+     ═══════════════════════════════════════════════════════════ */
+  .dv-hero-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+    background: #0A0A0C url('data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAABwBACdASoYAA4APu1iqU2ppaOiMAgBMB2JbACdMoRwAB8aaiBaskZRoEtpAAD+7p9CyiudmrWopqFpf29+Xg2bEXYsfrz+TkYCBXhBqiS1DvtXUMNjIQIzKyzDN+DllvSevlzwyZlAZe3J0p0Qt9++GGzQHBXpQs0wlo8uckDwcnz2AAA=') center/cover no-repeat;
+  }
+  .dv-hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: url('assets/hero-poster/hero-poster.webp') center/cover no-repeat;
+  }
+  .dv-hero-fallback-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: none;
+  }
+  .dv-cue {
+    position: absolute;
+    bottom: 34px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 2;
+  }
+  @keyframes dvDrift { 0%,100% { transform:translateY(0); opacity:.55 } 50% { transform:translateY(9px); opacity:1 } }
+  @media (max-height: 780px) { .dv-cue { display:none !important } }
 </style>
 <link rel="stylesheet" href="assets/nav.css?v=13">
 <link rel="stylesheet" href="assets/house.css?v=4">
@@ -1671,20 +1714,25 @@
 <main id="top">
 
 
-  <!-- ═══ CINEMATIC HERO SLIDE ═══ -->
-  <div class="slides">
-    <section class="slide" id="slide-elixir">
-      <video class="slide-media" src="paparazzi-hero.mp4" poster="paparazzi-hero.jpg"
-        autoplay muted loop playsinline webkit-playsinline="true" preload="auto"
-        disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
-        aria-hidden="true" onerror="this.style.display='none';"></video>
+  <!-- ═══ SCROLL-SCRUB HERO REGION (PORTED FROM V2) ═══ -->
+  <section id="slide-elixir" data-hero-region style="position:relative;height:100vh;background:#0A0A0C;scroll-snap-align:start;scroll-snap-stop:always;">
+    <div id="heroSticky" class="dv-hero-sticky">
+      <canvas id="heroCanvas" class="dv-hero-canvas" aria-hidden="true"></canvas>
+      <video id="heroMobileVideo" class="dv-hero-fallback-media" muted loop playsinline preload="none" aria-hidden="true"></video>
+      <img id="heroStaticPoster" class="dv-hero-fallback-media" src="assets/hero-poster/hero-poster.webp" alt="MAISON D'VUE Hair Elixir — face, eye, hands with the elixir, mirror reveal">
+
       <div class="slide-scrim" aria-hidden="true"></div>
       <a class="slide-label" href="reserve.html">
         <span class="slide-title">The Elixir</span>
         <span class="slide-cue">Explore</span>
       </a>
-    </section>
-  </div>
+
+      <div class="dv-cue">
+        <div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(239,233,223,.42);font-family:var(--font-display)">Scroll</div>
+        <div style="width:1px;height:52px;background:linear-gradient(180deg,rgba(194,161,91,.85),rgba(194,161,91,0));animation:dvDrift 3.4s ease-in-out infinite"></div>
+      </div>
+    </div>
+  </section>
 
   <!-- ═══ PURCHASE SECTION ═══ -->
   <section class="purchase-section" id="buy">
@@ -2042,6 +2090,242 @@
       window.addEventListener('mouseup', end);
     });
   })();
+
+  /* ─── SCROLL-SCRUB HERO ENGINE (PORTED FROM V2) ─── */
+  /* TODO: replace hero-frames-webp + hero-poster + hero-mobile.mp4 with the final color-graded export once delivered; re-run the ffmpeg/ffprobe commands documented in the JS comment above MdvHeroEngine to regenerate frames and update MDV_HERO_TOTAL_FRAMES */
+  const MDV_HERO_TOTAL_FRAMES = 289;
+  const MDV_HERO_FRAME_PATH = (n) => "assets/hero-frames-webp/frame-" + String(n).padStart(4, "0") + ".webp";
+  const MDV_HERO_MOBILE_VIDEO_SRC = "assets/hero-fallback/hero-mobile.mp4";
+  const MDV_HERO_SCROLL_HEIGHT = "clamp(1400px, 220vh, 3000px)";
+  const MDV_HERO_PRELOAD_CONCURRENCY = 16;
+  const MDV_HERO_BEATS = [];
+
+  class MdvHeroEngine {
+    constructor(stickyEl) {
+      this.sticky = stickyEl;
+      this.section = stickyEl.closest("[data-hero-region]");
+      this.canvas = stickyEl.querySelector("#heroCanvas");
+      this.video = stickyEl.querySelector("#heroMobileVideo");
+      this.poster = stickyEl.querySelector("#heroStaticPoster");
+      this.ctx = this.canvas ? this.canvas.getContext("2d", { alpha: false, desynchronized: true }) : null;
+      this.frameBitmaps = new Array(MDV_HERO_TOTAL_FRAMES + 1);
+      this.lastDrawnFrame = 0;
+      this.targetProgress = 0;
+      this.drawRafId = null;
+      this.resizeRafId = null;
+      this.lenis = null;
+      this.lenisRafId = null;
+      this.beatEls = [];
+      this.ctaEl = null;
+      this.activeBeatId = null;
+      this.destroyed = false;
+    }
+
+    isMobilePhone() {
+      const ua = navigator.userAgent || "";
+      const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+      const narrow = window.innerWidth <= 820;
+      const uaMobile = /Android|iPhone|iPod|Mobile/i.test(ua);
+      return uaMobile || (isTouch && narrow);
+    }
+
+    async init() {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (reducedMotion) {
+        this.showStaticPoster();
+        return;
+      }
+      if (this.isMobilePhone()) {
+        this.showMobileVideo();
+        return;
+      }
+
+      this.runCanvasEngine();
+    }
+
+    showStaticPoster() {
+      if (this.canvas) this.canvas.style.display = "none";
+      if (this.video) this.video.style.display = "none";
+      if (this.poster) this.poster.style.display = "block";
+    }
+
+    showMobileVideo() {
+      if (this.canvas) this.canvas.style.display = "none";
+      if (this.poster) this.poster.style.display = "none";
+      if (!this.video) return;
+      this.video.src = MDV_HERO_MOBILE_VIDEO_SRC;
+      this.video.style.display = "block";
+      this.video.play().catch(() => {});
+    }
+
+    async runCanvasEngine() {
+      if (!this.canvas || !this.ctx) return;
+      if (this.section) this.section.style.height = MDV_HERO_SCROLL_HEIGHT;
+
+      this.beatEls = MDV_HERO_BEATS.map((b) => ({ ...b, el: this.sticky.querySelector("#" + b.id) }));
+      this.ctaEl = this.sticky.querySelector("#heroCta");
+      this.activeBeatId = null;
+
+      this.onResize = () => this.scheduleResize();
+      window.addEventListener("resize", this.onResize);
+      this.resizeCanvas();
+
+      await this.loadFrame(1);
+      this.drawFrame(1, true);
+
+      this.setupLenis();
+      this.onScroll = () => this.updateTargetProgress();
+      window.addEventListener("scroll", this.onScroll, { passive: true });
+      window.addEventListener("touchmove", this.onScroll, { passive: true });
+      this.updateTargetProgress();
+
+      this.preloadAll();
+    }
+
+    scheduleResize() {
+      if (this.resizeRafId) return;
+      this.resizeRafId = requestAnimationFrame(() => {
+        this.resizeRafId = null;
+        this.resizeCanvas();
+      });
+    }
+
+    resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const box = this.sticky.getBoundingClientRect();
+      this.canvas.width = Math.round(box.width * dpr);
+      this.canvas.height = Math.round(box.height * dpr);
+      if (this.lastDrawnFrame) this.drawFrame(this.lastDrawnFrame, true);
+    }
+
+    loadFrame(n) {
+      if (this.frameBitmaps[n]) return Promise.resolve(this.frameBitmaps[n]);
+      return fetch(MDV_HERO_FRAME_PATH(n))
+        .then((r) => r.blob())
+        .then((b) => createImageBitmap(b))
+        .then((bmp) => {
+          this.frameBitmaps[n] = bmp;
+          return bmp;
+        })
+        .catch(() => null);
+    }
+
+    findNearestLoadedFrame(requested) {
+      if (this.frameBitmaps[requested]) return requested;
+      for (let d = 1; d < MDV_HERO_TOTAL_FRAMES; d++) {
+        const lo = requested - d;
+        const hi = requested + d;
+        if (lo >= 1 && this.frameBitmaps[lo]) return lo;
+        if (hi <= MDV_HERO_TOTAL_FRAMES && this.frameBitmaps[hi]) return hi;
+      }
+      return null;
+    }
+
+    drawFrame(n, force) {
+      const target = this.frameBitmaps[n] ? n : this.findNearestLoadedFrame(n);
+      if (target === null || target === undefined) return;
+      if (!force && target === this.lastDrawnFrame) return;
+      const bmp = this.frameBitmaps[target];
+      if (!bmp) return;
+
+      const cw = this.canvas.width;
+      const ch = this.canvas.height;
+      const canvasRatio = cw / ch;
+      const imgRatio = bmp.width / bmp.height;
+      let dw, dh, dx, dy;
+      if (imgRatio > canvasRatio) {
+        dh = ch; dw = ch * imgRatio; dx = (cw - dw) / 2; dy = 0;
+      } else {
+        dw = cw; dh = cw / imgRatio; dx = 0; dy = 0;
+      }
+      this.ctx.clearRect(0, 0, cw, ch);
+      this.ctx.drawImage(bmp, dx, dy, dw, dh);
+      this.lastDrawnFrame = target;
+    }
+
+    setupLenis() {
+      if (typeof Lenis === "undefined") return;
+      this.lenis = new Lenis({
+        lerp: 0.1,
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.6
+      });
+      const raf = (time) => {
+        if (this.destroyed) return;
+        this.lenis.raf(time);
+        this.lenisRafId = requestAnimationFrame(raf);
+      };
+      this.lenisRafId = requestAnimationFrame(raf);
+    }
+
+    updateTargetProgress() {
+      if (!this.section) return;
+      const rect = this.section.getBoundingClientRect();
+      const heroTop = rect.top + window.scrollY;
+      const heroHeight = this.section.offsetHeight;
+      const viewportH = window.innerHeight;
+      const raw = (window.scrollY - heroTop) / (heroHeight - viewportH);
+      this.targetProgress = Math.min(1, Math.max(0, raw || 0));
+      this.scheduleDraw();
+    }
+
+    scheduleDraw() {
+      if (this.drawRafId || this.destroyed) return;
+      this.drawRafId = requestAnimationFrame(() => {
+        this.drawRafId = null;
+        const frame = Math.min(MDV_HERO_TOTAL_FRAMES, Math.max(1, Math.round(this.targetProgress * (MDV_HERO_TOTAL_FRAMES - 1)) + 1));
+        this.drawFrame(frame);
+        this.updateNarrative(this.targetProgress);
+      });
+    }
+
+    updateNarrative(progress) {
+      const beat = this.beatEls.find((b) => progress >= b.from && progress < b.to) || this.beatEls[this.beatEls.length - 1];
+      if (!beat || beat.id === this.activeBeatId) return;
+      this.activeBeatId = beat.id;
+      this.beatEls.forEach((b) => {
+        if (b.el) b.el.classList.toggle("mdv-hero-beat-active", b.id === beat.id);
+      });
+      if (this.ctaEl) this.ctaEl.classList.toggle("mdv-hero-cta-hidden", beat.id === "heroBeat5");
+    }
+
+    preloadAll() {
+      const order = [];
+      for (let i = 1; i <= MDV_HERO_TOTAL_FRAMES; i += 4) order.push(i);
+      for (let i = 1; i <= MDV_HERO_TOTAL_FRAMES; i++) if (i % 4 !== 1) order.push(i);
+
+      let idx = 0;
+      const worker = () => {
+        if (this.destroyed || idx >= order.length) return;
+        const n = order[idx++];
+        this.loadFrame(n).finally(worker);
+      };
+      for (let i = 0; i < MDV_HERO_PRELOAD_CONCURRENCY; i++) worker();
+    }
+
+    destroy() {
+      this.destroyed = true;
+      if (this.drawRafId) cancelAnimationFrame(this.drawRafId);
+      if (this.resizeRafId) cancelAnimationFrame(this.resizeRafId);
+      if (this.lenisRafId) cancelAnimationFrame(this.lenisRafId);
+      if (this.onResize) window.removeEventListener("resize", this.onResize);
+      if (this.onScroll) {
+        window.removeEventListener("scroll", this.onScroll);
+        window.removeEventListener("touchmove", this.onScroll);
+      }
+      this.lenis?.destroy();
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var heroSticky = document.getElementById("heroSticky");
+    if (heroSticky) {
+      var heroEngine = new MdvHeroEngine(heroSticky);
+      heroEngine.init();
+    }
+  });
 
 </script>
 
