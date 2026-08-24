@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Cache freshness: always serve the current page, never a stale cached copy -->
+<meta http-equiv="Cache-Control" content="no-cache">
+<script>
+  /* If the browser restores this page from its back/forward cache, reload it
+     so the logo and nav never land on an outdated version of the site. */
+  window.addEventListener('pageshow', function (e) { if (e.persisted) window.location.reload(); });
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>A Word from the Founder &mdash; MAISON D&rsquo;VUE</title>
+<meta name="description" content="A private welcome from Masiela Lusha, founder of MAISON D'VUE. Enclosed with your package.">
+
+<!-- Hidden page: reachable by QR code only. Not indexed, not linked from the site. -->
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=4">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4">
+<link rel="shortcut icon" href="/favicon.ico?v=4">
+<meta name="theme-color" content="#F6F5F2">
+
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --paper-2: #F6F5F2;
+    --ink: #0A0A0A;
+    --mid: rgba(10, 10, 10, 0.60);
+    --soft: rgba(10, 10, 10, 0.40);
+    --line: rgba(10, 10, 10, 0.14);
+    --line-soft: rgba(10, 10, 10, 0.08);
+    --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--paper-2); -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--paper-2);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    line-height: 1.65;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+  /* ===== MASTHEAD — wordmark only, no nav to distract from the film ===== */
+  .fp-masthead {
+    padding: 34px 24px 0;
+    text-align: center;
+  }
+  .fp-logo {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.30em;
+    color: var(--ink);
+  }
+
+  /* ===== STAGE ===== */
+  .fp-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 24px 24px;
+  }
+  .fp-inner {
+    width: 100%;
+    max-width: 940px;
+    text-align: center;
+  }
+
+  .fp-eyebrow {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--soft);
+    margin-bottom: 16px;
+  }
+  .fp-title {
+    font-weight: 300;
+    font-size: clamp(26px, 5vw, 38px);
+    letter-spacing: 0.06em;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .fp-sub {
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    color: var(--mid);
+    margin-bottom: 30px;
+  }
+
+  /* ===== FILM PLATE ===== */
+  .fp-plate {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    /* On short windows the plate flattens rather than pushing the film below
+       the fold. The video is contained on white, so the trim is invisible. */
+    max-height: calc(100svh - 480px);
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    box-shadow: 0 26px 70px rgba(10, 10, 10, 0.10);
+    overflow: hidden;
+  }
+  .fp-plate video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    /* contain, not cover — the founder's frame is never cropped, and the
+       video's own white ground meets the plate's white seamlessly */
+    object-fit: contain;
+    display: block;
+    background: var(--paper);
+  }
+
+  /* Tap layer — covers the plate until the visitor turns the sound on */
+  .fp-tap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 26px;
+    gap: 14px;
+    background: linear-gradient(to top, rgba(10, 10, 10, 0.30), rgba(10, 10, 10, 0) 45%);
+    transition: opacity 420ms ease;
+  }
+  .fp-tap[hidden] { display: none; }
+  .fp-tap.is-gone { opacity: 0; pointer-events: none; }
+
+  .fp-tap-mark {
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.16);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fp-tap-mark svg { width: 20px; height: 20px; color: #FFFFFF; margin-left: 2px; }
+  .fp-tap-label {
+    font-size: 10px;
+    letter-spacing: 0.30em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-shadow: 0 1px 12px rgba(10, 10, 10, 0.45);
+  }
+
+  .fp-note {
+    margin-top: 22px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+
+  /* ===== ONWARD ===== */
+  .fp-onward {
+    margin-top: 34px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .fp-btn {
+    display: inline-block;
+    padding: 14px 30px;
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    transition: opacity 240ms ease;
+  }
+  .fp-btn:hover { opacity: 0.78; }
+  .fp-btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line);
+  }
+  .fp-btn-ghost:hover { border-color: var(--ink); opacity: 1; }
+
+  /* ===== FOOT ===== */
+  .fp-foot {
+    padding: 26px 24px 34px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+
+  @media (max-width: 640px) {
+    .fp-masthead { padding-top: 26px; }
+    .fp-logo { font-size: 15px; letter-spacing: 0.26em; }
+    .fp-stage { padding: 24px 14px 16px; }
+    .fp-eyebrow { margin-bottom: 12px; }
+    .fp-sub { margin-bottom: 20px; }
+    /* Stacked on a phone, so the two read as a matched pair rather than
+       two buttons that happen to sit above one another. */
+    .fp-onward { margin-top: 26px; flex-direction: column; align-items: center; }
+    .fp-btn { padding: 13px 24px; letter-spacing: 0.22em; min-width: 250px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="fp-masthead">
+  <a href="index.html" class="fp-logo">MAISON D&rsquo;VUE</a>
+</header>
+
+<main class="fp-stage">
+  <div class="fp-inner">
+
+    <p class="fp-eyebrow">Enclosed with your package</p>
+    <h1 class="fp-title">A word from the founder</h1>
+    <p class="fp-sub">Masiela Lusha &middot; Los Angeles</p>
+
+    <div class="fp-plate">
+      <video id="fpFilm"
+        src="welcome-intro.mp4?v=1"
+        poster="welcome-intro-poster.jpg?v=1"
+        playsinline webkit-playsinline="true"
+        preload="auto"
+        muted autoplay
+        controlslist="nodownload"
+        disablepictureinpicture></video>
+
+      <button class="fp-tap" id="fpTap" type="button" aria-label="Play with sound">
+        <span class="fp-tap-mark">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        <span class="fp-tap-label" id="fpTapLabel">Tap for sound</span>
+      </button>
+    </div>
+
+    <p class="fp-note" id="fpNote">Best experienced with sound</p>
+
+    <div class="fp-onward">
+      <a class="fp-btn" href="index.html">Enter MDV</a>
+      <a class="fp-btn fp-btn-ghost" href="founders-circle.html">Subscribe to MDV</a>
+      <a class="fp-btn fp-btn-ghost" href="https://instagram.com/maisondvue"
+         target="_blank" rel="noopener">Follow MDV</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="fp-foot">
+  Hand-sealed &middot; Los Angeles
+</footer>
+
+<script>
+  (function () {
+    var film  = document.getElementById('fpFilm');
+    var tap   = document.getElementById('fpTap');
+    var label = document.getElementById('fpTapLabel');
+    var note  = document.getElementById('fpNote');
+
+    /* Try to start muted the moment the page opens, so a scan lands on a
+       film already running. If the browser refuses, the tap layer becomes a
+       plain play button instead. */
+    var attempt = film.play();
+    if (attempt && typeof attempt.catch === 'function') {
+      attempt.catch(function () { label.textContent = 'Tap to play'; });
+    }
+
+    /* One tap: sound on, from the top, with native controls from then on. */
+    tap.addEventListener('click', function () {
+      film.muted = false;
+      film.volume = 1;
+      film.currentTime = 0;
+      film.controls = true;
+      film.play();
+
+      tap.classList.add('is-gone');
+      note.textContent = 'Masiela Lusha, founder';
+      setTimeout(function () { tap.hidden = true; }, 460);
+    });
+
+    /* When the film finishes, offer it again rather than leaving a dead frame. */
+    film.addEventListener('ended', function () {
+      film.controls = true;
+    });
+  })();
+</script>
+
+</body>
+</html>

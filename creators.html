@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Cache freshness: always serve the current page, never a stale cached copy -->
+<meta http-equiv="Cache-Control" content="no-cache">
+<script>
+  /* If the browser restores this page from its back/forward cache, reload it
+     so the logo and nav never land on an outdated version of the site. */
+  window.addEventListener('pageshow', function (e) { if (e.persisted) window.location.reload(); });
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Founding Creator Program &mdash; MAISON D&rsquo;VUE</title>
+<meta name="description" content="The MAISON D'VUE Founding Creator Program. By invitation. Early access, complimentary product consideration, and affiliate opportunities. Composed in Beverly Hills.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://maisondvue.com/creators.html">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=4">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4">
+<link rel="shortcut icon" href="/favicon.ico?v=4">
+<meta name="theme-color" content="#FFFFFF">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --paper-2: #F6F5F2;
+    --ink: #0A0A0A;
+    --navy: #0A0A0A;
+    --sapphire: #1A1A1A;
+    --gold: #0A0A0A;
+    --gold-deep: #0A0A0A;
+    --mid: rgba(10, 10, 10, 0.60);
+    --soft: rgba(10, 10, 10, 0.40);
+    --line: rgba(10, 10, 10, 0.14);
+    --line-soft: rgba(10, 10, 10, 0.08);
+    --font-display:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --font-italic:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --font-body:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --page: 1180px;
+    --nav-h: 72px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--paper); -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+
+  /* ===== TOP NAV ===== */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .nav-links { display: flex; gap: 40px; }
+  .nav-links a {
+    font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
+    font-weight: 400; color: var(--mid); transition: color 220ms ease;
+  }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-right { display: flex; align-items: center; gap: 22px; }
+  .nav-login {
+    font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
+    font-weight: 400; color: var(--navy);
+  }
+  .nav-login:hover { color: var(--gold-deep); }
+  @media (max-width: 860px) {
+    .nav { padding: 0 22px; }
+    .nav-links { display: none; }
+    .nav-logo { font-size: 16px; letter-spacing: 0.26em; }
+  }
+
+  /* ===== HERO (video band) ===== */
+  .hero {
+    position: relative;
+    height: 46vh; min-height: 360px; max-height: 520px;
+    overflow: hidden;
+    background: #050505;
+    display: flex; align-items: flex-end;
+  }
+  .hero video, .hero .hero-fallback {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 30%;
+  }
+  .hero .hero-fallback {
+    display: none; align-items: center; justify-content: center;
+    background: #050505;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0,0.30) 0%, rgba(0, 0, 0,0.12) 38%, rgba(0, 0, 0,0.80) 100%);
+  }
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: var(--page); margin: 0 auto; width: 100%;
+    padding: 0 40px 52px;
+  }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 0.42em; text-transform: uppercase;
+    color: rgba(255, 255, 255,0.78); margin-bottom: 20px; font-weight: 400;
+  }
+  .hero-title {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(38px, 5.4vw, 68px); line-height: 1.02;
+    color: #FFFFFF; margin-bottom: 14px;
+  }
+  .hero-sub {
+    font-family: var(--font-italic); font-style: italic;
+    font-size: clamp(16px, 1.7vw, 20px); color: rgba(255, 255, 255,0.86);
+  }
+  @media (max-width: 860px) { .hero-inner { padding: 0 22px 36px; } }
+
+  /* ===== APPLICATION BODY ===== */
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 40px; }
+  @media (max-width: 860px) { .wrap { padding: 0 22px; } }
+
+  /* Stepper — single evenly-spaced row, no wrapping */
+  .stepper {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 14px; flex-wrap: nowrap;
+    padding: 44px 0 16px; border-bottom: 1px solid var(--line);
+    margin-bottom: 56px;
+  }
+  .step { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; padding-bottom: 16px; }
+  .step-num {
+    font-family: var(--font-body); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; color: var(--soft);
+  }
+  .step-label {
+    font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--soft); font-weight: 400;
+  }
+  .step.active .step-num, .step.active .step-label { color: var(--navy); }
+  .step.active { box-shadow: inset 0 -1px 0 var(--navy); }
+  @media (max-width: 560px) {
+    .stepper { gap: 6px; padding: 36px 0 14px; }
+    .step { gap: 5px; padding-bottom: 12px; }
+    .step-num, .step-label { font-size: 9.5px; letter-spacing: 0.08em; }
+  }
+
+  /* Sections */
+  .sec-title {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    font-weight: 500; color: var(--navy);
+    padding-bottom: 16px; margin-bottom: 30px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sec { margin-bottom: 56px; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 32px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 26px 32px; }
+  .col-2 { grid-column: 1 / -1; }
+  @media (max-width: 660px) { .grid, .grid-3 { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; }
+  .field label {
+    font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 12px; font-weight: 400;
+  }
+  .field .opt { color: var(--soft); }
+  .field input,
+  .field select,
+  .field textarea {
+    background: transparent;
+    border: 0; border-bottom: 1px solid var(--line);
+    padding: 8px 2px; outline: none;
+    font-family: var(--font-display); font-size: 19px; color: var(--navy);
+    border-radius: 0;
+    transition: border-color 240ms ease;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: var(--soft); font-style: italic; }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus { border-color: var(--navy); }
+  .field textarea { resize: vertical; min-height: 30px; line-height: 1.5; }
+  .field select {
+    -webkit-appearance: none; appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%230A0A0A' stroke-width='1.2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 2px center;
+    padding-right: 22px;
+  }
+  .field select.placeholder { color: var(--soft); font-style: italic; }
+
+  /* Consent + submit */
+  .form-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 28px; flex-wrap: wrap; margin-top: 8px;
+  }
+  .consent { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+  .consent input { width: 16px; height: 16px; accent-color: var(--navy); cursor: pointer; }
+  .consent span {
+    font-family: var(--font-italic); font-style: italic; font-size: 15px; color: var(--mid);
+  }
+  .submit-btn {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: var(--navy); color: var(--paper);
+    border: 1px solid var(--navy);
+    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+    font-weight: 400; padding: 17px 34px; cursor: pointer;
+    transition: background 260ms ease;
+  }
+  .submit-btn:hover { background: var(--sapphire); }
+  .submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .submit-btn .arrow { font-size: 15px; }
+
+  .feedback {
+    min-height: 22px; margin-top: 20px;
+    font-family: var(--font-italic); font-style: italic; font-size: 15px;
+    color: var(--mid);
+  }
+  .feedback.error { color: #B26A6A; }
+
+  /* Success */
+  .success { display: none; text-align: center; padding: 40px 0 24px; }
+  .success.visible { display: block; animation: fadeIn 640ms ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .success-eyebrow {
+    font-size: 11px; letter-spacing: 0.34em; text-transform: uppercase;
+    color: var(--gold-deep); margin-bottom: 22px; font-weight: 400;
+  }
+  .success-title {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(28px, 3.6vw, 42px); color: var(--navy);
+    line-height: 1.12; margin-bottom: 22px; text-wrap: balance;
+  }
+  .success-body { max-width: 520px; margin: 0 auto; }
+  .success-body p { color: var(--mid); margin-bottom: 14px; }
+  .success-signoff {
+    margin-top: 26px; font-family: var(--font-display); font-size: 16px;
+    letter-spacing: 0.18em; color: var(--navy);
+  }
+
+  .pane { padding-bottom: 110px; }
+  .form-wrap.submitted form { display: none; }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 30px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 18px; flex-wrap: wrap;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--soft);
+  }
+  footer a { color: var(--mid); }
+  footer a:hover { color: var(--navy); }
+  @media (max-width: 860px) { footer { padding: 26px 22px; } }
+
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 800ms ease, transform 800ms ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+<link rel="stylesheet" href="assets/nav.css?v=13">
+<link rel="stylesheet" href="assets/house.css?v=4">
+</head>
+
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="mdv-nav mdv-nav-split mdv-nav--light" id="mdvNav">
+  <div class="nav-group nav-group-left">
+    <a href="product.html">The Elixir</a>
+    <a href="product.html#ritual">The Ritual</a>
+  </div>
+  <a href="index.html" class="nav-logo">MAISON D&rsquo;VUE</a>
+  <div class="nav-right-cluster">
+    <div class="nav-group nav-group-right">
+      <a href="about.html">The House</a>
+      <a href="gallery.html">World</a>
+    </div>
+    <a class="nav-bag" href="https://shop.maisondvue.com/cart" aria-label="Bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 7h12l-1 14H7L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg></a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <video class="hero-video" src="paparazzi-hero.mp4" poster="paparazzi-hero.jpg"
+         autoplay muted loop playsinline webkit-playsinline="true" preload="auto"
+         disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
+         aria-hidden="true"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"></video>
+  <div class="hero-fallback" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Founding Creator Program</p>
+    <h1 class="hero-title">Join the House.</h1>
+    <p class="hero-sub">For those who create with intention.</p>
+  </div>
+</section>
+
+<!-- ===== APPLICATION ===== -->
+<main class="pane">
+  <div class="wrap">
+
+    <div class="stepper" aria-hidden="true">
+      <div class="step active"><span class="step-num">01</span><span class="step-label">Application</span></div>
+      <div class="step"><span class="step-num">02</span><span class="step-label">Review</span></div>
+      <div class="step"><span class="step-num">03</span><span class="step-label">Invitation</span></div>
+    </div>
+
+    <div class="form-wrap" id="applyFormWrap">
+      <form id="applyForm" novalidate>
+
+        <!-- honeypot -->
+        <div style="position:absolute;left:-9999px" aria-hidden="true">
+          <label>Leave blank<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <!-- ABOUT YOU -->
+        <section class="sec">
+          <p class="sec-title">About You</p>
+          <div class="grid">
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="fullName" placeholder="Your full name" autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" inputmode="email">
+            </div>
+            <div class="field">
+              <label for="country">Country / Region</label>
+              <select id="country" name="country" class="placeholder">
+                <option value="" disabled selected>Select your country</option>
+                <option>United States</option>
+                <option>Canada</option>
+                <option>United Kingdom</option>
+                <option>France</option>
+                <option>Italy</option>
+                <option>Spain</option>
+                <option>Germany</option>
+                <option>Australia</option>
+                <option>United Arab Emirates</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="instagram">Instagram Handle</label>
+              <input type="text" id="instagram" name="instagram" placeholder="@yourhandle" autocapitalize="off" spellcheck="false">
+            </div>
+            <div class="field">
+              <label for="tiktok">TikTok Handle <span class="opt">(optional)</span></label>
+              <input type="text" id="tiktok" name="tiktok" placeholder="@yourhandle" autocapitalize="off" spellcheck="false">
+            </div>
+          </div>
+        </section>
+
+        <!-- ABOUT YOUR PLATFORM -->
+        <section class="sec">
+          <p class="sec-title">About Your Platform</p>
+          <div class="grid-3">
+            <div class="field">
+              <label for="platform">Primary Platform</label>
+              <select id="platform" name="platform" class="placeholder">
+                <option value="" disabled selected>Select platform</option>
+                <option>Instagram</option>
+                <option>TikTok</option>
+                <option>YouTube</option>
+                <option>Pinterest</option>
+                <option>Substack / Blog</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="followers">Followers</label>
+              <input type="text" id="followers" name="followers" placeholder="E.g. 25K">
+            </div>
+            <div class="field">
+              <label for="engagement">Engagement Rate (approx.)</label>
+              <input type="text" id="engagement" name="engagement" placeholder="E.g. 3.5%">
+            </div>
+            <div class="field col-2">
+              <label for="contentFocus">Content Focus</label>
+              <select id="contentFocus" name="contentFocus" class="placeholder">
+                <option value="" disabled selected>Select content focus</option>
+                <option>Beauty</option>
+                <option>Hair</option>
+                <option>Fashion</option>
+                <option>Lifestyle</option>
+                <option>Wellness</option>
+                <option>Luxury &amp; Travel</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field col-2">
+              <label for="content">Tell Us About Your Content</label>
+              <textarea id="content" name="content" rows="2" placeholder="Share your story&hellip;"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- WHY MDV -->
+        <section class="sec">
+          <p class="sec-title">Why MDV</p>
+          <div class="field">
+            <label for="why">Why do you want to partner with MAISON D&rsquo;VUE?</label>
+            <textarea id="why" name="why" rows="3" placeholder="Share your vision&hellip;"></textarea>
+          </div>
+        </section>
+
+        <div class="form-foot">
+          <label class="consent">
+            <input type="checkbox" id="consent" name="consent">
+            <span>I agree to the Founding Creator Program terms and conditions.</span>
+          </label>
+          <button type="submit" class="submit-btn" id="applySubmit">Submit Application <span class="arrow">&rarr;</span></button>
+        </div>
+        <p class="feedback" id="applyFeedback" role="status" aria-live="polite"></p>
+
+      </form>
+
+      <!-- SUCCESS -->
+      <div class="success" id="applySuccess">
+        <p class="success-eyebrow">Application Received</p>
+        <h2 class="success-title">Thank you for your interest in joining the House.</h2>
+        <div class="success-body">
+          <p>Applications are reviewed on a rolling basis.</p>
+          <p>If approved, you will receive details regarding product allocation, affiliate access, and next steps.</p>
+          <p>We appreciate your interest in becoming part of the House.</p>
+        </div>
+        <p class="success-signoff">&mdash; MAISON D&rsquo;VUE</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span>&copy; 2026 MAISON D&rsquo;VUE &middot; Founding Creator Program</span>
+  <span>Questions? <a href="mailto:hello@maisondvue.com">hello@maisondvue.com</a></span>
+</footer>
+
+<script>
+  /* ─── CONFIGURATION ─── */
+  var APPLICATION_ENDPOINT = "https://script.google.com/macros/s/AKfycby2kfS1JR4HvNI6-CqdHntoislU_lpsPP22SsHmostPkbNXnGBgeG5B0O4Ce0VJYKgk/exec";
+
+  /* Mailchimp audience (us20) — fallback if the Apps Script endpoint is unset. */
+  var MAILCHIMP_ACTION = "https://maisondvue.us20.list-manage.com/subscribe/post?u=ece90c707751d2379f6f22e77&id=3a9da7ab07&f_id=004802eef0";
+  var MAILCHIMP_HONEYPOT = "b_ece90c707751d2379f6f22e77_3a9da7ab07";
+
+  /* ─── SELECT PLACEHOLDER STYLING ─── */
+  document.querySelectorAll('select').forEach(function (sel) {
+    function sync() { sel.classList.toggle('placeholder', !sel.value); }
+    sel.addEventListener('change', sync); sync();
+  });
+
+  /* Compose the extra fields into the backend's single Note column so nothing
+     is lost (the Applications sheet keeps First/Last, Email, IG, TikTok,
+     Followers, Note). */
+  function buildNote(d) {
+    var lines = [];
+    if (d.country) lines.push('Country: ' + d.country);
+    if (d.platform) lines.push('Primary platform: ' + d.platform);
+    if (d.engagement) lines.push('Engagement: ' + d.engagement);
+    if (d.contentFocus) lines.push('Content focus: ' + d.contentFocus);
+    if (d.content) lines.push('', 'Content: ' + d.content);
+    if (d.why) lines.push('', 'Why MDV: ' + d.why);
+    return lines.join('\n');
+  }
+
+  function splitName(full) {
+    var parts = String(full || '').trim().split(/\s+/);
+    return { first: parts.shift() || '', last: parts.join(' ') };
+  }
+
+  /* Mailchimp fallback (hidden iframe) — used only if the endpoint is unset. */
+  function postToMailchimp(data, done) {
+    var iframe = document.createElement('iframe');
+    iframe.name = 'mc_target_' + Date.now();
+    iframe.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px';
+    iframe.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(iframe);
+
+    var f = document.createElement('form');
+    f.action = MAILCHIMP_ACTION; f.method = 'post'; f.target = iframe.name; f.style.display = 'none';
+
+    var fields = {
+      EMAIL: data.email, FNAME: data.firstName, LNAME: data.lastName,
+      IG: data.instagram, TIKTOK: data.tiktok, FOLLOWERS: data.followers, NOTE: data.note
+    };
+    fields[MAILCHIMP_HONEYPOT] = '';
+    Object.keys(fields).forEach(function (name) {
+      var input = document.createElement('input');
+      input.type = 'text'; input.name = name;
+      input.value = fields[name] == null ? '' : fields[name];
+      f.appendChild(input);
+    });
+
+    var finished = false;
+    function finish() {
+      if (finished) return; finished = true;
+      setTimeout(function () {
+        if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+        if (f.parentNode) f.parentNode.removeChild(f);
+      }, 1500);
+      done();
+    }
+    iframe.addEventListener('load', finish);
+    setTimeout(finish, 3500);
+    document.body.appendChild(f); f.submit();
+  }
+
+  /* ─── APPLICATION FORM ─── */
+  (function () {
+    var form = document.getElementById('applyForm');
+    var submit = document.getElementById('applySubmit');
+    var feedback = document.getElementById('applyFeedback');
+    var wrap = document.getElementById('applyFormWrap');
+    var success = document.getElementById('applySuccess');
+    var stepper = document.querySelector('.stepper');
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function setMsg(text, type) {
+      feedback.textContent = text || '';
+      feedback.classList.toggle('error', type === 'error');
+    }
+    function showSuccess() {
+      if (stepper) stepper.style.display = 'none';
+      wrap.classList.add('submitted');
+      success.classList.add('visible');
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      setMsg('');
+
+      var honey = form.website.value.trim();
+      if (honey) { showSuccess(); form.reset(); return; }
+
+      var name = splitName(form.fullName.value);
+      var email = form.email.value.trim();
+      var instagram = form.instagram.value.trim();
+
+      if (!name.first) { setMsg('Your name, please.', 'error'); form.fullName.focus(); return; }
+      if (!emailRe.test(email)) { setMsg('A valid email, please.', 'error'); form.email.focus(); return; }
+      if (!instagram) { setMsg('An Instagram handle, please.', 'error'); form.instagram.focus(); return; }
+      if (!form.platform.value) { setMsg('Please select your primary platform.', 'error'); form.platform.focus(); return; }
+      if (!form.followers.value.trim()) { setMsg('Your follower count, please.', 'error'); form.followers.focus(); return; }
+      if (!form.consent.checked) { setMsg('Please confirm you wish to be considered.', 'error'); form.consent.focus(); return; }
+
+      var extras = {
+        country: form.country.value,
+        platform: form.platform.value,
+        engagement: form.engagement.value.trim(),
+        contentFocus: form.contentFocus.value,
+        content: form.content.value.trim(),
+        why: form.why.value.trim()
+      };
+      var appData = {
+        firstName: name.first, lastName: name.last, email: email,
+        instagram: instagram, tiktok: form.tiktok.value.trim(),
+        followers: form.followers.value.trim(), shipping: '', note: buildNote(extras)
+      };
+
+      submit.disabled = true;
+      var orig = submit.innerHTML;
+      submit.textContent = 'Sending…';
+
+      if (!APPLICATION_ENDPOINT || APPLICATION_ENDPOINT.indexOf('REPLACE_') === 0) {
+        postToMailchimp(appData, function () {
+          submit.disabled = false; submit.innerHTML = orig; form.reset(); showSuccess();
+        });
+        return;
+      }
+
+      try {
+        var fd = new FormData();
+        Object.keys(appData).forEach(function (k) { fd.append(k, appData[k]); });
+        fd.append('source', 'creators-page');
+        fd.append('userAgent', navigator.userAgent || '');
+        fd.append('referrer', document.referrer || '');
+
+        var res = await fetch(APPLICATION_ENDPOINT, { method: 'POST', body: fd });
+        var ok = res.ok;
+        try { var data = await res.json(); ok = ok && data && data.ok !== false; } catch (_) {}
+
+        if (ok) { form.reset(); showSuccess(); }
+        else { throw new Error('Server returned an error'); }
+      } catch (err) {
+        setMsg('Forgive us — something faltered in transit. Please write to hello@maisondvue.com.', 'error');
+      } finally {
+        submit.disabled = false; submit.innerHTML = orig;
+      }
+    });
+  })();
+</script>
+
+<script src="assets/chat.js?v=5" defer></script>
+<script src="assets/menu.js?v=10" defer></script>
+<script src="assets/house.js?v=1" defer></script>
+
+</body>
+</html>

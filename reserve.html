@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Cache freshness: always serve the current page, never a stale cached copy -->
+<meta http-equiv="Cache-Control" content="no-cache">
+<script>
+  window.addEventListener('pageshow', function (e) { if (e.persisted) window.location.reload(); });
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reserve &mdash; MAISON D&rsquo;VUE</title>
+<meta name="description" content="Reserve the MAISON D'VUE Hair Elixir. The Signature and the Voyage, hand-sealed in Beverly Hills.">
+<link rel="canonical" href="https://maisondvue.com/reserve.html">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=4">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4">
+<link rel="shortcut icon" href="/favicon.ico?v=4">
+<meta name="theme-color" content="#FFFFFF">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#FFFFFF; --paper-2:#F4F2EE; --ink:#0A0A0A; --navy-deep:#000000;
+    --mid:rgba(10,10,10,0.60); --soft:rgba(10,10,10,0.42); --line:rgba(10,10,10,0.12);
+    --font-sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --font-serif:'Bodoni Moda','Didot','Bodoni MT',Georgia,serif;
+    --nav-h:72px;
+  }
+  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; background:var(--paper); }
+  body{
+    font-family:var(--font-sans); font-weight:300; color:var(--ink);
+    background:var(--paper); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  }
+  a{ color:inherit; text-decoration:none; }
+  img{ display:block; }
+
+  /* ══ CINEMATIC BANNER — placeholder; swap the media with a film or full-bleed image ══ */
+  /* The frame holds the whole video at its native 16:9 — nothing cropped. */
+  .shop-banner{ position:relative; background:var(--navy-deep); }
+  .shop-banner-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; }
+  .shop-banner-media{
+    position:absolute; inset:0; z-index:1;
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .shop-banner-frame::after{ /* scrim so the overlaid title stays legible */
+    content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+    background:linear-gradient(to bottom,
+      rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.06) 36%,
+      rgba(0,0,0,0.12) 58%, rgba(0,0,0,0.66) 100%);
+  }
+  /* Desktop: title overlaid on the lower band of the video. */
+  .shop-banner-inner{ position:absolute; left:0; right:0; bottom:0; z-index:3; text-align:center; padding:0 24px 6vh; }
+  .shop-banner-eyebrow{
+    font-family:var(--font-sans); font-size:11px; font-weight:500;
+    letter-spacing:0.42em; text-transform:uppercase; color:rgba(255,255,255,0.72);
+    margin-bottom:24px;
+  }
+  .shop-banner-title{
+    font-family:var(--font-serif); font-weight:500;
+    font-size:clamp(46px,7.4vw,94px); letter-spacing:0.02em; color:#FFFFFF; line-height:1;
+  }
+  .shop-banner-sub{
+    font-family:'EB Garamond',Georgia,serif; font-style:italic;
+    font-size:clamp(15px,1.5vw,19px); color:rgba(255,255,255,0.82); margin-top:22px;
+  }
+
+  /* ══ PRODUCTS ══ */
+  .shop-products{ padding:clamp(70px,9vw,128px) clamp(24px,5vw,72px) 120px; }
+  .shop-grid{
+    display:grid; grid-template-columns:repeat(2,1fr);
+    gap:clamp(28px,4vw,72px); max-width:1180px; margin:0 auto;
+  }
+  .shop-card{ display:flex; flex-direction:column; }
+  .shop-card-media{
+    display:block; position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--paper-2);
+  }
+  .shop-card-media img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform 700ms cubic-bezier(0.22,1,0.36,1);
+  }
+  .shop-card:hover .shop-card-media img{ transform:scale(1.035); }
+  .shop-card-media-hover{
+    position:absolute; inset:0; opacity:0;
+    transition:opacity 500ms ease;
+  }
+  .shop-card:hover .shop-card-media-hover{ opacity:1; }
+  .shop-card-info{ text-align:center; padding-top:30px; }
+  .shop-card-name{
+    font-family:var(--font-serif); font-weight:500;
+    font-size:clamp(25px,2.4vw,34px); letter-spacing:0.01em; color:var(--ink); line-height:1.05;
+  }
+  .shop-card-sub{
+    font-family:var(--font-sans); font-size:11px; font-weight:500;
+    letter-spacing:0.22em; text-transform:uppercase; color:var(--soft); margin-top:12px;
+  }
+  .shop-card-rating{
+    display:inline-flex; align-items:center; gap:9px; margin-top:16px;
+    font-size:12px; letter-spacing:0.02em;
+  }
+  .shop-card-stars{ color:var(--ink); letter-spacing:2px; font-size:12px; }
+  .shop-card-rating span{ color:var(--mid); letter-spacing:0.1em; }
+  .shop-card-price{
+    font-family:var(--font-sans); font-size:19px; font-weight:500;
+    letter-spacing:0.04em; color:var(--ink); margin-top:18px;
+  }
+  .shop-card-cta{
+    display:inline-block; margin-top:24px; padding:16px 58px;
+    background:var(--ink); color:#FFFFFF; font-family:var(--font-sans);
+    font-size:12px; font-weight:500; letter-spacing:0.24em; text-transform:uppercase;
+    transition:opacity 220ms ease;
+  }
+  .shop-card-cta:hover{ opacity:0.82; }
+  .shop-provenance{
+    text-align:center; margin-top:clamp(60px,7vw,96px);
+    font-family:var(--font-sans); font-size:11px; letter-spacing:0.34em;
+    text-transform:uppercase; color:var(--soft);
+  }
+
+  /* ══ FOOTER ══ */
+  footer{
+    background:var(--navy-deep); color:#FFFFFF; text-align:center;
+    padding:64px 24px; font-family:var(--font-sans); font-size:12px;
+    letter-spacing:0.14em; line-height:2;
+  }
+  .footer-logo{
+    font-family:var(--font-serif); font-size:20px; letter-spacing:0.3em;
+    text-transform:uppercase; margin-bottom:18px; color:#FFFFFF;
+  }
+  footer a{ color:#FFFFFF; }
+  footer a:hover{ opacity:0.75; }
+
+  @media (max-width:760px){
+    /* iPhone: show the whole 16:9 video full-width (shrunk to fit), then the
+       title stacked beneath it on paper — nothing cramped or cropped. */
+    .shop-banner{ background:var(--paper); }
+    .shop-banner-frame::after{ display:none; }
+    .shop-banner-inner{ position:static; padding:30px 22px 26px; }
+    .shop-banner-eyebrow{ color:var(--soft); margin-bottom:16px; }
+    .shop-banner-title{ color:var(--ink); font-size:clamp(34px,8.6vw,54px); }
+    .shop-banner-sub{ color:var(--mid); }
+    .shop-grid{ grid-template-columns:1fr; gap:64px; max-width:440px; }
+  }
+</style>
+
+<link rel="stylesheet" href="assets/nav.css?v=13">
+<link rel="stylesheet" href="assets/house.css?v=4">
+</head>
+<body>
+
+<!-- ═══ UNIFIED NAV — transparent over the banner, solid on scroll ═══ -->
+<nav class="mdv-nav mdv-nav-split" id="mdvNav">
+  <div class="nav-group nav-group-left">
+    <a href="product.html">The Elixir</a>
+    <a href="product.html#ritual">The Ritual</a>
+  </div>
+  <a href="index.html" class="nav-logo">MAISON D&rsquo;VUE</a>
+  <div class="nav-right-cluster">
+    <div class="nav-group nav-group-right">
+      <a href="about.html">The House</a>
+      <a href="gallery.html">World</a>
+    </div>
+    <a class="nav-bag" href="https://shop.maisondvue.com/cart" aria-label="Bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 7h12l-1 14H7L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg></a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ═══ CINEMATIC BANNER — PLACEHOLDER: replace .shop-banner-media with a
+       full-bleed image or looping video when the final banner is ready ═══ -->
+  <section class="shop-banner">
+    <div class="shop-banner-frame">
+      <video class="shop-banner-media" src="signature-banner.mp4?v=1" poster="reserve-banner-poster-alt.jpg?v=1"
+        muted loop autoplay playsinline webkit-playsinline="true" preload="auto"
+        disablepictureinpicture aria-hidden="true"
+        onloadedmetadata="this.currentTime=30"
+        onerror="this.style.display='none';"></video>
+    </div>
+    <div class="shop-banner-inner">
+      <p class="shop-banner-eyebrow">The Collection</p>
+      <h1 class="shop-banner-title">The Hair Elixir</h1>
+      <p class="shop-banner-sub">Fourteen rare essences &middot; Scented in &Acirc;me de Vue&trade;</p>
+    </div>
+  </section>
+
+  <!-- ═══ PRODUCTS ═══ -->
+  <section class="shop-products">
+    <div class="shop-grid">
+
+      <article class="shop-card">
+        <a class="shop-card-media" href="elixir-signature.html" aria-label="The Signature">
+          <img src="maison-dvue-elixir-studio.jpg" alt="The Signature — 30ml MAISON D'VUE Hair Elixir in cobalt frosted glass with matte gold cap">
+          <img class="shop-card-media-hover" src="maison-dvue-elixir-dropper-drop.jpg" alt="A single drop of MAISON D'VUE Hair Elixir suspended from the gold dropper" aria-hidden="true">
+        </a>
+        <div class="shop-card-info">
+          <h2 class="shop-card-name"><a href="elixir-signature.html">The Signature</a></h2>
+          <p class="shop-card-sub">Hair Elixir &middot; 30 ml &middot; 1 fl oz</p>
+          <span class="shop-card-rating"><span class="shop-card-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <span>5.0 &middot; 28 reviews</span></span>
+          <p class="shop-card-price">$125</p>
+          <a class="shop-card-cta" href="elixir-signature.html">View &amp; Reserve</a>
+        </div>
+      </article>
+
+      <article class="shop-card">
+        <a class="shop-card-media" href="elixir-voyage.html" aria-label="The Voyage">
+          <img src="maison-dvue-elixir-voyage.jpg" alt="The Voyage — 10ml MAISON D'VUE Hair Elixir travel size in cobalt frosted glass">
+          <img class="shop-card-media-hover" src="voyage-hermes-bag.jpg" alt="The Voyage tucked in the pocket of a Hermès leather bag" aria-hidden="true">
+        </a>
+        <div class="shop-card-info">
+          <h2 class="shop-card-name"><a href="elixir-voyage.html">The Voyage</a></h2>
+          <p class="shop-card-sub">Hair Elixir &middot; 10 ml &middot; 0.33 fl oz</p>
+          <span class="shop-card-rating"><span class="shop-card-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <span>5.0 &middot; 11 reviews</span></span>
+          <p class="shop-card-price">$68</p>
+          <a class="shop-card-cta" href="elixir-voyage.html">View &amp; Reserve</a>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="shop-provenance">Hand-sealed &middot; Beverly Hills</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-logo">MAISON D&rsquo;VUE</div>
+  <div>&copy; 2026 MAISON D&rsquo;VUE &middot; Composed in Beverly Hills</div>
+  <div>Questions? <a href="mailto:hello@maisondvue.com">hello@maisondvue.com</a></div>
+</footer>
+
+<script src="assets/chat.js?v=5" defer></script>
+<script src="assets/menu.js?v=10" defer></script>
+<script src="assets/house.js?v=1" defer></script>
+</body>
+</html>

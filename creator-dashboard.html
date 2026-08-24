@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Cache freshness: always serve the current page, never a stale cached copy -->
+<meta http-equiv="Cache-Control" content="no-cache">
+<script>
+  window.addEventListener('pageshow', function (e) { if (e.persisted) window.location.reload(); });
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Creator Dashboard &mdash; MAISON D&rsquo;VUE</title>
+<meta name="description" content="The MAISON D'VUE creator dashboard. Your referral link, creator code, and performance.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://maisondvue.com/creator-dashboard.html">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=4">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4">
+<link rel="shortcut icon" href="/favicon.ico?v=4">
+<meta name="theme-color" content="#FFFFFF">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --paper-2: #F6F5F2;
+    --ink: #0A0A0A;
+    --navy: #0A0A0A;
+    --sapphire: #1A1A1A;
+    --gold: #0A0A0A;
+    --gold-deep: #0A0A0A;
+    --mid: rgba(10, 10, 10, 0.60);
+    --soft: rgba(10, 10, 10, 0.40);
+    --line: rgba(10, 10, 10, 0.14);
+    --line-soft: rgba(10, 10, 10, 0.08);
+    --font-display:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --font-italic:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --font-body:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --page: 1180px;
+    --nav-h: 72px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--paper); -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font-body); font-weight: 300; color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh; font-size: 16px; line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, input { font: inherit; color: inherit; }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: sticky; top: 0; z-index: 50; height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; background: rgba(255, 255, 255,0.92);
+    backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-logo { font-family: var(--font-display); font-weight: 500; font-size: 20px; letter-spacing: 0.34em; text-transform: uppercase; white-space: nowrap; }
+  .nav-links { display: flex; gap: 40px; }
+  .nav-links a { font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; font-weight: 400; color: var(--mid); transition: color 220ms ease; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-welcome { font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 400; color: var(--navy); }
+  .nav-avatar { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; background: var(--paper-2); font-family: var(--font-display); font-size: 14px; color: var(--navy); letter-spacing: 0.04em; overflow: hidden; }
+  @media (max-width: 860px) { .nav { padding: 0 22px; } .nav-links { display: none; } .nav-logo { font-size: 16px; letter-spacing: 0.26em; } }
+
+  .wrap { max-width: var(--page); margin: 0 auto; padding: 0 40px; }
+  @media (max-width: 860px) { .wrap { padding: 0 22px; } }
+
+  /* ===== SIGN IN ===== */
+  .signin { max-width: 460px; margin: 0 auto; padding: 90px 0 120px; text-align: center; }
+  .signin-eyebrow { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--soft); margin-bottom: 22px; }
+  .signin-title { font-family: var(--font-display); font-weight: 300; font-size: clamp(32px, 4vw, 48px); color: var(--navy); margin-bottom: 14px; }
+  .signin-sub { font-family: var(--font-italic); font-style: italic; font-size: 17px; color: var(--mid); margin-bottom: 44px; }
+  .signin-label { display: block; text-align: left; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mid); margin-bottom: 12px; }
+  .signin-label.stacked { margin-top: 22px; }
+  .signin-field { width: 100%; background: transparent; border: 1px solid var(--line); color: var(--navy); font-family: var(--font-display); font-size: 18px; padding: 15px 18px; outline: none; border-radius: 0; transition: border-color 220ms ease; }
+  .signin-field::placeholder { color: var(--soft); }
+  .signin-field:focus { border-color: var(--navy); }
+  .signin-row { display: flex; }
+  .signin-row .signin-field { border-right: 0; flex: 1; text-transform: uppercase; letter-spacing: 0.1em; }
+  .signin-row button { background: var(--navy); color: var(--paper); border: 1px solid var(--navy); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; padding: 0 30px; cursor: pointer; transition: background 240ms ease; }
+  .signin-row button:hover { background: var(--sapphire); }
+  .signin-row button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .signin-feedback { min-height: 20px; margin-top: 18px; font-family: var(--font-italic); font-style: italic; font-size: 15px; color: #B26A6A; }
+  .signin-help { margin-top: 28px; font-family: var(--font-italic); font-style: italic; font-size: 14px; color: var(--soft); }
+  .signin-help a { border-bottom: 1px solid var(--line); }
+
+  /* ===== DASHBOARD ===== */
+  .dash { display: none; padding: 56px 0 100px; }
+  .dash.visible { display: block; animation: fadeIn 600ms ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .dash-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 30px; padding-bottom: 50px; border-bottom: 1px solid var(--line); margin-bottom: 50px; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--soft); margin-bottom: 22px; }
+  .dash-name { font-family: var(--font-display); font-weight: 300; font-size: clamp(40px, 5vw, 64px); line-height: 1; color: var(--navy); margin-bottom: 14px; }
+  .dash-tagline { font-family: var(--font-italic); font-style: italic; font-size: 18px; color: var(--mid); }
+  .dash-badge { text-align: center; flex: 0 0 auto; }
+  .dash-monogram { width: 78px; height: 78px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; margin: 0 auto 14px; }
+  .dash-monogram svg { width: 40px; height: 40px; }
+  .dash-tier { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--navy); line-height: 1.7; }
+  .dash-tier .since { color: var(--soft); }
+
+  .block-label { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 500; color: var(--navy); margin-bottom: 22px; }
+
+  /* Overview cards */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); margin-bottom: 56px; }
+  .stat { background: var(--paper); padding: 30px 26px; }
+  .stat-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mid); margin-bottom: 16px; }
+  .stat-value { font-family: var(--font-display); font-weight: 300; font-size: clamp(26px, 2.6vw, 34px); line-height: 1; color: var(--navy); }
+  @media (max-width: 760px) { .stats { grid-template-columns: 1fr 1fr; } }
+
+  /* Tools + feature */
+  .cols { display: grid; grid-template-columns: 1.55fr 1fr; gap: 40px; margin-bottom: 56px; }
+  @media (max-width: 880px) { .cols { grid-template-columns: 1fr; gap: 30px; } }
+
+  .tools { border-top: 1px solid var(--line); }
+  .tool { display: flex; align-items: center; gap: 18px; padding: 22px 2px; border-bottom: 1px solid var(--line); }
+  .tool-icon { flex: 0 0 auto; width: 24px; height: 24px; color: var(--navy); opacity: 0.8; }
+  .tool-icon svg { width: 24px; height: 24px; }
+  .tool-info { flex: 1; min-width: 0; }
+  .tool-name { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); margin-bottom: 6px; }
+  .tool-desc { font-family: var(--font-italic); font-style: italic; font-size: 14.5px; color: var(--mid); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tool-action { flex: 0 0 auto; font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--navy); cursor: pointer; background: none; border: 0; padding: 6px 2px; transition: color 220ms ease; }
+  .tool-action:hover { color: var(--gold-deep); }
+  .tool-action.copied { color: var(--gold-deep); }
+
+  .feature { position: relative; overflow: hidden; min-height: 320px; display: flex; align-items: flex-end; background: #050505; }
+  .feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .feature::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0,0.72) 0%, rgba(0, 0, 0,0.12) 55%, rgba(0, 0, 0,0.05) 100%); }
+  .feature-text { position: relative; z-index: 2; padding: 30px; color: var(--paper); }
+  .feature-title { font-family: var(--font-display); font-weight: 400; font-size: 26px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+  .feature-sub { font-family: var(--font-italic); font-style: italic; font-size: 16px; color: rgba(255, 255, 255,0.88); margin-bottom: 18px; }
+  .feature-link { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--paper); border-bottom: 1px solid rgba(255, 255, 255,0.5); padding-bottom: 4px; }
+
+  /* Activity + news */
+  .lower { display: grid; grid-template-columns: 1.55fr 1fr; gap: 40px; }
+  @media (max-width: 880px) { .lower { grid-template-columns: 1fr; gap: 30px; } }
+
+  .activity table { width: 100%; border-collapse: collapse; }
+  .activity th { text-align: left; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); font-weight: 400; padding: 0 0 14px; border-bottom: 1px solid var(--line); }
+  .activity th.right, .activity td.right { text-align: right; }
+  .activity td { font-family: var(--font-display); font-size: 17px; color: var(--navy); padding: 16px 0; border-bottom: 1px solid var(--line-soft); }
+  .activity td .status { font-family: var(--font-body); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); }
+  .activity td .status.pending { font-family: var(--font-italic); font-style: italic; letter-spacing: 0; text-transform: none; font-size: 14px; }
+  .activity td .amt-pos { color: var(--navy); }
+  .activity-empty { font-family: var(--font-italic); font-style: italic; color: var(--soft); padding: 24px 0; }
+
+  .news .news-item { padding: 16px 0; border-bottom: 1px solid var(--line-soft); }
+  .news .news-item:first-child { padding-top: 0; }
+  .news-title { font-family: var(--font-display); font-size: 19px; color: var(--navy); line-height: 1.25; margin-bottom: 4px; }
+  .news-cta { font-family: var(--font-italic); font-style: italic; font-size: 14px; color: var(--gold-deep); }
+  .news-all { display: block; margin-top: 22px; text-align: right; font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--navy); }
+
+  .dash-signout { margin-top: 40px; text-align: center; }
+  .dash-signout button { background: none; border: 0; font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--soft); cursor: pointer; border-bottom: 1px solid var(--line); padding: 6px 2px; transition: color 220ms ease; }
+  .dash-signout button:hover { color: var(--navy); }
+
+  footer { border-top: 1px solid var(--line); padding: 30px 40px; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--soft); }
+  footer a { color: var(--mid); }
+  footer a:hover { color: var(--navy); }
+  @media (max-width: 860px) { footer { padding: 26px 22px; } }
+
+  .dash-name, .signin-title { text-wrap: balance; }
+</style>
+<link rel="stylesheet" href="assets/nav.css?v=13">
+<link rel="stylesheet" href="assets/house.css?v=4">
+</head>
+
+<body>
+
+<nav class="mdv-nav mdv-nav-split mdv-nav--light" id="mdvNav">
+  <div class="nav-group nav-group-left">
+    <a href="product.html">The Elixir</a>
+    <a href="product.html#ritual">The Ritual</a>
+  </div>
+  <a href="index.html" class="nav-logo">MAISON D&rsquo;VUE</a>
+  <div class="nav-right-cluster">
+    <div class="nav-group nav-group-right">
+      <a href="about.html">The House</a>
+      <a href="gallery.html">World</a>
+    </div>
+    <a class="nav-bag" href="https://shop.maisondvue.com/cart" aria-label="Bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 7h12l-1 14H7L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg></a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <!-- SIGN IN -->
+    <section class="signin" id="signin">
+      <p class="signin-eyebrow">Founding Creator Program</p>
+      <h1 class="signin-title">Creator Dashboard</h1>
+      <p class="signin-sub">Your link, your code, your contribution to the House.</p>
+      <form id="signinForm" novalidate>
+        <label class="signin-label" for="emailInput">Email on file</label>
+        <input type="email" id="emailInput" class="signin-field" placeholder="you@example.com" autocomplete="email" autocapitalize="off" spellcheck="false" inputmode="email">
+        <label class="signin-label stacked" for="codeInput">Creator code</label>
+        <div class="signin-row">
+          <input type="text" id="codeInput" class="signin-field" placeholder="e.g. MASIELA10" autocomplete="off" autocapitalize="characters" spellcheck="false">
+          <button type="submit" id="signinBtn">View</button>
+        </div>
+      </form>
+      <p class="signin-feedback" id="signinFeedback" role="status" aria-live="polite"></p>
+      <p class="signin-help">Approved creators receive a code by email. Enter the same email you applied with. Questions? <a href="mailto:hello@maisondvue.com">hello@maisondvue.com</a></p>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section class="dash" id="dash">
+
+      <div class="dash-head">
+        <div>
+          <p class="eyebrow">Founder Status</p>
+          <h1 class="dash-name" id="dashName">&mdash;</h1>
+          <p class="dash-tagline">You are part of the House.</p>
+        </div>
+        <div class="dash-badge">
+          <div class="dash-monogram">
+            <svg viewBox="0 0 100 100" fill="none" stroke="#0A0A0A" stroke-width="3" aria-hidden="true">
+              <path d="M20 74V32l30 30 30-30v42" stroke-linejoin="round" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="dash-tier"><span id="dashTier">Founding Creator</span><br><span class="since" id="dashSince">Member</span></p>
+        </div>
+      </div>
+
+      <p class="block-label">Your Overview</p>
+      <div class="stats">
+        <div class="stat"><p class="stat-label">Total Earnings</p><p class="stat-value" id="statEarnings">&mdash;</p></div>
+        <div class="stat"><p class="stat-label">Pending Payout</p><p class="stat-value" id="statPending">&mdash;</p></div>
+        <div class="stat"><p class="stat-label">Total Referrals</p><p class="stat-value" id="statReferrals">&mdash;</p></div>
+        <div class="stat"><p class="stat-label">Conversion Rate</p><p class="stat-value" id="statConversion">&mdash;</p></div>
+      </div>
+
+      <div class="cols">
+        <div>
+          <p class="block-label">Your Tools</p>
+          <div class="tools">
+            <div class="tool">
+              <span class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9 13a4 4 0 0 0 5.66 0l3-3a4 4 0 1 0-5.66-5.66l-1 1"/><path d="M15 11a4 4 0 0 0-5.66 0l-3 3a4 4 0 1 0 5.66 5.66l1-1"/></svg></span>
+              <div class="tool-info"><p class="tool-name">Your Referral Link</p><p class="tool-desc" id="toolLink">Share your link and earn.</p></div>
+              <button class="tool-action" type="button" id="copyLink">Copy</button>
+            </div>
+            <div class="tool">
+              <span class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="14" rx="1.5"/><path d="M3 14l5-4 4 3 4-4 5 4"/><circle cx="8.5" cy="8.5" r="1.3"/></svg></span>
+              <div class="tool-info"><p class="tool-name">Creative Library</p><p class="tool-desc">Access brand assets and content.</p></div>
+              <a class="tool-action" href="mailto:hello@maisondvue.com?subject=Creative%20Library%20Access">View</a>
+            </div>
+            <div class="tool">
+              <span class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+              <div class="tool-info"><p class="tool-name">Performance</p><p class="tool-desc">Track your clicks, sales, and earnings.</p></div>
+              <button class="tool-action" type="button" id="toPerformance">View</button>
+            </div>
+            <div class="tool">
+              <span class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M3 10h18"/></svg></span>
+              <div class="tool-info"><p class="tool-name">Payments</p><p class="tool-desc">View your payouts and history.</p></div>
+              <a class="tool-action" href="mailto:hello@maisondvue.com?subject=Founding%20Creator%20Payments">View</a>
+            </div>
+            <div class="tool">
+              <span class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 4h11l3 3v13H5z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span>
+              <div class="tool-info"><p class="tool-name">Program Guidelines</p><p class="tool-desc">Learn about the House and our standards.</p></div>
+              <a class="tool-action" href="creators.html">View</a>
+            </div>
+          </div>
+        </div>
+
+        <a class="feature" href="https://shop.maisondvue.com/">
+          <img src="maison-dvue-elixir-pour.jpg" alt="VUE 14 Hair Elixir" loading="lazy">
+          <div class="feature-text">
+            <p class="feature-title">The Elixir</p>
+            <p class="feature-sub">Share what is worthy.</p>
+            <span class="feature-link">Discover</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="lower">
+        <div class="activity">
+          <p class="block-label">Recent Activity</p>
+          <table>
+            <thead><tr><th>Date</th><th>Description</th><th class="right">Amount</th><th class="right">Status</th></tr></thead>
+            <tbody id="activityBody">
+              <tr><td colspan="4" class="activity-empty">No activity yet. Your referral sales will appear here.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="news">
+          <p class="block-label">News from the House</p>
+          <div class="news-item"><p class="news-title">Welcome to the Founding Creator Program</p><a class="news-cta" href="creators.html">Read more</a></div>
+          <div class="news-item"><p class="news-title">New Assets in Your Library</p><a class="news-cta" href="mailto:hello@maisondvue.com?subject=Creative%20Library%20Access">Explore</a></div>
+          <div class="news-item"><p class="news-title">The Elixir: The Ritual</p><a class="news-cta" href="https://shop.maisondvue.com/">Discover</a></div>
+          <a class="news-all" href="mailto:hello@maisondvue.com">View all updates</a>
+        </div>
+      </div>
+
+      <div class="dash-signout"><button type="button" id="signoutBtn">Sign out</button></div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <span>&copy; 2026 MAISON D&rsquo;VUE &middot; Founding Creator Program</span>
+  <span>Questions? <a href="mailto:hello@maisondvue.com">hello@maisondvue.com</a></span>
+</footer>
+
+<script>
+  /* Same Apps Script Web App URL as creators.html. The dashboard reads a
+     creator's figures with GET ?action=dashboard&code=CODE&email=EMAIL.
+     ?demo=1 shows a sample record (preview only). */
+  var DASHBOARD_ENDPOINT = "https://script.google.com/macros/s/AKfycby2kfS1JR4HvNI6-CqdHntoislU_lpsPP22SsHmostPkbNXnGBgeG5B0O4Ce0VJYKgk/exec";
+
+  var els = {
+    signin: document.getElementById('signin'),
+    form: document.getElementById('signinForm'),
+    code: document.getElementById('codeInput'),
+    email: document.getElementById('emailInput'),
+    btn: document.getElementById('signinBtn'),
+    feedback: document.getElementById('signinFeedback'),
+    dash: document.getElementById('dash'),
+    name: document.getElementById('dashName'),
+    tier: document.getElementById('dashTier'),
+    since: document.getElementById('dashSince'),
+    earnings: document.getElementById('statEarnings'),
+    pending: document.getElementById('statPending'),
+    referrals: document.getElementById('statReferrals'),
+    conversion: document.getElementById('statConversion'),
+    toolLink: document.getElementById('toolLink'),
+    activity: document.getElementById('activityBody'),
+    navRight: document.getElementById('navRight'),
+    signout: document.getElementById('signoutBtn')
+  };
+  var affiliateLink = '';
+
+  function money(n) {
+    var v = Number(n) || 0;
+    return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function num(n) { return (Number(n) || 0).toLocaleString('en-US'); }
+  function firstName(name) { return String(name || 'Creator').trim().split(/\s+/)[0]; }
+  function initials(name) {
+    var p = String(name || '').trim().split(/\s+/);
+    return ((p[0] || 'M')[0] + (p.length > 1 ? p[p.length - 1][0] : '')).toUpperCase();
+  }
+  function setMsg(t) { els.feedback.textContent = t || ''; }
+
+  function render(d) {
+    affiliateLink = d.affiliateLink || '';
+    els.name.textContent = 'Welcome, ' + firstName(d.name) + '.';
+    els.tier.textContent = d.tier || 'Founding Creator';
+    els.since.textContent = d.memberSince ? ('Member since ' + d.memberSince) : (d.status || 'Member');
+    els.earnings.textContent = money(d.commissionEarned);
+    els.pending.textContent = money(d.pendingPayout != null ? d.pendingPayout : d.commissionEarned);
+    els.referrals.textContent = (d.totalReferrals != null ? num(d.totalReferrals) : num(d.totalSales));
+    els.conversion.textContent = d.conversionRate != null ? d.conversionRate :
+      (d.clicks ? (Math.round((Number(d.totalSales) / Number(d.clicks)) * 1000) / 10) + '%' : '—');
+    els.toolLink.textContent = affiliateLink || 'Share your link and earn.';
+
+    // Recent activity
+    var rows = Array.isArray(d.recentActivity) ? d.recentActivity : [];
+    if (rows.length) {
+      els.activity.innerHTML = rows.map(function (r) {
+        var amt = r.amount != null && r.amount !== '' ? (Number(r.amount) >= 0 ? '+ ' : '') + money(Math.abs(r.amount)) : '—';
+        var st = String(r.status || '').toLowerCase();
+        var stClass = (st === 'pending') ? 'status pending' : 'status';
+        return '<tr><td>' + (r.date || '') + '</td><td>' + (r.description || '') +
+          '</td><td class="right"><span class="amt-pos">' + amt + '</span></td>' +
+          '<td class="right"><span class="' + stClass + '">' + (r.status || '—') + '</span></td></tr>';
+      }).join('');
+    }
+
+    // Nav greeting + avatar (nav-right slot may not exist on the unified nav)
+    if (els.navRight) els.navRight.innerHTML = '<span class="nav-welcome">Welcome, ' + firstName(d.name) +
+      '</span><span class="nav-avatar">' + initials(d.name) + '</span>';
+
+    els.signin.style.display = 'none';
+    els.dash.classList.add('visible');
+  }
+
+  function demoRecord() {
+    return {
+      name: 'Masiela Lusha', tier: 'Founding Creator', memberSince: 'June 2026',
+      status: 'Active Affiliate', commissionRate: '20%',
+      creatorCode: 'MASIELA10', affiliateLink: 'https://shop.maisondvue.com/?ref=MASIELA10',
+      commissionEarned: 1240, pendingPayout: 320, totalReferrals: 68, conversionRate: '14.2%',
+      totalSales: 12, totalRevenue: 6200,
+      recentActivity: [
+        { date: 'Jun 26, 2026', description: 'Referral Sale', amount: 120, status: 'Paid' },
+        { date: 'Jun 24, 2026', description: 'Referral Sale', amount: 120, status: 'Paid' },
+        { date: 'Jun 22, 2026', description: 'Referral Sale', amount: 90, status: 'Pending' },
+        { date: 'Jun 20, 2026', description: 'Referral Click', amount: '', status: '—' }
+      ]
+    };
+  }
+
+  async function lookup(code, email) {
+    code = (code || '').trim().toUpperCase();
+    email = (email || '').trim();
+    var emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+    if (!emailOk) { setMsg('Please enter the email you applied with.'); els.email.focus(); return; }
+    if (!code) { setMsg('Please enter your creator code.'); els.code.focus(); return; }
+
+    if (!DASHBOARD_ENDPOINT || DASHBOARD_ENDPOINT.indexOf('REPLACE_') === 0) { render(demoRecord()); return; }
+
+    els.btn.disabled = true; var orig = els.btn.textContent; els.btn.textContent = '…'; setMsg('');
+    try {
+      var url = DASHBOARD_ENDPOINT + (DASHBOARD_ENDPOINT.indexOf('?') === -1 ? '?' : '&') +
+        'action=dashboard&code=' + encodeURIComponent(code) + '&email=' + encodeURIComponent(email);
+      var res = await fetch(url, { method: 'GET' });
+      var data = await res.json();
+      if (data && data.ok !== false && data.creatorCode) { render(data); }
+      else { setMsg('That code and email were not recognized. Please check your approval email, or write to us.'); els.code.select(); }
+    } catch (err) {
+      setMsg('We could not reach the House just now. Please try again shortly.');
+    } finally { els.btn.disabled = false; els.btn.textContent = orig; }
+  }
+
+  els.form.addEventListener('submit', function (e) { e.preventDefault(); lookup(els.code.value, els.email.value); });
+
+  els.signout.addEventListener('click', function () {
+    els.dash.classList.remove('visible');
+    els.signin.style.display = '';
+    els.code.value = ''; els.email.value = '';
+    if (els.navRight) els.navRight.innerHTML = '<a href="creators.html" class="nav-welcome">Founding Creator Program</a>';
+    els.email.focus();
+    history.replaceState(null, '', location.pathname);
+  });
+
+  /* Copy referral link */
+  document.getElementById('copyLink').addEventListener('click', function () {
+    var btn = this;
+    if (!affiliateLink) return;
+    var done = function () { btn.classList.add('copied'); var o = btn.textContent; btn.textContent = 'Copied'; setTimeout(function () { btn.classList.remove('copied'); btn.textContent = o; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(affiliateLink).then(done).catch(done); }
+    else { var ta = document.createElement('textarea'); ta.value = affiliateLink; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (_) {} document.body.removeChild(ta); done(); }
+  });
+  document.getElementById('toPerformance').addEventListener('click', function () {
+    document.querySelector('.stats').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  /* Deep link: ?demo=1 (preview), ?code=X&email=Y (open), ?code=X (prefill). */
+  (function () {
+    var params = new URLSearchParams(location.search);
+    if (params.get('demo') === '1') { render(demoRecord()); return; }
+    var code = params.get('code'), email = params.get('email');
+    if (code) els.code.value = code.toUpperCase();
+    if (email) els.email.value = email;
+    if (code && email) { lookup(code, email); }
+    else if (code) { els.email.focus(); }
+  })();
+</script>
+
+<script src="assets/menu.js?v=10" defer></script>
+<script src="assets/house.js?v=1" defer></script>
+</body>
+</html>

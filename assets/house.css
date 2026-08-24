@@ -1,0 +1,87 @@
+/* MAISON D'VUE — house.css
+   The cinematic foundation shared by every room of the House. Loaded after each
+   page's own styles (and after nav.css) so it sets the register without rewriting
+   page copy or structure. White throughout, near-black ink, generous air, hairline
+   rules, restrained motion. Nothing bounces. */
+
+:root {
+  --mdv-ink: #0A0A0A;
+  --mdv-paper: #FFFFFF;
+  --mdv-ink-soft: rgba(10, 10, 10, 0.62);
+  --mdv-ink-faint: rgba(10, 10, 10, 0.42);
+  --mdv-hairline: rgba(10, 10, 10, 0.08);
+  --mdv-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Quiet the page edges and lift the type a touch site-wide. */
+html { scroll-behavior: smooth; }
+
+/* ── Page-load fade ──────────────────────────────────────────────────────────
+   The whole document eases up from rest on load and eases out before a same-site
+   navigation (driven by house.js). A fade between rooms, never a cut. */
+body.mdv-fade { opacity: 0; }
+body.mdv-fade.mdv-fade-in { opacity: 1; transition: opacity 620ms var(--mdv-ease); }
+body.mdv-fade.mdv-fade-out { opacity: 0; transition: opacity 380ms var(--mdv-ease); }
+
+/* Respect reduced-motion: no fades, no reveals, no smooth-scroll. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body.mdv-fade, body.mdv-fade.mdv-fade-in, body.mdv-fade.mdv-fade-out { opacity: 1 !important; transition: none !important; }
+  .mdv-reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Reveal on scroll ────────────────────────────────────────────────────────
+   Elements tagged .mdv-reveal (or inside .mdv-reveal-group) rise and resolve as
+   they enter the viewport. Slow, weighted, single pass — editorial, not flashy. */
+.mdv-reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 900ms var(--mdv-ease), transform 900ms var(--mdv-ease);
+  will-change: opacity, transform;
+}
+.mdv-reveal.mdv-in { opacity: 1; transform: none; }
+/* Staggered children within a group. */
+.mdv-reveal-group > * { transition-delay: 0ms; }
+.mdv-reveal-group.mdv-in > *:nth-child(2) { transition-delay: 90ms; }
+.mdv-reveal-group.mdv-in > *:nth-child(3) { transition-delay: 180ms; }
+.mdv-reveal-group.mdv-in > *:nth-child(4) { transition-delay: 270ms; }
+.mdv-reveal-group.mdv-in > *:nth-child(5) { transition-delay: 360ms; }
+
+/* ── Scroll-snap utility ─────────────────────────────────────────────────────
+   Opt-in per page: add .mdv-snap to a scroll container and .mdv-snap-panel to its
+   full-height sections. Proximity (not mandatory) so long copy never traps. */
+.mdv-snap { scroll-snap-type: y proximity; }
+.mdv-snap-panel { scroll-snap-align: start; scroll-snap-stop: normal; }
+
+/* ── Hairlines ───────────────────────────────────────────────────────────────
+   Replace heavy dividers with a single near-invisible rule. */
+.mdv-rule { border: 0; border-top: 1px solid var(--mdv-hairline); margin: 0; }
+
+/* ── Editorial type helpers (used by the rooms, harmless elsewhere) ──────────── */
+.mdv-eyebrow {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--mdv-ink-faint);
+}
+.mdv-display {
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: 400;
+  letter-spacing: 0.01em; line-height: 1.04; color: var(--mdv-ink);
+}
+
+/* ── The wordmark — a high-contrast Didone, the one designed letterform ────────
+   Set here (after every page's own styles) so MAISON D'VUE reads as an elegant
+   serif house-mark against the clean Helvetica navigation, the Saint Laurent
+   register. Applies to the nav logo, the footer logo, and any header logo. */
+.nav-logo, .footer-logo, .header-logo {
+  font-family: 'Bodoni Moda', 'Didot', 'Bodoni MT', 'Didot LT STD', Georgia, serif !important;
+}
+
+/* ── Display headlines — the Didone extends to the big titles (Vogue-runway).
+   Eyebrows, labels, prices, stats, UI and body stay clean Helvetica. ──────────── */
+.res-headline, .hero-title, .purchase-title, .formulation-title,
+.ritual-head h2, .origins-head h2, .origin-hero-name, .reviews-head h2,
+.review-form-headline, .final-buy h2, .display,
+.feature-title .t-main, .feature-title .t-house, .film-line, .collection-title,
+.founder-hero-name, .slideshow-title, .slide-chapter, .house-title, .house-future-title,
+.success-title, .policy-hero h1, .signin-title, .dash-name {
+  font-family: 'Bodoni Moda', 'Didot', 'Bodoni MT', 'Didot LT STD', Georgia, serif !important;
+}
