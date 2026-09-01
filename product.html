@@ -2853,17 +2853,101 @@
     </div>
   </section>
 
-  <!-- ═══ CINEMATIC FILM BANNER SHOWCASE ═══ -->
-  <section style="position:relative;width:100%;max-width:1240px;margin:80px auto;padding:0 24px">
-    <div style="position:relative;aspect-ratio:16/9;max-height:560px;width:100%;overflow:hidden;border:1px solid rgba(194,161,91,0.3);box-shadow:0 24px 60px rgba(0,0,0,0.18)">
-      <video autoplay muted loop playsinline poster="photos/banner-product.jpg" style="width:100%;height:100%;object-fit:cover">
-        <source src="videos/ame-de-vue-product-reveal.mp4" type="video/mp4">
-      </video>
-      <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,12,0.85) 0%, rgba(10,10,12,0.15) 50%, rgba(10,10,12,0.4) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(24px,4vw,48px)">
-        <div style="display:inline-block;padding:5px 14px;border:1px solid #C2A15B;border-radius:20px;font-size:9.5px;letter-spacing:.32em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content;background:rgba(10,10,12,0.6)">RECOMMENDED FILM &middot; 4K B-ROLL REVEAL</div>
-        <h3 style="font-family:'Bodoni Moda',serif;font-size:clamp(22px,2.5vw,36px);color:#FDFBF8;margin-bottom:8px">Âme de Vue™ — The Elixir Ceremony</h3>
-        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(253,251,248,0.88);max-width:580px">Recommended Video: High-speed slow-motion video loop of golden amber oil droplets descending onto crystal glass, catching soft warm studio light reflections.</p>
+  <!-- ═══ REVIEWS ═══ -->
+  <section class="reviews" id="reviews">
+    <div class="section-inner">
+      <div class="reviews-head">
+        <p class="label">In Their Words</p>
+        <h2>From the maison&rsquo;s clients.</h2>
+        <div class="reviews-summary">
+          <span class="stars-large" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="summary-text">5.0 &middot; 9 Reviews</span>
+        </div>
       </div>
+
+      <div class="reviews-carousel-wrap">
+        <button type="button" class="reviews-arrow prev" aria-label="Previous reviews">&larr;</button>
+        <button type="button" class="reviews-arrow next" aria-label="Next reviews">&rarr;</button>
+
+        <div class="reviews-grid" id="reviewsGrid">
+          <div class="review-card">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">&ldquo;I&rsquo;m extremely picky about scent and this is honestly one of the best-smelling hair products I&rsquo;ve ever used. It&rsquo;s warm and clean at the same time &mdash; not overly floral, not perfume-y. The smell stays in your hair in the nicest way and I&rsquo;ve had multiple people ask me what fragrance I&rsquo;m wearing.&rdquo;</p>
+            <div class="review-name">Brittany</div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">&ldquo;I didn&rsquo;t expect this to replace so many products for me. Usually I need a leave-in, a shine serum, something for frizz, something for dry ends&hellip; now I just use a few drops of this and my hair looks healthy and finished. It somehow feels lightweight but still makes a huge difference.&rdquo;</p>
+            <div class="review-name">Yasmine</div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">&ldquo;This sounds dramatic but this product made me like my hair again. My hair had been feeling dry and dull for so long that I kind of gave up on it. After using this for a couple weeks it looked softer, shinier, and actually felt good to touch. I&rsquo;ve been wearing my hair down way more because of it.&rdquo;</p>
+            <div class="review-name">Rita</div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">&ldquo;I really like this so much. I never thought 5 drops would be enough for me, but they truly are. Sometimes I need more, sometimes less.&rdquo;</p>
+            <div class="review-name">T.S.</div>
+          </div>
+
+          <div class="review-card empty">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="review-name">Jessica</div>
+          </div>
+
+          <div class="review-card empty">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="review-name">Ashley</div>
+          </div>
+
+          <div class="review-card empty">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="review-name">Megan</div>
+          </div>
+
+          <div class="review-card empty">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="review-name">Priya</div>
+          </div>
+
+          <div class="review-card empty">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="review-name">Sarah</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-form-wrap" id="reviewFormWrap" style="max-width:680px;margin:80px auto 0;border:1px solid rgba(194,161,91,0.28);background:#FAF8F4;padding:clamp(40px,6vw,64px);border-radius:2px;box-shadow:0 16px 40px rgba(0,0,0,0.03)">
+        <p class="review-form-label" style="font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:#8A6C2E;margin-bottom:14px;font-weight:500">Leave a Review</p>
+        <h3 class="review-form-headline" style="font-family:'Bodoni Moda',serif;font-size:clamp(28px,3vw,38px);font-weight:400;color:#0A0A0C;margin-bottom:10px">Share your experience.</h3>
+        <p class="review-form-sub" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:rgba(10,10,12,0.65);margin-bottom:36px">Tell us how you have lived with the elixir.</p>
+
+        <form class="review-form" id="reviewForm" novalidate style="display:flex;flex-direction:column;gap:20px;text-align:left">
+          <div class="review-stars-input" id="reviewStarsInput" role="radiogroup" aria-label="Rating" style="display:flex;justify-content:center;gap:10px;margin-bottom:12px">
+            <button type="button" class="review-star-btn" data-value="1" aria-label="1 star" style="font-size:32px;color:#C2A15B">&#9733;</button>
+            <button type="button" class="review-star-btn" data-value="2" aria-label="2 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
+            <button type="button" class="review-star-btn" data-value="3" aria-label="3 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
+            <button type="button" class="review-star-btn" data-value="4" aria-label="4 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
+            <button type="button" class="review-star-btn" data-value="5" aria-label="5 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
+          </div>
+
+          <input type="text" id="reviewName" name="reviewName" placeholder="First name" autocomplete="given-name" required style="width:100%;background:#FFFFFF;border:1px solid rgba(10,10,12,0.15);padding:16px 20px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;outline:none;border-radius:2px">
+          <textarea id="reviewBody" name="reviewBody" placeholder="Tell us about your experience" required style="width:100%;min-height:140px;background:#FFFFFF;border:1px solid rgba(10,10,12,0.15);padding:16px 20px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;outline:none;border-radius:2px;resize:vertical"></textarea>
+
+          <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">
+            <input type="text" id="reviewHp" name="reviewHp" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" class="review-submit" id="reviewSubmit" style="width:100%;padding:18px;background:#0A0A0C;color:#FDFBF8;border:1px solid #C2A15B;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;cursor:pointer;font-weight:500;transition:all 240ms ease">Submit Review</button>
+        </form>
+
+        <p class="review-feedback" id="reviewFeedback" role="status" aria-live="polite" style="margin-top:16px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#8A6C2E"></p>
+      </div>
+
     </div>
   </section>
 
@@ -2877,7 +2961,6 @@
         <!-- Formulations Hero Image -->
         <div style="margin:28px 0;position:relative;aspect-ratio:4/5;max-height:420px;overflow:hidden;border:1px solid rgba(194,161,91,0.25)">
           <img src="photos/wax-seal-detail.jpg" alt="Hand-sealed gold wax detail on Vue 14 Elixir" style="width:100%;height:100%;object-fit:cover">
-          <div style="position:absolute;bottom:14px;left:14px;right:14px;background:rgba(10,10,12,0.75);padding:8px 12px;border-radius:2px;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:#C2A15B">RECOMMENDED PHOTO: Close-up macro photograph of hand-poured gold wax emblem seal</div>
         </div>
 
         <button class="formulation-mark formulation-toggle" type="button" id="matrixToggle" aria-expanded="false" aria-controls="matrixPanel" onclick="toggleMatrix()">
@@ -2937,7 +3020,6 @@
         <div class="ritual-step">
           <div class="ritual-image" style="position:relative">
             <img src="photos/ritual-five-drops.jpg" alt="Five drops of MAISON D'VUE Hair Elixir falling into an open palm" style="width:100%;height:100%;object-fit:cover">
-            <div style="position:absolute;bottom:8px;left:8px;right:8px;background:rgba(10,10,12,0.8);padding:6px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B">RECOMMENDED VIDEO: 4K 60fps slow-motion of 5 drops falling into open palm</div>
           </div>
           <div class="ritual-num">01</div>
           <div class="ritual-title">Five drops</div>
@@ -2946,7 +3028,6 @@
         <div class="ritual-step">
           <div class="ritual-image" style="position:relative">
             <img src="photos/ritual-warm-palms.jpg" alt="Hands rubbing together, warming the MAISON D'VUE Hair Elixir between palms" style="width:100%;height:100%;object-fit:cover">
-            <div style="position:absolute;bottom:8px;left:8px;right:8px;background:rgba(10,10,12,0.8);padding:6px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B">RECOMMENDED VIDEO: Slow-motion clip warming elixir between palms</div>
           </div>
           <div class="ritual-num">02</div>
           <div class="ritual-title">Warmed between the palms</div>
@@ -2955,7 +3036,6 @@
         <div class="ritual-step">
           <div class="ritual-image" style="position:relative">
             <img src="photos/ritual-draw-through.jpg" alt="Hands pressing the MAISON D'VUE Hair Elixir into long luminous hair" style="width:100%;height:100%;object-fit:cover">
-            <div style="position:absolute;bottom:8px;left:8px;right:8px;background:rgba(10,10,12,0.8);padding:6px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B">RECOMMENDED VIDEO: Model drawing hand through silk hair lengths</div>
           </div>
           <div class="ritual-num">03</div>
           <div class="ritual-title">Drawn through the hair</div>
@@ -2987,7 +3067,6 @@
         <article class="origin-hero">
           <img src="photos/editorial-essences.jpeg" alt="Ungurahua palm in the Amazon rainforest at dawn">
           <div class="origin-hero-content">
-            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: Amazonian Rainforest canopy photography</div>
             <p class="origin-hero-place">Amazon Rainforest</p>
             <h3 class="origin-hero-name">Ungurahua</h3>
             <p class="origin-hero-latin">Oenocarpus bataua</p>
@@ -2999,7 +3078,6 @@
         <article class="origin-hero">
           <img src="photos/film-backstage.jpg" alt="Bulgarian damask roses in the Valley of Roses at dawn">
           <div class="origin-hero-content">
-            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: Bulgarian Damask Rose harvest at sunrise</div>
             <p class="origin-hero-place">Valley of Roses, Bulgaria</p>
             <h3 class="origin-hero-name">Bulgarian Rose</h3>
             <p class="origin-hero-latin">Rosa damascena</p>
@@ -3011,7 +3089,6 @@
         <article class="origin-hero">
           <img src="photos/film-street.jpg" alt="Crimson camellia bloom in a Japanese garden at dawn">
           <div class="origin-hero-content">
-            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: 35mm film shot of Tsubaki camellia bloom</div>
             <p class="origin-hero-place">Japan</p>
             <h3 class="origin-hero-name">Camellia</h3>
             <p class="origin-hero-latin">Camellia japonica</p>
@@ -3023,7 +3100,6 @@
         <article class="origin-hero">
           <img src="photos/founder-campaign-01.jpg" alt="Prickly pear cactus in the Atlas Mountains at dusk">
           <div class="origin-hero-content">
-            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: Berber women harvesting Atlas flora</div>
             <p class="origin-hero-place">Atlas Mountains, Morocco</p>
             <h3 class="origin-hero-name">Prickly Pear</h3>
             <p class="origin-hero-latin">Opuntia ficus-indica</p>
@@ -3035,7 +3111,6 @@
         <article class="origin-hero">
           <img src="photos/founder-campaign-02.jpg" alt="Wild rosehip cluster against Andean peaks at dusk">
           <div class="origin-hero-content">
-            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: Patagonian wild rosehip botanical shot</div>
             <p class="origin-hero-place">Andes &amp; Southern Chile</p>
             <h3 class="origin-hero-name">Rosehip</h3>
             <p class="origin-hero-latin">Rosa moschata</p>
@@ -3047,7 +3122,6 @@
         <article class="origin-hero">
           <img src="photos/founder-campaign-03.jpg" alt="Meadowfoam flowers on the Pacific Northwest coast at sunset">
           <div class="origin-hero-content">
-            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: Pacific Northwest meadowfoam field</div>
             <p class="origin-hero-place">Pacific Northwest</p>
             <h3 class="origin-hero-name">Meadowfoam</h3>
             <p class="origin-hero-latin">Limnanthes alba</p>
@@ -3148,104 +3222,6 @@
 
       <p class="fourteen">Fourteen in total. Working as one system.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- ═══ REVIEWS ═══ -->
-  <section class="reviews" id="reviews">
-    <div class="section-inner">
-      <div class="reviews-head">
-        <p class="label">In Their Words</p>
-        <h2>From the maison&rsquo;s clients.</h2>
-        <div class="reviews-summary">
-          <span class="stars-large" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          <span class="summary-text">5.0 &middot; 9 Reviews</span>
-        </div>
-      </div>
-
-      <div class="reviews-carousel-wrap">
-        <button type="button" class="reviews-arrow prev" aria-label="Previous reviews">&larr;</button>
-        <button type="button" class="reviews-arrow next" aria-label="Next reviews">&rarr;</button>
-
-        <div class="reviews-grid" id="reviewsGrid">
-          <div class="review-card">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p class="review-text">&ldquo;I&rsquo;m extremely picky about scent and this is honestly one of the best-smelling hair products I&rsquo;ve ever used. It&rsquo;s warm and clean at the same time &mdash; not overly floral, not perfume-y. The smell stays in your hair in the nicest way and I&rsquo;ve had multiple people ask me what fragrance I&rsquo;m wearing.&rdquo;</p>
-            <div class="review-name">Brittany</div>
-          </div>
-
-          <div class="review-card">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p class="review-text">&ldquo;I didn&rsquo;t expect this to replace so many products for me. Usually I need a leave-in, a shine serum, something for frizz, something for dry ends&hellip; now I just use a few drops of this and my hair looks healthy and finished. It somehow feels lightweight but still makes a huge difference.&rdquo;</p>
-            <div class="review-name">Yasmine</div>
-          </div>
-
-          <div class="review-card">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p class="review-text">&ldquo;This sounds dramatic but this product made me like my hair again. My hair had been feeling dry and dull for so long that I kind of gave up on it. After using this for a couple weeks it looked softer, shinier, and actually felt good to touch. I&rsquo;ve been wearing my hair down way more because of it.&rdquo;</p>
-            <div class="review-name">Rita</div>
-          </div>
-
-          <div class="review-card">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p class="review-text">&ldquo;I really like this so much. I never thought 5 drops would be enough for me, but they truly are. Sometimes I need more, sometimes less.&rdquo;</p>
-            <div class="review-name">T.S.</div>
-          </div>
-
-          <div class="review-card empty">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <div class="review-name">Jessica</div>
-          </div>
-
-          <div class="review-card empty">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <div class="review-name">Ashley</div>
-          </div>
-
-          <div class="review-card empty">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <div class="review-name">Megan</div>
-          </div>
-
-          <div class="review-card empty">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <div class="review-name">Priya</div>
-          </div>
-
-          <div class="review-card empty">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <div class="review-name">Sarah</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-form-wrap" id="reviewFormWrap" style="max-width:680px;margin:80px auto 0;border:1px solid rgba(194,161,91,0.28);background:#FAF8F4;padding:clamp(40px,6vw,64px);border-radius:2px;box-shadow:0 16px 40px rgba(0,0,0,0.03)">
-        <p class="review-form-label" style="font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:#8A6C2E;margin-bottom:14px;font-weight:500">Leave a Review</p>
-        <h3 class="review-form-headline" style="font-family:'Bodoni Moda',serif;font-size:clamp(28px,3vw,38px);font-weight:400;color:#0A0A0C;margin-bottom:10px">Share your experience.</h3>
-        <p class="review-form-sub" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:rgba(10,10,12,0.65);margin-bottom:36px">Tell us how you have lived with the elixir.</p>
-
-        <form class="review-form" id="reviewForm" novalidate style="display:flex;flex-direction:column;gap:20px;text-align:left">
-          <div class="review-stars-input" id="reviewStarsInput" role="radiogroup" aria-label="Rating" style="display:flex;justify-content:center;gap:10px;margin-bottom:12px">
-            <button type="button" class="review-star-btn" data-value="1" aria-label="1 star" style="font-size:32px;color:#C2A15B">&#9733;</button>
-            <button type="button" class="review-star-btn" data-value="2" aria-label="2 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
-            <button type="button" class="review-star-btn" data-value="3" aria-label="3 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
-            <button type="button" class="review-star-btn" data-value="4" aria-label="4 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
-            <button type="button" class="review-star-btn" data-value="5" aria-label="5 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
-          </div>
-
-          <input type="text" id="reviewName" name="reviewName" placeholder="First name" autocomplete="given-name" required style="width:100%;background:#FFFFFF;border:1px solid rgba(10,10,12,0.15);padding:16px 20px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;outline:none;border-radius:2px">
-          <textarea id="reviewBody" name="reviewBody" placeholder="Tell us about your experience" required style="width:100%;min-height:140px;background:#FFFFFF;border:1px solid rgba(10,10,12,0.15);padding:16px 20px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;outline:none;border-radius:2px;resize:vertical"></textarea>
-
-          <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">
-            <input type="text" id="reviewHp" name="reviewHp" tabindex="-1" autocomplete="off">
-          </div>
-
-          <button type="submit" class="review-submit" id="reviewSubmit" style="width:100%;padding:18px;background:#0A0A0C;color:#FDFBF8;border:1px solid #C2A15B;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;cursor:pointer;font-weight:500;transition:all 240ms ease">Submit Review</button>
-        </form>
-
-        <p class="review-feedback" id="reviewFeedback" role="status" aria-live="polite" style="margin-top:16px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#8A6C2E"></p>
-      </div>
-
     </div>
   </section>
 

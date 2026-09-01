@@ -222,8 +222,8 @@
   <div class="letters-modal" id="lettersModal">
     <button class="letters-close" type="button" aria-label="Close">&times;</button>
 
-    <p class="letters-label">Welcome to MAISON D&rsquo;VUE</p>
-    <p class="letters-headline" id="lettersHeadline">Join the waitlist for a chance to win a sapphire necklace.</p>
+    <p class="letters-label">WELCOME TO MAISON D&rsquo;VUE</p>
+    <p class="letters-headline" id="lettersHeadline">The sapphire necklace remains unclaimed.<br>Enter the draw for a chance to make it yours. Winner revealed November 23.</p>
 
     <form class="letters-form" id="lettersForm" novalidate>
       <div class="letters-input-row">
