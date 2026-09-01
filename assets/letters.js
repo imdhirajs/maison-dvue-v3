@@ -87,7 +87,7 @@
     letter-spacing: 0.32em;
     text-transform: uppercase;
     color: var(--navy);
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     line-height: 1;
     font-weight: 500;
   }
@@ -95,11 +95,21 @@
   .letters-headline {
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: 14px;
-    line-height: 1.55;
+    font-size: 20px;
+    line-height: 1.3;
     letter-spacing: 0.01em;
     color: var(--navy);
-    margin-bottom: 28px;
+    margin-bottom: 10px;
+  }
+
+  .letters-sub {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 13.5px;
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+    color: var(--mid);
+    margin-bottom: 26px;
   }
 
   .letters-form {
@@ -223,7 +233,8 @@
     <button class="letters-close" type="button" aria-label="Close">&times;</button>
 
     <p class="letters-label">WELCOME TO MAISON D&rsquo;VUE</p>
-    <p class="letters-headline" id="lettersHeadline">The sapphire necklace remains unclaimed.<br>Enter the draw for a chance to make it yours. Winner revealed November 23.</p>
+    <h2 class="letters-headline" id="lettersHeadline">The sapphire necklace remains unclaimed.</h2>
+    <p class="letters-sub">Enter the draw for a chance to make it yours. Winner revealed November 23.</p>
 
     <form class="letters-form" id="lettersForm" novalidate>
       <div class="letters-input-row">
