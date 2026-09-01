@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache">
+<script>
+  window.addEventListener('pageshow', function (e) { if (e.persisted) window.location.reload(); });
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Official Rules — Sapphire Necklace Drawing — MAISON D&rsquo;VUE</title>
+<meta name="description" content="MAISON D'VUE Sapphire Necklace Drawing Official Rules. No purchase necessary. Void where prohibited.">
+<link rel="canonical" href="https://maisondvue.com/rules.html">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=4">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4">
+<link rel="shortcut icon" href="/favicon.ico?v=4">
+<meta name="theme-color" content="#FFFFFF">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy: #0A0A0C;
+    --navy-deep: #04081A;
+    --gold: #C2A15B;
+    --gold-dark: #8A6C2E;
+    --cream: #FAF8F4;
+    --paper: #FFFFFF;
+    --ink: #1A1A1E;
+    --ink-light: rgba(26, 26, 30, 0.72);
+    --line: rgba(10, 10, 12, 0.12);
+    --font-display: 'Bodoni Moda', serif;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'Jost', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; background: var(--paper); }
+  body {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+    line-height: 1.75;
+    padding-top: 72px;
+  }
+
+  a { color: var(--gold-dark); text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { color: var(--navy); }
+
+  /* ═══ UNIFIED NAV ═══ */
+  .mdv-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 72px;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 40px;
+    background: rgba(255, 255, 255, 0.96); backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--line);
+  }
+  .mdv-nav .nav-logo {
+    font-family: var(--font-sans); font-weight: 500; font-size: 18px; letter-spacing: 0.34em;
+    text-transform: uppercase; color: var(--navy); text-decoration: none;
+  }
+  .mdv-nav .nav-links { display: flex; gap: 36px; }
+  .mdv-nav .nav-links a {
+    font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; font-weight: 400;
+    color: rgba(10, 10, 12, 0.65); text-decoration: none; transition: color 200ms ease;
+  }
+  .mdv-nav .nav-links a:hover { color: var(--navy); }
+  .mdv-nav-toggle { display: none; background: transparent; border: 0; color: var(--navy); padding: 6px; cursor: pointer; }
+  .mdv-nav-toggle svg { width: 22px; height: 22px; display: block; }
+
+  /* MOBILE MENU */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; background: var(--paper); z-index: 300;
+    flex-direction: column; padding: 80px 40px 40px; opacity: 0; transform: translateY(-12px);
+    transition: opacity 300ms ease, transform 300ms ease; pointer-events: none;
+  }
+  .mobile-menu.open { display: flex; opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .mobile-menu-close { position: absolute; top: 24px; right: 24px; background: transparent; border: 0; color: var(--navy); font-size: 28px; padding: 8px; }
+  .mobile-menu a { font-family: var(--font-sans); font-size: 16px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--navy); padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+
+  @media (max-width: 860px) {
+    .mdv-nav { padding: 0 20px; }
+    .mdv-nav .nav-links { display: none; }
+    .mdv-nav-toggle { display: block; }
+  }
+
+  /* ═══ PAGE HEADER ═══ */
+  .rules-hero {
+    background: var(--navy-deep);
+    color: #EFE9DF;
+    padding: clamp(64px, 10vh, 110px) clamp(24px, 5vw, 64px);
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid rgba(194, 161, 91, 0.3);
+  }
+  .rules-hero-inner { max-width: 820px; margin: 0 auto; }
+  .rules-eyebrow {
+    font-size: 10px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--gold);
+    font-weight: 500; margin-bottom: 20px;
+  }
+  .rules-title {
+    font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.12; margin-bottom: 24px; letter-spacing: -0.01em; color: #FDFBF8;
+  }
+  .rules-disclaimer {
+    font-family: var(--font-serif); font-style: italic; font-size: clamp(16px, 1.8vw, 21px);
+    line-height: 1.5; color: rgba(239, 233, 223, 0.85); max-width: 640px; margin: 0 auto;
+  }
+
+  /* ═══ MAIN LEGAL CONTAINER ═══ */
+  .rules-content {
+    max-width: 860px;
+    margin: clamp(48px, 8vh, 88px) auto;
+    padding: 0 24px;
+  }
+  .rules-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(194, 161, 91, 0.22);
+    padding: clamp(36px, 6vw, 64px);
+    border-radius: 2px;
+    box-shadow: 0 12px 36px rgba(10, 10, 12, 0.03);
+  }
+
+  .rules-section {
+    margin-bottom: 40px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--line);
+  }
+  .rules-section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: 0; }
+
+  .section-number {
+    font-size: 10.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dark);
+    font-weight: 600; margin-bottom: 8px; display: block;
+  }
+  .section-title {
+    font-family: var(--font-display); font-weight: 400; font-size: clamp(20px, 2.2vw, 26px);
+    color: var(--navy); margin-bottom: 16px; line-height: 1.25;
+  }
+  .section-body {
+    font-size: 15px; color: var(--ink-light); line-height: 1.8;
+  }
+  .section-body p { margin-bottom: 14px; }
+  .section-body p:last-child { margin-bottom: 0; }
+  .section-body ul { margin: 12px 0 16px 20px; list-style: disc; }
+  .section-body li { margin-bottom: 8px; }
+
+  /* VALUE PLACEHOLDER BADGE */
+  .value-highlight {
+    background: #FFF8E7;
+    color: #8A6C2E;
+    border: 1px solid #C2A15B;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    display: inline-block;
+  }
+
+  .all-caps-warning {
+    font-weight: 500; color: var(--navy); letter-spacing: 0.01em; margin-top: 12px; display: block;
+  }
+
+  .last-updated {
+    text-align: center; margin-top: 48px; font-family: var(--font-serif); font-style: italic;
+    font-size: 16px; color: var(--gold-dark);
+  }
+
+  /* ═══ FOOTER ═══ */
+  footer { background: var(--navy-deep); color: #EFE9DF; padding: 88px 0 40px; margin-top: 100px; }
+  .footer-inner { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+  .footer-top { display: grid; grid-template-columns: 1.4fr 2.6fr; gap: 80px; padding-bottom: 64px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); margin-bottom: 48px; }
+  .footer-brand .footer-logo { font-family: var(--font-sans); font-size: 20px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 18px; color: #FFFFFF; }
+  .footer-brand .footer-line { font-family: var(--font-serif); font-size: 15px; font-style: italic; color: rgba(239, 233, 223, 0.75); margin-bottom: 18px; }
+  .footer-brand .footer-provenance { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(239, 233, 223, 0.5); }
+  .footer-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .footer-col-label { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 20px; font-weight: 500; }
+  .footer-col a { font-size: 13px; color: rgba(239, 233, 223, 0.78); margin-bottom: 12px; text-decoration: none; display: block; transition: color 200ms ease; }
+  .footer-col a:hover { color: #FFFFFF; }
+  .footer-bottom { font-size: 11px; letter-spacing: 0.18em; color: rgba(239, 233, 223, 0.4); text-align: center; text-transform: uppercase; }
+
+  @media (max-width: 900px) {
+    .footer-top { grid-template-columns: 1fr; gap: 48px; }
+    .footer-nav { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-inner { padding: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ UNIFIED NAVIGATION BAR ═══ -->
+<nav class="mdv-nav" id="mdvNav">
+  <div class="nav-left">
+    <button class="mdv-nav-toggle" type="button" aria-label="Open menu" onclick="openMobileMenu()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="13" x2="21" y2="13"/><line x1="3" y1="19" x2="21" y2="19"/></svg>
+    </button>
+    <a href="index.html" class="nav-logo">MAISON D&rsquo;VUE</a>
+  </div>
+  <div class="nav-links">
+    <a href="about.html">The House</a>
+    <a href="product.html">The Elixir</a>
+    <a href="gallery.html">The Story</a>
+    <a href="product.html#formulation">The Formula</a>
+    <a href="product.html#origins">Origins</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-bag" href="https://shop.maisondvue.com/cart" aria-label="Bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 7h12l-1 14H7L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg></a>
+  </div>
+</nav>
+
+<!-- ═══ MOBILE MENU ═══ -->
+<nav class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()">&times;</button>
+  <a href="about.html" onclick="closeMobileMenu()">The House</a>
+  <a href="product.html" onclick="closeMobileMenu()">The Elixir</a>
+  <a href="gallery.html" onclick="closeMobileMenu()">The Story</a>
+  <a href="product.html#formulation" onclick="closeMobileMenu()">The Formula</a>
+  <a href="product.html#origins" onclick="closeMobileMenu()">Origins</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<header class="rules-hero">
+  <div class="rules-hero-inner">
+    <p class="rules-eyebrow">MAISON D&rsquo;VUE &middot; SAPPHIRE NECKLACE DRAWING</p>
+    <h1 class="rules-title">Official Rules</h1>
+    <p class="rules-disclaimer">
+      NO PURCHASE NECESSARY TO ENTER OR WIN.<br>
+      A PURCHASE WILL NOT INCREASE YOUR CHANCES OF WINNING.<br>
+      VOID WHERE PROHIBITED BY LAW.
+    </p>
+  </div>
+</header>
+
+<!-- ═══ LEGAL RULES DOCUMENT CONTENT ═══ -->
+<main class="rules-content">
+  <div class="rules-card">
+
+    <!-- 1. SPONSOR -->
+    <div class="rules-section">
+      <span class="section-number">01 &middot; Sponsor</span>
+      <h2 class="section-title">1. Sponsor</h2>
+      <div class="section-body">
+        <p>MDV Group, LLC (“MAISON D’VUE” or “Sponsor”), 132 S Lasky Dr, Floor 2, Unit #523, Beverly Hills, CA 90212.</p>
+        <p>This drawing is in no way sponsored, endorsed, administered by, or associated with Instagram, Meta Platforms, Inc., Shopify, or any other platform on which it may appear.</p>
+      </div>
+    </div>
+
+    <!-- 2. ELIGIBILITY -->
+    <div class="rules-section">
+      <span class="section-number">02 &middot; Eligibility</span>
+      <h2 class="section-title">2. Eligibility</h2>
+      <div class="section-body">
+        <p>Open to legal residents of the fifty (50) United States and the District of Columbia who are eighteen (18) years of age or older at the time of entry.</p>
+        <p>Void in Puerto Rico, all U.S. territories and possessions, and wherever prohibited or restricted by law.</p>
+        <p>Employees, officers, and members of Sponsor, and their immediate family members (spouse, parent, child, sibling, and their respective spouses) and household members, are not eligible.</p>
+      </div>
+    </div>
+
+    <!-- 3. ENTRY PERIOD -->
+    <div class="rules-section">
+      <span class="section-number">03 &middot; Entry Period</span>
+      <h2 class="section-title">3. Entry Period</h2>
+      <div class="section-body">
+        <p>The Drawing begins at 12:00 AM Pacific Time on September 3, 2026 and ends at 11:59 PM Pacific Time on November 23, 2026 (the “Entry Period”).</p>
+        <p>Sponsor’s computer is the official time-keeping device for this Drawing.</p>
+      </div>
+    </div>
+
+    <!-- 4. HOW TO ENTER -->
+    <div class="rules-section">
+      <span class="section-number">04 &middot; Entry Methods</span>
+      <h2 class="section-title">4. How to Enter</h2>
+      <div class="section-body">
+        <p>Entry is free. There are three (3) methods of entry, each carrying equal weight:</p>
+        <p><strong>(a) Instagram.</strong> Follow @maisondvue and leave a comment on the designated Drawing post during the Entry Period.</p>
+        <p><strong>(b) Email.</strong> Subscribe to the MAISON D’VUE mailing list at maisondvue.com during the Entry Period. Existing subscribers as of the start of the Entry Period are automatically entered.</p>
+        <p><strong>(c) Mail-in.</strong> Hand-print your full name, complete mailing address, daytime telephone number, email address, and date of birth on a 3″ &times; 5″ card and mail it in a #10 envelope with sufficient postage to: MAISON D’VUE Sapphire Necklace Drawing, 132 S Lasky Dr, Floor 2, Unit #523, Beverly Hills, CA 90212. Mail-in entries must be postmarked by November 23, 2026 and received by November 30, 2026.</p>
+        <p><strong>Limit:</strong> one (1) entry per person per method, for a maximum of three (3) entries per person for the full Entry Period.</p>
+        <p>Entries generated by script, macro, bot, or other automated means are void. Multiple accounts operated by a single individual are void. Entries that are incomplete, illegible, late, or that do not conform to these Official Rules are void.</p>
+        <p>All entries become the property of Sponsor and will not be acknowledged or returned.</p>
+      </div>
+    </div>
+
+    <!-- 5. WINNER SELECTION -->
+    <div class="rules-section">
+      <span class="section-number">05 &middot; Selection</span>
+      <h2 class="section-title">5. Winner Selection</h2>
+      <div class="section-body">
+        <p>One (1) potential winner will be selected in a random drawing from among all eligible entries received, to be conducted on or about November 23, 2026 by Sponsor, whose decisions are final and binding in all matters relating to this Drawing.</p>
+        <p>Odds of winning depend on the total number of eligible entries received.</p>
+      </div>
+    </div>
+
+    <!-- 6. PRIZE -->
+    <div class="rules-section">
+      <span class="section-number">06 &middot; Prize Details</span>
+      <h2 class="section-title">6. Prize</h2>
+      <div class="section-body">
+        <p>One (1) sapphire necklace. Approximate Retail Value (“ARV”): $<span class="value-highlight">[VALUE &mdash; CONFIRM WITH MASIELA BEFORE PUBLISHING]</span> USD. Total ARV of all prizes: $<span class="value-highlight">[VALUE &mdash; CONFIRM WITH MASIELA BEFORE PUBLISHING]</span> USD.</p>
+        <p>The prize is awarded “as is” with no warranty or guarantee, express or implied, by Sponsor. The prize is non-transferable.</p>
+        <p>No substitution, assignment, or cash equivalent is permitted, except that Sponsor reserves the right to substitute a prize of equal or greater value if the advertised prize becomes unavailable for any reason.</p>
+        <p>All costs and expenses not expressly stated as included in the prize are the sole responsibility of the winner.</p>
+      </div>
+    </div>
+
+    <!-- 7. WINNER NOTIFICATION -->
+    <div class="rules-section">
+      <span class="section-number">07 &middot; Notification</span>
+      <h2 class="section-title">7. Winner Notification</h2>
+      <div class="section-body">
+        <p>The potential winner will be notified by direct message, email, or telephone using the contact information associated with the winning entry, within five (5) business days of the drawing.</p>
+        <p>The potential winner must respond within five (5) calendar days of the first notification attempt. Failure to respond within that period, an undeliverable notification, ineligibility, or noncompliance with these Official Rules will result in forfeiture, and an alternate winner may be selected at Sponsor’s discretion.</p>
+        <p>The potential winner may be required to complete, sign, and return an Affidavit of Eligibility, a Liability Release, and, where lawful, a Publicity Release within seven (7) days of receipt.</p>
+      </div>
+    </div>
+
+    <!-- 8. TAXES -->
+    <div class="rules-section">
+      <span class="section-number">08 &middot; Tax Responsibility</span>
+      <h2 class="section-title">8. Taxes</h2>
+      <div class="section-body">
+        <p>All federal, state, and local taxes on the prize are the sole responsibility of the winner. The winner is advised to consult a tax professional regarding the tax consequences of accepting the prize.</p>
+      </div>
+    </div>
+
+    <!-- 9. PUBLICITY -->
+    <div class="rules-section">
+      <span class="section-number">09 &middot; Promotional Use</span>
+      <h2 class="section-title">9. Publicity</h2>
+      <div class="section-body">
+        <p>Except where prohibited by law, acceptance of the prize constitutes the winner’s consent for Sponsor to use the winner’s name, city and state of residence, likeness, and any statements made regarding the Drawing for advertising and promotional purposes in any media, worldwide, in perpetuity, without further compensation, notice, or approval.</p>
+      </div>
+    </div>
+
+    <!-- 10. RELEASE AND LIMITATION OF LIABILITY -->
+    <div class="rules-section">
+      <span class="section-number">10 &middot; Liability</span>
+      <h2 class="section-title">10. Release and Limitation of Liability</h2>
+      <div class="section-body">
+        <p>By entering, each entrant releases and holds harmless Sponsor, its members, officers, agents, and representatives, and each of the platforms on which the Drawing appears, from any and all liability for any loss, harm, damage, injury, cost, or expense arising out of participation in this Drawing, the acceptance, possession, use, or misuse of the prize, or any typographical or other error in these Official Rules or the announcement of the prize.</p>
+        <p>Sponsor is not responsible for lost, late, misdirected, garbled, incomplete, or undeliverable entries; technical failures of any kind; or any injury or damage to any person’s device related to or resulting from participation in this Drawing.</p>
+      </div>
+    </div>
+
+    <!-- 11. GENERAL CONDITIONS -->
+    <div class="rules-section">
+      <span class="section-number">11 &middot; Conditions</span>
+      <h2 class="section-title">11. General Conditions</h2>
+      <div class="section-body">
+        <p>Sponsor reserves the right to cancel, suspend, or modify the Drawing, or any part of it, if fraud, technical failure, or any other factor beyond Sponsor’s reasonable control impairs the integrity or proper functioning of the Drawing, as determined by Sponsor in its sole discretion. In such event, Sponsor may select the winner from among all eligible entries received prior to the impairment.</p>
+        <p>Sponsor reserves the right, in its sole discretion, to disqualify any individual it finds to be tampering with the entry process, acting in violation of these Official Rules, or acting in a disruptive manner or with intent to annoy, abuse, threaten, or harass any other person.</p>
+        <p class="all-caps-warning">ANY ATTEMPT BY ANY PERSON TO DELIBERATELY UNDERMINE THE LEGITIMATE OPERATION OF THIS DRAWING MAY BE A VIOLATION OF CRIMINAL AND CIVIL LAW.</p>
+      </div>
+    </div>
+
+    <!-- 12. DISPUTES AND GOVERNING LAW -->
+    <div class="rules-section">
+      <span class="section-number">12 &middot; Governing Law</span>
+      <h2 class="section-title">12. Disputes and Governing Law</h2>
+      <div class="section-body">
+        <p>All issues and questions concerning the construction, validity, interpretation, and enforceability of these Official Rules, or the rights and obligations of entrants and Sponsor, shall be governed by the laws of the State of California, without regard to its conflict of law principles.</p>
+        <p>Each entrant agrees that any dispute shall be resolved individually, without resort to any form of class action, and exclusively in the state or federal courts located in Los Angeles County, California.</p>
+        <p>Entrants waive all rights to claim punitive, incidental, or consequential damages, and any damages other than actual out-of-pocket expenses incurred in entering.</p>
+      </div>
+    </div>
+
+    <!-- 13. PRIVACY -->
+    <div class="rules-section">
+      <span class="section-number">13 &middot; Data Privacy</span>
+      <h2 class="section-title">13. Privacy</h2>
+      <div class="section-body">
+        <p>Information submitted in connection with this Drawing will be treated in accordance with Sponsor’s Privacy Policy, available at maisondvue.com. Entry does not automatically enroll entrants in any marketing communications except where the entrant has separately opted in.</p>
+        <p>California residents have rights under the California Consumer Privacy Act, including the right to request access to or deletion of personal information. Requests may be directed to <a href="mailto:hello@maisondvue.com">hello@maisondvue.com</a>.</p>
+      </div>
+    </div>
+
+    <!-- 14. WINNER LIST -->
+    <div class="rules-section">
+      <span class="section-number">14 &middot; Winner List</span>
+      <h2 class="section-title">14. Winner List</h2>
+      <div class="section-body">
+        <p>For the name of the winner, send a self-addressed stamped envelope to: MAISON D’VUE Sapphire Necklace Drawing &mdash; Winner List, 132 S Lasky Dr, Floor 2, Unit #523, Beverly Hills, CA 90212, to be received no later than February 21, 2027.</p>
+      </div>
+    </div>
+
+    <div class="last-updated">
+      These Official Rules were last updated September 2, 2026.
+    </div>
+
+  </div>
+</main>
+
+<!-- ═══ LUXURY EDITORIAL FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">MAISON D&rsquo;VUE</div>
+        <p class="footer-line">Rare by origin. Refined by design.</p>
+        <div class="footer-provenance">Hand-sealed &middot; Beverly Hills</div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <div class="footer-col-label">The House</div>
+          <a href="about.html#founder">Masiela Lusha</a>
+          <a href="about.html#house">The House of Vue</a>
+          <a href="about.html#inside">Inside MAISON D&rsquo;VUE</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">The Product</div>
+          <a href="gallery.html">The Story</a>
+          <a href="product.html#formulation">The Formula</a>
+          <a href="product.html#ritual">The Ritual</a>
+          <a href="product.html#origins">Origins</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">Soundtrack</div>
+          <a href="https://open.spotify.com/album/3M2q35RFBDcS2x2RcjVRu0" target="_blank" rel="noopener">Spotify Album</a>
+          <a href="https://music.apple.com/us/search?term=maison+dvue" target="_blank" rel="noopener">Apple Music</a>
+          <a href="https://shop.maisondvue.com" target="_blank" rel="noopener">Shopify Library</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">Access</div>
+          <a href="product.html#buy">Reserve</a>
+          <a href="founders-circle.html">Founder&rsquo;s Circle</a>
+          <a href="mailto:hello@maisondvue.com">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 MAISON D&rsquo;VUE &nbsp;&middot;&nbsp; hello@maisondvue.com &nbsp;&middot;&nbsp; Beverly Hills, CA</div>
+  </div>
+</footer>
+
+<script>
+  function openMobileMenu(){ document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMobileMenu(){ document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow = ''; }
+</script>
+
+</body>
+</html>
