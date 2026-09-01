@@ -1123,12 +1123,23 @@
   }
 
   .wall-grid{
-    max-width:1400px; margin:0 auto; padding:0 24px;
-    display:grid; grid-template-columns:repeat(4, 1fr);
-    grid-auto-rows:230px; grid-auto-flow:dense; gap:14px;
+    max-width:1120px; margin:0 auto; padding:0 24px;
+    display:grid; grid-template-columns:repeat(3, 1fr);
+    grid-auto-rows:clamp(380px, 34vw, 480px); gap:20px;
   }
   .wall-tile{ position:relative; overflow:hidden; background:var(--paper-2); }
   .wall-tile--tall{ grid-row:span 2; }
+  .wall-tile--full-review{ }
+  .wall-sound-btn{
+    position:absolute; left:50%; bottom:16px; transform:translateX(-50%);
+    display:flex; align-items:center; gap:8px;
+    background:rgba(10,10,12,0.72); color:#fff; border:1px solid rgba(255,255,255,0.4);
+    border-radius:999px; padding:8px 16px; font-size:12px; letter-spacing:0.04em;
+    cursor:pointer; z-index:2; backdrop-filter:blur(4px);
+  }
+  .wall-sound-btn:hover{ background:rgba(10,10,12,0.9); }
+  .wall-sound-icon{ font-size:10px; }
+  .wall-tile--full-review.is-playing-full .wall-sound-btn{ display:none; }
   /* These are vertical selfie-style clips; their subjects sit in the upper
      third of the frame, so a plain center-center crop lops off foreheads
      in the shorter single-row cells. Anchor toward the top instead. */
@@ -1180,186 +1191,132 @@
   .wall-cta-btn:hover{ background:#FFFFFF; color:var(--ink); }
 
   @media (max-width:980px){
-    .wall-grid{ grid-template-columns:repeat(2, 1fr); grid-auto-rows:210px; }
+    .wall-grid{ grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); grid-auto-rows:clamp(360px, 50vw, 440px); gap:16px; }
   }
   @media (max-width:620px){
-    /* Dense thumbnail mosaic — every tile (all 5 videos, all 4 quotes, all
-       5 name-only reviews, the CTA) fits on one iPhone screen at once, no
-       scrolling through the wall. Traded legibility for completeness on
-       purpose: quote text clamps to a snippet, everything reads as an
-       overview rather than a fully readable card. Top padding must stay
-       above 72px to clear the fixed nav; everything else is squeezed. */
-    .wall{ padding:80px 0 12px; }
-    .wall-head{ margin:0 auto 10px; padding:0 14px; }
-    .wall-eyebrow{ font-size:9px; letter-spacing:0.2em; margin-bottom:5px; }
-    .wall-title{ font-size:19px; margin-bottom:5px; line-height:1.05; }
-    .wall-summary{ gap:6px; }
-    .wall-summary .stars{ font-size:10px; letter-spacing:1px; }
-    .wall-summary span:last-child{ font-size:9px; letter-spacing:0.1em; }
+    .wall{ padding:80px 0 40px; }
+    .wall-head{ margin:0 auto 24px; padding:0 20px; text-align:center; }
+    .wall-eyebrow{ font-size:9.5px; letter-spacing:0.2em; margin-bottom:8px; }
+    .wall-title{ font-size:24px; margin-bottom:8px; line-height:1.15; }
+    .wall-summary span:last-child{ font-size:10px; letter-spacing:0.14em; }
 
     .wall-grid{
-      grid-template-columns:repeat(4, 1fr); grid-auto-rows:90px; gap:5px; padding:0 8px;
+      grid-template-columns:1fr; grid-auto-rows:clamp(380px, 90vw, 500px); gap:16px; padding:0 20px;
     }
-    .wall-tile--tall{ grid-row:span 1; }
-    .wall-quote{ grid-column:span 2; grid-row:span 1; padding:7px 8px; gap:2px; }
-    .wall-quote-stars{ font-size:7px; letter-spacing:1px; }
-    .wall-quote-text{
-      font-size:8px; line-height:1.22;
-      display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden;
-    }
-    .wall-quote-name{ font-size:6px; letter-spacing:0.06em; }
-    .wall-name{ padding:5px; gap:2px; }
-    .wall-name .wall-quote-stars{ font-size:7px; }
-    .wall-name .wall-quote-name{ font-size:6px; }
-    .wall-cta{ grid-column:span 2; grid-row:span 1; padding:6px; gap:4px; }
-    .wall-cta-label{ font-size:8.5px; line-height:1.15; }
-    .wall-cta-btn{ padding:4px 7px; font-size:6.5px; letter-spacing:0.08em; }
+    .wall-cta{ padding:36px 20px; }
+    .wall-cta-label{ font-size:16px; line-height:1.4; }
+    .wall-cta-btn{ padding:11px 18px; font-size:10px; letter-spacing:0.18em; }
   }
 
   /* ═══════════════════════════════════════════════════════════
      PURCHASE SECTION (PORTED FROM PRODUCT.HTML)
      ═══════════════════════════════════════════════════════════ */
   .purchase-section {
-    background: var(--warm-white);
-    padding: 76px 0 110px;
+    background: radial-gradient(ellipse at 50% 25%, #FAF8F4 0%, #F1EBE0 100%);
+    padding: clamp(64px, 8vh, 96px) 0 clamp(80px, 10vh, 120px);
     text-align: center;
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    position: relative;
+    border-top: 1px solid rgba(194, 161, 91, 0.18);
   }
 
   .purchase-inner {
-    max-width: 720px;
+    max-width: 1140px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 clamp(20px, 3.5vw, 48px);
   }
 
   .purchase-label {
     font-family: var(--font-display);
-    font-size: 10px;
-    letter-spacing: 0.42em;
+    font-size: 11px;
+    letter-spacing: 0.44em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     line-height: 1;
   }
 
   .purchase-title {
     font-family: var(--font-display);
     font-weight: 300;
-    font-size: clamp(28px, 3.4vw, 44px);
+    font-size: clamp(32px, 3.8vw, 48px);
     color: var(--navy);
-    line-height: 1.15;
-    letter-spacing: 0.005em;
-    margin-bottom: 18px;
+    line-height: 1.12;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
   }
 
   .purchase-scent {
     font-family: var(--font-italic);
     font-style: italic;
-    font-size: 19px;
+    font-size: 18px;
     color: var(--gold-muted);
-    margin-bottom: 28px;
-    letter-spacing: 0.01em;
-  }
-
-  .purchase-rating {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 56px;
-  }
-
-  .purchase-rating .stars {
-    color: var(--gold);
-    font-size: 14px;
-    letter-spacing: 0.06em;
-    line-height: 1;
-  }
-
-  .purchase-rating .rating-text {
-    font-family: var(--font-display);
-    font-size: 13px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--navy);
-    line-height: 1;
-  }
-
-  .purchase-rating a {
-    color: var(--navy);
-    border-bottom: 1px solid rgba(10, 10, 10, 0.18);
-    transition: color 240ms ease;
-  }
-
-  .purchase-rating a:hover {
-    color: var(--gold-muted);
-  }
-
-  .purchase-allocation {
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 24px 0;
-    margin-bottom: 56px;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .allocation-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    font-family: var(--font-display);
-    font-size: 15px;
+    margin-bottom: clamp(36px, 5vh, 52px);
     letter-spacing: 0.02em;
-    color: var(--navy);
-  }
-
-  .allocation-row .status {
-    font-family: var(--font-display);
-    font-size: 11px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  .allocation-row.muted {
-    opacity: 0.45;
   }
 
   .purchase-options {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-    max-width: 640px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(24px, 3.5vw, 48px);
+    max-width: 1020px;
     margin: 0 auto;
+    align-items: stretch;
   }
 
   .purchase-card {
-    border: 1px solid var(--line);
+    border: 1px solid rgba(194, 161, 91, 0.22);
+    border-radius: 3px;
     padding: 0;
-    background: var(--warm-white);
-    transition: border-color 320ms ease, transform 320ms ease;
+    background: #FFFFFF;
+    box-shadow: 0 16px 40px -14px rgba(10, 10, 12, 0.07), 0 0 0 1px rgba(194, 161, 91, 0.06);
+    transition: border-color 380ms ease, transform 380ms cubic-bezier(0.2, 0.6, 0.2, 1), box-shadow 380ms ease;
     display: flex;
     flex-direction: column;
     text-align: center;
     overflow: hidden;
+    position: relative;
   }
 
   .purchase-card:hover {
-    border-color: rgba(10, 10, 10, 0.18);
-    transform: translateY(-2px);
+    border-color: rgba(194, 161, 91, 0.48);
+    transform: translateY(-5px);
+    box-shadow: 0 28px 64px -16px rgba(10, 10, 12, 0.14), 0 0 0 1px rgba(194, 161, 91, 0.3);
+  }
+
+  .card-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 4;
+    background: rgba(10, 10, 12, 0.85);
+    color: #EFE9DF;
+    border: 1px solid rgba(194, 161, 91, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  .card-badge--light {
+    background: rgba(253, 251, 248, 0.9);
+    color: var(--ink);
+    border-color: rgba(10, 10, 12, 0.18);
   }
 
   .card-image {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 4.4;
     background-color: var(--ivory);
     overflow: hidden;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid rgba(194, 161, 91, 0.16);
   }
 
   .card-image img {
@@ -1369,11 +1326,16 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 600ms cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+
+  .purchase-card:hover .card-image img {
+    transform: scale(1.03);
   }
 
   .purchase-card.featured .card-image {
-    background-color: var(--navy);
-    border-bottom-color: rgba(255, 255, 255, 0.35);
+    background-color: #0A0A0C;
+    border-bottom-color: rgba(255, 255, 255, 0.12);
   }
 
   /* ─── CARD CAROUSEL ─── */
@@ -1404,10 +1366,10 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.42);
+    background: rgba(10, 10, 12, 0.55);
     color: var(--cream);
     border: 1px solid rgba(255, 255, 255, 0.34);
     font-family: var(--font-display);
@@ -1419,15 +1381,15 @@
     align-items: center;
     justify-content: center;
     z-index: 3;
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
     opacity: 0.85;
-    transition: background 0.3s ease, opacity 0.3s ease;
+    transition: background 0.3s ease, opacity 0.3s ease, transform 0.2s ease;
   }
 
-  .carousel-arrow:hover { background: rgba(0, 0, 0, 0.72); opacity: 1; }
-  .carousel-arrow.prev { left: 12px; }
-  .carousel-arrow.next { right: 12px; }
+  .carousel-arrow:hover { background: rgba(10, 10, 12, 0.85); opacity: 1; transform: translateY(-50%) scale(1.05); }
+  .carousel-arrow.prev { left: 14px; }
+  .carousel-arrow.next { right: 14px; }
 
   .carousel-dots {
     position: absolute;
@@ -1456,15 +1418,16 @@
   }
 
   .card-body {
-    padding: 36px 28px 32px;
+    padding: clamp(28px, 3.5vw, 40px) clamp(24px, 3vw, 36px);
     display: flex;
     flex-direction: column;
     align-items: center;
     flex: 1;
+    background: #FFFFFF;
   }
 
   .purchase-card.featured .card-body {
-    background: var(--navy);
+    background: #0A0A0C;
     color: var(--cream);
   }
 
@@ -1475,17 +1438,17 @@
   }
 
   .purchase-card.featured .card-size {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(239, 233, 223, 0.72);
   }
 
   .card-tag {
     font-family: var(--font-display);
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 400;
     letter-spacing: 0.32em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 14px;
+    margin-bottom: 10px;
     line-height: 1.2;
   }
 
@@ -1495,13 +1458,13 @@
     font-weight: 400;
     font-size: 15px;
     color: var(--mid);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     line-height: 1.2;
     letter-spacing: 0.02em;
   }
 
   .purchase-card.featured .card-name {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(239, 233, 223, 0.65);
   }
 
   .card-size {
@@ -1510,16 +1473,16 @@
     letter-spacing: 0.26em;
     text-transform: uppercase;
     color: var(--mid);
-    margin-bottom: 24px;
+    margin-bottom: 22px;
     line-height: 1;
   }
 
   .card-price {
     font-family: var(--font-display);
     font-weight: 300;
-    font-size: 32px;
+    font-size: 36px;
     color: var(--navy);
-    margin-bottom: 28px;
+    margin-bottom: 26px;
     line-height: 1;
   }
 
@@ -1527,67 +1490,69 @@
     width: 100%;
     margin-top: auto;
   }
+
   .card-cta {
     width: 100%;
     border: 1px solid var(--navy);
     background: var(--navy);
     color: var(--cream);
-    padding: 14px 22px;
+    padding: 16px 24px;
     cursor: pointer;
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: 12px;
+    font-size: 11.5px;
     letter-spacing: 0.32em;
     text-transform: uppercase;
-    transition: background 260ms ease, color 260ms ease;
+    transition: background 260ms ease, color 260ms ease, border-color 260ms ease;
     text-decoration: none;
     display: inline-block;
     text-align: center;
   }
 
   .card-cta:hover {
-    background: var(--navy);
-    border-color: var(--navy);
+    background: #000000;
+    border-color: #000000;
     color: #FFFFFF;
   }
 
   .purchase-card.featured .card-cta {
     background: #FFFFFF;
     border-color: #FFFFFF;
-    color: var(--navy);
+    color: #0A0A0C;
   }
 
   .purchase-card.featured .card-cta:hover {
-    background: rgba(255, 255, 255, 0.85);
-    border-color: rgba(255, 255, 255, 0.85);
+    background: rgba(239, 233, 223, 0.9);
+    border-color: rgba(239, 233, 223, 0.9);
+    color: #0A0A0C;
   }
 
   .purchase-provenance {
-    margin-top: 56px;
+    margin-top: 48px;
     font-family: var(--font-display);
-    font-size: 11px;
-    letter-spacing: 0.32em;
+    font-size: 10.5px;
+    letter-spacing: 0.34em;
     text-transform: uppercase;
     color: var(--gold-muted);
     line-height: 1;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 860px) {
     .purchase-section {
       padding: 56px 0 84px;
     }
 
     .purchase-options {
       grid-template-columns: 1fr;
-      gap: 18px;
-      max-width: 360px;
+      gap: 28px;
+      max-width: 440px;
     }
   }
 
   @media (max-width: 600px) {
-    .purchase-title { font-size: 26px; }
-    .card-tag { font-size: 15px; }
-    .card-price { font-size: 26px; }
+    .purchase-title { font-size: 28px; }
+    .card-tag { font-size: 17px; }
+    .card-price { font-size: 30px; }
   }
 
   /* ═══════════════════════════════════════════════════════════
@@ -1720,11 +1685,25 @@
       <video id="heroMobileVideo" class="dv-hero-fallback-media" muted loop playsinline preload="none" aria-hidden="true"></video>
       <img id="heroStaticPoster" class="dv-hero-fallback-media" src="assets/hero-poster/hero-poster.webp" alt="MAISON D'VUE Hair Elixir — face, eye, hands with the elixir, mirror reveal">
 
-      <div class="slide-scrim" aria-hidden="true"></div>
-      <a class="slide-label" href="reserve.html">
-        <span class="slide-title">The Elixir</span>
-        <span class="slide-cue">Explore</span>
-      </a>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,.78) 0%,rgba(10,10,12,.38) 38%,rgba(10,10,12,.84) 100%);pointer-events:none;z-index:2"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 42%,rgba(15,23,56,.4) 0%,rgba(10,10,12,0) 62%);pointer-events:none;z-index:2"></div>
+
+      <div style="position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;padding:96px clamp(20px,5vw,64px) 132px;pointer-events:none">
+        <div style="max-width:1080px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:32px;color:#EFE9DF;pointer-events:auto">
+          <div style="font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:#C2A15B">Beverly Hills &middot; Est. MMXXVI</div>
+          <h1 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(42px,8.6vw,124px);line-height:.96;letter-spacing:.1em;text-transform:uppercase;color:#EFE9DF">Maison D'Vue</h1>
+          <div style="display:flex;align-items:center;gap:20px;width:min(560px,86vw)">
+            <div style="height:1px;flex:1;background:linear-gradient(90deg,rgba(194,161,91,0),rgba(194,161,91,.7))"></div>
+            <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(239,233,223,.82);white-space:nowrap">The House of Affinity Compositions&trade;</div>
+            <div style="height:1px;flex:1;background:linear-gradient(90deg,rgba(194,161,91,.7),rgba(194,161,91,0))"></div>
+          </div>
+          <p style="margin:0;max-width:620px;font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.8vw,32px);line-height:1.4;font-weight:300;font-style:italic;color:rgba(239,233,223,.92);text-wrap:pretty">Where <span style="color:#C2A15B;font-style:normal;font-weight:400">rare</span> ingredients<br>become a <span style="color:#C2A15B;font-style:normal;font-weight:400">composition</span>.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:6px">
+            <a href="#buy" style="padding:17px 38px;background:#C2A15B;color:#0A0A0C;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;font-weight:500">Purchase the Elixir</a>
+            <a href="#slide-matrix" style="padding:17px 38px;border:1px solid rgba(239,233,223,.34);color:#EFE9DF;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;font-weight:500">Discover Vue 14&trade;</a>
+          </div>
+        </div>
+      </div>
 
       <div class="dv-cue">
         <div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(239,233,223,.42);font-family:var(--font-display)">Scroll</div>
@@ -1737,24 +1716,14 @@
   <section class="purchase-section" id="buy">
     <div class="purchase-inner">
 
-      <p class="purchase-label">Vue 14&trade;</p>
+      <p class="purchase-label">The Allocations &middot; Vue 14&trade;</p>
       <h2 class="purchase-title">The Hair Elixir</h2>
-      <p class="purchase-scent">Scented in &Acirc;me de Vue&trade;.</p>
-
-      <div class="purchase-rating">
-        <span class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        <span class="rating-text">5.0 &middot; <a href="#testimonials">9 reviews</a></span>
-      </div>
-
-      <div class="purchase-allocation">
-        <div class="allocation-row muted"><span>June Allocation</span><span class="status">Sold Out</span></div>
-        <div class="allocation-row muted"><span>July Allocation</span><span class="status">Sold Out</span></div>
-        <div class="allocation-row"><span>August Allocation</span><span class="status">Now Accepting Reservations</span></div>
-      </div>
+      <p class="purchase-scent">Scented in &Acirc;me de Vue&trade; &middot; Small Batch Release</p>
 
       <div class="purchase-options">
 
         <div class="purchase-card featured">
+          <span class="card-badge">Flagship Edition</span>
           <div class="card-image card-carousel" data-carousel aria-roledescription="carousel" aria-label="The Signature Hair Elixir photographs">
             <div class="carousel-track">
               <img src="maison-dvue-elixir-studio.jpg" alt="The Signature &mdash; 30ml MAISON D'VUE Hair Elixir in cobalt frosted glass with matte gold cap on a dark studio background" draggable="false">
@@ -1769,8 +1738,8 @@
           </div>
           <div class="card-body">
             <p class="card-tag">The Signature</p>
-            <p class="card-name">Hair Elixir</p>
-            <p class="card-size">30 ml &middot; 1 fl oz</p>
+            <p class="card-name">Flagship Coffret</p>
+            <p class="card-size">30 ml &middot; 1.0 fl oz</p>
             <p class="card-price">$125</p>
             <form class="card-cta-form" method="post" action="https://shop.maisondvue.com/cart/add">
               <input type="hidden" name="id" value="48287241339128">
@@ -1782,12 +1751,13 @@
         </div>
 
         <div class="purchase-card">
+          <span class="card-badge card-badge--light">Travel Edition</span>
           <div class="card-image">
             <img src="maison-dvue-elixir-voyage.jpg" alt="A hand holding the Voyage &mdash; 10ml MAISON D'VUE Hair Elixir travel size in cobalt frosted glass with matte gold cap, labeled Hair Elixir Voyage">
           </div>
           <div class="card-body">
             <p class="card-tag">The Voyage</p>
-            <p class="card-name">Hair Elixir</p>
+            <p class="card-name">Travel Edition</p>
             <p class="card-size">10 ml &middot; 0.33 fl oz</p>
             <p class="card-price">$68</p>
             <form class="card-cta-form" method="post" action="https://shop.maisondvue.com/cart/add">
@@ -1812,95 +1782,28 @@
       <p class="wall-eyebrow">In Their Words</p>
       <h2 class="wall-title">From the maison&rsquo;s clients.</h2>
       <div class="wall-summary">
-        <span class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        <span>5.0 &middot; 9 Reviews</span>
+        <span>In her clients&rsquo; own words</span>
       </div>
     </div>
 
     <div class="wall-grid">
 
-      <div class="wall-tile wall-tile--tall">
-        <video class="wall-video" src="testimonial-1.mp4?v=1" poster="testimonial-1-poster.jpg?v=1"
+      <div class="wall-tile wall-tile--full-review">
+        <video class="wall-video" id="testimonial-6-video" src="testimonial-6.mp4?v=1" poster="testimonial-6-poster.jpg?v=1"
           autoplay muted loop playsinline webkit-playsinline="true" preload="metadata"
-          disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
-          aria-hidden="true" onerror="this.style.display='none';"></video>
+          disablepictureinpicture aria-hidden="true" onerror="this.style.display='none';"></video>
+        <button type="button" class="wall-sound-btn" data-video-target="testimonial-6-video" aria-label="Play full review with sound">
+          <span class="wall-sound-icon">&#9658;</span> Watch full review
+        </button>
       </div>
 
-      <div class="wall-quote wall-quote--ink">
-        <div class="wall-quote-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="wall-quote-text">&ldquo;I&rsquo;m extremely picky about scent and this is honestly one of the best-smelling hair products I&rsquo;ve ever used. It&rsquo;s warm and clean at the same time &mdash; not overly floral, not perfume-y.&rdquo;</p>
-        <div class="wall-quote-name">&mdash; Brittany</div>
-      </div>
-
-      <div class="wall-tile">
-        <video class="wall-video" src="testimonial-2.mp4?v=1" poster="testimonial-2-poster.jpg?v=1"
+      <div class="wall-tile wall-tile--full-review">
+        <video class="wall-video" id="testimonial-7-video" src="testimonial-7.mp4?v=1" poster="testimonial-7-poster.jpg?v=1"
           autoplay muted loop playsinline webkit-playsinline="true" preload="metadata"
-          disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
-          aria-hidden="true" onerror="this.style.display='none';"></video>
-      </div>
-
-      <div class="wall-name">
-        <div class="wall-quote-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="wall-quote-name">Jessica</div>
-      </div>
-
-      <div class="wall-tile">
-        <video class="wall-video" src="testimonial-3.mp4?v=1" poster="testimonial-3-poster.jpg?v=1"
-          autoplay muted loop playsinline webkit-playsinline="true" preload="metadata"
-          disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
-          aria-hidden="true" onerror="this.style.display='none';"></video>
-      </div>
-
-      <div class="wall-quote wall-quote--paper">
-        <div class="wall-quote-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="wall-quote-text">&ldquo;I didn&rsquo;t expect this to replace so many products for me&hellip; now I just use a few drops of this and my hair looks healthy and finished. It somehow feels lightweight but still makes a huge difference.&rdquo;</p>
-        <div class="wall-quote-name">&mdash; Yasmine</div>
-      </div>
-
-      <div class="wall-name">
-        <div class="wall-quote-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="wall-quote-name">Ashley</div>
-      </div>
-
-      <div class="wall-tile">
-        <video class="wall-video" src="testimonial-4.mp4?v=1" poster="testimonial-4-poster.jpg?v=1"
-          autoplay muted loop playsinline webkit-playsinline="true" preload="metadata"
-          disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
-          aria-hidden="true" onerror="this.style.display='none';"></video>
-      </div>
-
-      <div class="wall-name">
-        <div class="wall-quote-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="wall-quote-name">Megan</div>
-      </div>
-
-      <div class="wall-quote wall-quote--ink">
-        <div class="wall-quote-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="wall-quote-text">&ldquo;This sounds dramatic but this product made me like my hair again. After a couple weeks it looked softer, shinier, and actually felt good to touch. I&rsquo;ve been wearing my hair down way more because of it.&rdquo;</p>
-        <div class="wall-quote-name">&mdash; Rita</div>
-      </div>
-
-      <div class="wall-tile">
-        <video class="wall-video wall-video--t5" src="testimonial-5.mp4?v=1" poster="testimonial-5-poster.jpg?v=1"
-          autoplay muted loop playsinline webkit-playsinline="true" preload="metadata"
-          disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
-          aria-hidden="true" onerror="this.style.display='none';"></video>
-      </div>
-
-      <div class="wall-name">
-        <div class="wall-quote-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="wall-quote-name">Priya</div>
-      </div>
-
-      <div class="wall-quote wall-quote--paper">
-        <div class="wall-quote-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="wall-quote-text">&ldquo;I really like this so much. I never thought 5 drops would be enough for me, but they truly are. Sometimes I need more, sometimes less.&rdquo;</p>
-        <div class="wall-quote-name">&mdash; T.S.</div>
-      </div>
-
-      <div class="wall-name">
-        <div class="wall-quote-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="wall-quote-name">Sarah</div>
+          disablepictureinpicture aria-hidden="true" onerror="this.style.display='none';"></video>
+        <button type="button" class="wall-sound-btn" data-video-target="testimonial-7-video" aria-label="Play full review with sound">
+          <span class="wall-sound-icon">&#9658;</span> Watch full review
+        </button>
       </div>
 
       <div class="wall-tile wall-cta">
@@ -1957,9 +1860,67 @@
 
 </main>
 
-<footer>
-  <span>&copy; 2026 MAISON D&rsquo;VUE &middot; Composed in Beverly Hills</span>
-  <span>Questions? <a href="mailto:hello@maisondvue.com">hello@maisondvue.com</a></span>
+<section id="house" style="padding:clamp(64px,8vh,100px) clamp(24px,5vw,64px);background:#FFFFFF">
+  <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(36px,5vw,64px);align-items:center">
+    <div style="position:relative;aspect-ratio:4/5;max-height:540px;width:100%;background:#F9F8F6;border-radius:2px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.04)">
+      <img src="photos/founder-portrait-light.jpg" alt="Masiela Lusha — Founder &amp; Creative Director" style="width:100%;height:100%;object-fit:cover;object-position:center 10%;display:block">
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:center;gap:18px;max-width:480px">
+      <div style="font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:#8A6C2E;font-weight:500">The House &amp; Founder</div>
+      <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(28px,3.2vw,44px);line-height:1.16;color:#0A0A0C;letter-spacing:-0.01em">Written before it was formulated.</h2>
+      <div style="font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(10,10,12,.48)">Masiela Lusha &mdash; Founder &amp; Creative Director</div>
+      <blockquote style="margin:4px 0 0;padding-left:18px;border-left:2px solid #C2A15B;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(19px,2.1vw,25px);line-height:1.48;color:rgba(10,10,12,.88)">A poem is what remains after everything unnecessary is removed. So is a composition.</blockquote>
+      <p style="margin:2px 0 0;font-size:14px;line-height:1.75;color:rgba(10,10,12,.65)">Author of seven published works and first UN-affiliated Goodwill Ambassador, founder Masiela Lusha brings the same discipline of selection &mdash; six books of poetry, one composition of botany &mdash; to MAISON D'VUE.</p>
+      <a href="about.html" style="font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#0A0A0C;text-decoration:none;border-bottom:1px solid #C2A15B;padding-bottom:2px;width:fit-content;margin-top:6px;font-weight:500">Discover the House &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ALLOCATION / NEWSLETTER RESERVATION ═══ -->
+<section id="reserve" style="position:relative;padding:clamp(96px,13vh,168px) clamp(20px,5vw,64px);background:#0F1738;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 0%,rgba(194,161,91,.14),rgba(15,23,56,0) 70%);pointer-events:none"></div>
+  <div style="position:relative;max-width:720px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px;color:#EFE9DF">
+    <div style="font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:#C2A15B">AUGUST ALLOCATION &mdash; OPEN</div>
+    <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(32px,5vw,60px);line-height:1.1;color:#EFE9DF">Composed in small allocations</h2>
+    <p style="margin:0;max-width:520px;font-size:14.5px;line-height:1.85;color:rgba(239,233,223,.72)">The maison releases in monthly batches rather than continuous inventory. Purchase within the open allocation, or leave your name and we will write to you the moment the next one opens.</p>
+
+    <form onsubmit="event.preventDefault();alert('Thank you for joining the list.');" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:min(560px,100%);margin-top:14px">
+      <input type="email" required placeholder="Your email address" style="flex:1 1 260px;background:transparent;border:1px solid rgba(239,233,223,.28);color:#EFE9DF;padding:17px 20px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.06em;outline:none">
+      <button type="submit" style="padding:17px 34px;background:#C2A15B;color:#0A0A0C;border:none;font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;cursor:pointer">Join the List</button>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ LUXURY EDITORIAL FOOTER ═══ -->
+<footer style="background:#fff;padding:clamp(64px,8vh,96px) clamp(20px,5vw,64px) 44px;border-top:1px solid rgba(20,20,26,.1)">
+  <div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:44px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-family:'Bodoni Moda',serif;font-weight:500;font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:#14141A">Maison D'Vue</div>
+      <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(20,20,26,.45);line-height:2">The House of Affinity Compositions&trade;</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:rgba(20,20,26,.62);line-height:1.9">
+      <div style="font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(20,20,26,.4)">The Maison</div>
+      <a href="mailto:hello@maisondvue.com" style="color:#8A6C2E;text-decoration:none">hello@maisondvue.com</a>
+      <a href="tel:+13109851449" style="color:rgba(20,20,26,.62);text-decoration:none">+1 (310) 985-1449</a>
+      <div>132 S Lasky Dr, Floor 2<br>Beverly Hills, CA 90212</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:rgba(20,20,26,.62);line-height:1.9">
+      <div style="font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(20,20,26,.4)">Follow</div>
+      <a href="https://instagram.com/maisondvue" target="_blank" rel="noopener" style="color:rgba(20,20,26,.62);text-decoration:none">Instagram &mdash; @maisondvue</a>
+      <a href="https://instagram.com/masielalusha" target="_blank" rel="noopener" style="color:rgba(20,20,26,.62);text-decoration:none">@masielalusha</a>
+      <a href="https://shop.maisondvue.com" style="color:rgba(20,20,26,.62);text-decoration:none">The Boutique</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:rgba(20,20,26,.62);line-height:1.9">
+      <div style="font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(20,20,26,.4)">Care</div>
+      <div>Complimentary US shipping, 5–10 business days</div>
+      <div>Express, $25 flat &mdash; 1–2 business days</div>
+      <div>All sales final except damage or defect</div>
+    </div>
+  </div>
+  <div style="max-width:1180px;margin:52px auto 0;padding-top:24px;border-top:1px solid rgba(20,20,26,.08);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(20,20,26,.4)">
+    <div>&copy; MMXXVI Maison D'Vue &mdash; Beverly Hills</div>
+    <div>&Acirc;me de Vue&trade; &middot; VUE Affinity Matrix&trade; &middot; Affinity Compositions&trade;</div>
+  </div>
 </footer>
 
 <script>
@@ -2344,6 +2305,19 @@
       var heroEngine = new MdvHeroEngine(heroSticky);
       heroEngine.init();
     }
+
+    document.querySelectorAll('.wall-sound-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var video = document.getElementById(btn.getAttribute('data-video-target'));
+        if(!video) return;
+        video.loop = false;
+        video.muted = false;
+        video.controls = true;
+        video.currentTime = 0;
+        video.play();
+        btn.closest('.wall-tile--full-review').classList.add('is-playing-full');
+      });
+    });
   });
 
 </script>

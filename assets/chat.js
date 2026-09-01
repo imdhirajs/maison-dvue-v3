@@ -28,16 +28,16 @@
   }
   /* Launcher bubble — the monogram as the advisor's face */
   .mdv-chat-launcher {
-    position: fixed; bottom: 20px; right: 20px; z-index: 2147483000;
-    width: 30px; height: 30px; border: 0; padding: 0; cursor: pointer;
+    position: fixed; bottom: 24px; right: 24px; z-index: 2147483000;
+    width: 44px; height: 44px; border: 0; padding: 0; cursor: pointer;
     border-radius: 50%; overflow: hidden;
-    background: #fff;
+    background: #0A0A0C;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 16px rgba(11,31,58,0.22), inset 0 0 0 1px rgba(0,0,0,0.14);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.30), inset 0 0 0 1px rgba(194,161,91,0.45);
     transition: transform 240ms ease, opacity 240ms ease;
   }
-  .mdv-chat-launcher:hover { transform: translateY(-2px); }
-  .mdv-chat-launcher img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mdv-chat-launcher:hover { transform: translateY(-2px) scale(1.05); }
+  .mdv-chat-launcher img { width: 100%; height: 100%; object-fit: cover; display: block; filter: invert(0); }
   .mdv-chat.open .mdv-chat-launcher { opacity: 0; pointer-events: none; }
 
   /* Avatars (header + advisor messages) */
@@ -161,12 +161,12 @@
   root.className = "mdv-chat";
   root.innerHTML = `
     <button class="mdv-chat-launcher" type="button" aria-label="Open live chat">
-      <img src="/monogram-bw.svg" alt="MAISON D&rsquo;VUE">
+      <img src="monogram-bw.svg" alt="MAISON D&rsquo;VUE">
     </button>
     <div class="mdv-chat-panel" role="dialog" aria-label="Live chat" aria-modal="false">
       <div class="mdv-chat-header">
         <span class="mdv-chat-headleft">
-          <img class="mdv-chat-ava" src="/monogram-bw.svg" alt="" aria-hidden="true">
+          <img class="mdv-chat-ava" src="monogram-bw.svg" alt="" aria-hidden="true">
           <span class="mdv-chat-title">Live Chat</span>
         </span>
         <button class="mdv-chat-close" type="button" aria-label="Close chat">&times;</button>

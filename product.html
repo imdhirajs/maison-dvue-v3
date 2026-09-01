@@ -112,29 +112,31 @@
 
 <style>
   :root {
-    --navy: #0A0A0A;
-    --navy-deep: #000000;
-    --navy-center: #1A1A1A;
-    --cobalt: #1A1A1A;
+    --navy: #0B1728;
+    --navy-deep: #060B14;
+    --navy-center: #0F1D32;
+    --cobalt: #0D1624;
 
-    --gold: #0A0A0A;
-    --gold-soft: #0A0A0A;
-    --gold-muted: #0A0A0A;
+    --gold: #C2A15B;
+    --gold-soft: #D8B974;
+    --gold-muted: #8A6C2E;
 
-    --cream: #FFFFFF;
+    --cream: #FDFBF8;
     --warm-white: #FFFFFF;
-    --ivory: #FFFFFF;
+    --ivory: #F8F6F0;
 
-    --dark: #0A0A0A;
-    --mid: #6B6B6B;
-    --muted: rgba(10, 10, 10, 0.48);
+    --dark: #0A0A0C;
+    --mid: #5A5A62;
+    --muted: rgba(10, 10, 12, 0.48);
 
-    --line: rgba(10, 10, 10, 0.18);
+    --line: rgba(194, 161, 91, 0.22);
     --line-dark: rgba(255, 255, 255, 0.16);
 
-    --font-display:'Helvetica Neue',Helvetica,Arial,sans-serif;
-    --font-italic:'Helvetica Neue',Helvetica,Arial,sans-serif;
-    --font-body:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --font-display: 'Bodoni Moda', serif, Georgia;
+    --font-serif: 'Bodoni Moda', serif, Georgia;
+    --font-italic: 'Cormorant Garamond', serif, Georgia;
+    --font-body: 'Jost', 'Helvetica Neue', sans-serif;
+    --font-sans: 'Jost', sans-serif;
 
     --page: 1240px;
     --ribbon-h: 44px;
@@ -2759,8 +2761,8 @@
   <section class="hero">
     <video
       class="hero-image hero-video"
-      src="paparazzi-hero.mp4"
-      poster="paparazzi-hero.jpg"
+      src="videos/ame-de-vue-product-reveal.mp4"
+      poster="photos/banner-product.jpg"
       autoplay
       muted
       loop
@@ -2770,7 +2772,7 @@
       disablepictureinpicture
       controlslist="nodownload nofullscreen noremoteplayback"
       aria-hidden="true"
-      onerror="this.style.display='none';">
+      style="width:100%;height:100%;object-fit:cover">
     </video>
 
     <div class="hero-content">
@@ -2803,11 +2805,10 @@
         <div class="purchase-card featured">
           <div class="card-image card-carousel" data-carousel aria-roledescription="carousel" aria-label="The Signature Hair Elixir photographs">
             <div class="carousel-track">
-              <img src="maison-dvue-elixir-studio.jpg" alt="The Signature &mdash; 30ml MAISON D'VUE Hair Elixir in cobalt frosted glass with matte gold cap on a dark studio background" draggable="false">
-              <img src="maison-dvue-elixir-dropper-drop.jpg" alt="A single golden drop of MAISON D'VUE Hair Elixir suspended from the dropper above the bottle's gold cap" loading="lazy" draggable="false">
-              <img src="signature-open-poster.jpg" alt="Opening the box on the MAISON D'VUE Hair Elixir" loading="lazy" draggable="false">
-              <img src="signature-apply-poster.jpg" alt="Applying the MAISON D'VUE Hair Elixir" loading="lazy" draggable="false">
-              <img src="maison-dvue-elixir-bedside.jpg" alt="The MAISON D'VUE Hair Elixir on a bedside table beside a lit lamp, a hand reaching for it" loading="lazy" draggable="false">
+              <img src="photos/shop-signature.jpg" alt="The Signature &mdash; 30ml MAISON D'VUE Hair Elixir in cobalt frosted glass with matte gold cap" draggable="false">
+              <img src="photos/wax-seal-detail.jpg" alt="Hand-sealed gold wax detail on the MAISON D'VUE Hair Elixir" loading="lazy" draggable="false">
+              <img src="photos/banner-product.jpg" alt="The MAISON D'VUE Hair Elixir resting over water reflections" loading="lazy" draggable="false">
+              <img src="photos/ritual-five-drops.jpg" alt="Five drops of MAISON D'VUE Hair Elixir" loading="lazy" draggable="false">
             </div>
             <button type="button" class="carousel-arrow prev" aria-label="Previous photo">&#8249;</button>
             <button type="button" class="carousel-arrow next" aria-label="Next photo">&#8250;</button>
@@ -2829,7 +2830,7 @@
 
         <div class="purchase-card">
           <div class="card-image">
-            <img src="maison-dvue-elixir-voyage.jpg" alt="A hand holding the Voyage &mdash; 10ml MAISON D'VUE Hair Elixir travel size in cobalt frosted glass with matte gold cap, labeled Hair Elixir Voyage">
+            <img src="photos/shop-voyage.jpg" alt="The Voyage &mdash; 10ml MAISON D'VUE Hair Elixir travel size in cobalt frosted glass with matte gold cap">
           </div>
           <div class="card-body">
             <p class="card-tag">The Voyage</p>
@@ -2852,12 +2853,33 @@
     </div>
   </section>
 
+  <!-- ═══ CINEMATIC FILM BANNER SHOWCASE ═══ -->
+  <section style="position:relative;width:100%;max-width:1240px;margin:80px auto;padding:0 24px">
+    <div style="position:relative;aspect-ratio:16/9;max-height:560px;width:100%;overflow:hidden;border:1px solid rgba(194,161,91,0.3);box-shadow:0 24px 60px rgba(0,0,0,0.18)">
+      <video autoplay muted loop playsinline poster="photos/banner-product.jpg" style="width:100%;height:100%;object-fit:cover">
+        <source src="videos/ame-de-vue-product-reveal.mp4" type="video/mp4">
+      </video>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,12,0.85) 0%, rgba(10,10,12,0.15) 50%, rgba(10,10,12,0.4) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(24px,4vw,48px)">
+        <div style="display:inline-block;padding:5px 14px;border:1px solid #C2A15B;border-radius:20px;font-size:9.5px;letter-spacing:.32em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content;background:rgba(10,10,12,0.6)">RECOMMENDED FILM &middot; 4K B-ROLL REVEAL</div>
+        <h3 style="font-family:'Bodoni Moda',serif;font-size:clamp(22px,2.5vw,36px);color:#FDFBF8;margin-bottom:8px">Âme de Vue™ — The Elixir Ceremony</h3>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(253,251,248,0.88);max-width:580px">Recommended Video: High-speed slow-motion video loop of golden amber oil droplets descending onto crystal glass, catching soft warm studio light reflections.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ FORMULATION ═══ -->
   <section class="section formulation" id="formulation">
-    <div class="section-inner formulation-grid">
+    <div class="section-inner formulation-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
       <div class="formulation-left">
         <p class="label">The Formulation</p>
         <h2 class="display formulation-title">The Total<br>Renewal Ritual.</h2>
+        
+        <!-- Formulations Hero Image -->
+        <div style="margin:28px 0;position:relative;aspect-ratio:4/5;max-height:420px;overflow:hidden;border:1px solid rgba(194,161,91,0.25)">
+          <img src="photos/wax-seal-detail.jpg" alt="Hand-sealed gold wax detail on Vue 14 Elixir" style="width:100%;height:100%;object-fit:cover">
+          <div style="position:absolute;bottom:14px;left:14px;right:14px;background:rgba(10,10,12,0.75);padding:8px 12px;border-radius:2px;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:#C2A15B">RECOMMENDED PHOTO: Close-up macro photograph of hand-poured gold wax emblem seal</div>
+        </div>
+
         <button class="formulation-mark formulation-toggle" type="button" id="matrixToggle" aria-expanded="false" aria-controls="matrixPanel" onclick="toggleMatrix()">
           <span class="formulation-mark-text">
             <span class="formulation-mark-title">VUE Affinity Matrix<span class="tm">&trade;</span></span>
@@ -2913,30 +2935,27 @@
 
       <div class="ritual-grid" id="ritualPanel" role="region" aria-labelledby="ritualToggle">
         <div class="ritual-step">
-          <div class="ritual-image">
-            <video class="ritual-video" poster="ritual-drops.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Five drops of MAISON D'VUE Hair Elixir falling into an open palm">
-              <source src="ritual-drops.mp4" type="video/mp4">
-            </video>
+          <div class="ritual-image" style="position:relative">
+            <img src="photos/ritual-five-drops.jpg" alt="Five drops of MAISON D'VUE Hair Elixir falling into an open palm" style="width:100%;height:100%;object-fit:cover">
+            <div style="position:absolute;bottom:8px;left:8px;right:8px;background:rgba(10,10,12,0.8);padding:6px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B">RECOMMENDED VIDEO: 4K 60fps slow-motion of 5 drops falling into open palm</div>
           </div>
           <div class="ritual-num">01</div>
           <div class="ritual-title">Five drops</div>
           <p class="ritual-text">Into the palm.</p>
         </div>
         <div class="ritual-step">
-          <div class="ritual-image">
-            <video class="ritual-video" poster="ritual-warm.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Hands rubbing together, warming the MAISON D'VUE Hair Elixir between the palms until the essences open">
-              <source src="ritual-warm.mp4" type="video/mp4">
-            </video>
+          <div class="ritual-image" style="position:relative">
+            <img src="photos/ritual-warm-palms.jpg" alt="Hands rubbing together, warming the MAISON D'VUE Hair Elixir between palms" style="width:100%;height:100%;object-fit:cover">
+            <div style="position:absolute;bottom:8px;left:8px;right:8px;background:rgba(10,10,12,0.8);padding:6px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B">RECOMMENDED VIDEO: Slow-motion clip warming elixir between palms</div>
           </div>
           <div class="ritual-num">02</div>
           <div class="ritual-title">Warmed between the palms</div>
           <p class="ritual-text">Until the essences open.</p>
         </div>
         <div class="ritual-step">
-          <div class="ritual-image">
-            <video class="ritual-video" poster="ritual-style.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Hands pressing the MAISON D'VUE Hair Elixir into long, luminous hair as it is styled">
-              <source src="ritual-style.mp4" type="video/mp4">
-            </video>
+          <div class="ritual-image" style="position:relative">
+            <img src="photos/ritual-draw-through.jpg" alt="Hands pressing the MAISON D'VUE Hair Elixir into long luminous hair" style="width:100%;height:100%;object-fit:cover">
+            <div style="position:absolute;bottom:8px;left:8px;right:8px;background:rgba(10,10,12,0.8);padding:6px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B">RECOMMENDED VIDEO: Model drawing hand through silk hair lengths</div>
           </div>
           <div class="ritual-num">03</div>
           <div class="ritual-title">Drawn through the hair</div>
@@ -2966,8 +2985,9 @@
       <div class="origin-heroes">
 
         <article class="origin-hero">
-          <img src="origin-ungurahua.jpg" alt="Ungurahua palm in the Amazon rainforest at dawn">
+          <img src="photos/editorial-essences.jpeg" alt="Ungurahua palm in the Amazon rainforest at dawn">
           <div class="origin-hero-content">
+            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: Amazonian Rainforest canopy photography</div>
             <p class="origin-hero-place">Amazon Rainforest</p>
             <h3 class="origin-hero-name">Ungurahua</h3>
             <p class="origin-hero-latin">Oenocarpus bataua</p>
@@ -2977,8 +2997,9 @@
         </article>
 
         <article class="origin-hero">
-          <img src="origin-rose.jpg" alt="Bulgarian damask roses in the Valley of Roses at dawn">
+          <img src="photos/film-backstage.jpg" alt="Bulgarian damask roses in the Valley of Roses at dawn">
           <div class="origin-hero-content">
+            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: Bulgarian Damask Rose harvest at sunrise</div>
             <p class="origin-hero-place">Valley of Roses, Bulgaria</p>
             <h3 class="origin-hero-name">Bulgarian Rose</h3>
             <p class="origin-hero-latin">Rosa damascena</p>
@@ -2988,8 +3009,9 @@
         </article>
 
         <article class="origin-hero">
-          <img src="origin-camellia.jpg" alt="Crimson camellia bloom in a Japanese garden at dawn">
+          <img src="photos/film-street.jpg" alt="Crimson camellia bloom in a Japanese garden at dawn">
           <div class="origin-hero-content">
+            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: 35mm film shot of Tsubaki camellia bloom</div>
             <p class="origin-hero-place">Japan</p>
             <h3 class="origin-hero-name">Camellia</h3>
             <p class="origin-hero-latin">Camellia japonica</p>
@@ -2999,8 +3021,9 @@
         </article>
 
         <article class="origin-hero">
-          <img src="origin-prickly-pear.jpg" alt="Prickly pear cactus with magenta fruits in the Atlas Mountains at dusk">
+          <img src="photos/founder-campaign-01.jpg" alt="Prickly pear cactus in the Atlas Mountains at dusk">
           <div class="origin-hero-content">
+            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: Berber women harvesting Atlas flora</div>
             <p class="origin-hero-place">Atlas Mountains, Morocco</p>
             <h3 class="origin-hero-name">Prickly Pear</h3>
             <p class="origin-hero-latin">Opuntia ficus-indica</p>
@@ -3010,8 +3033,9 @@
         </article>
 
         <article class="origin-hero">
-          <img src="origin-rosehip.jpg" alt="Wild rosehip cluster against Andean peaks at dusk">
+          <img src="photos/founder-campaign-02.jpg" alt="Wild rosehip cluster against Andean peaks at dusk">
           <div class="origin-hero-content">
+            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: Patagonian wild rosehip botanical shot</div>
             <p class="origin-hero-place">Andes &amp; Southern Chile</p>
             <h3 class="origin-hero-name">Rosehip</h3>
             <p class="origin-hero-latin">Rosa moschata</p>
@@ -3021,8 +3045,9 @@
         </article>
 
         <article class="origin-hero">
-          <img src="origin-meadowfoam.jpg" alt="Meadowfoam flowers on the Pacific Northwest coast at sunset">
+          <img src="photos/founder-campaign-03.jpg" alt="Meadowfoam flowers on the Pacific Northwest coast at sunset">
           <div class="origin-hero-content">
+            <div style="background:rgba(10,10,12,0.7);padding:4px 10px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#C2A15B;margin-bottom:12px;width:fit-content">RECOMMENDED PHOTO: Pacific Northwest meadowfoam field</div>
             <p class="origin-hero-place">Pacific Northwest</p>
             <h3 class="origin-hero-name">Meadowfoam</h3>
             <p class="origin-hero-latin">Limnanthes alba</p>
@@ -3041,7 +3066,7 @@
 
         <article class="origin-tile">
           <div class="origin-tile-image">
-            <img src="grid-almond.jpg" alt="Sweet almonds in their green hulls beside an apothecary bottle">
+            <img src="photos/shop-signature.jpg" alt="Sweet almonds in their green hulls beside an apothecary bottle">
           </div>
           <p class="origin-tile-place">Mediterranean Basin</p>
           <h3 class="origin-tile-name">Sweet Almond</h3>
@@ -3051,7 +3076,7 @@
 
         <article class="origin-tile">
           <div class="origin-tile-image">
-            <img src="grid-argan.jpg" alt="Argan kernels on dark stone with brass spoon and Berber textile">
+            <img src="photos/shop-voyage.jpg" alt="Argan kernels on dark stone with brass spoon and Berber textile">
           </div>
           <p class="origin-tile-place">Sous Valley, Morocco</p>
           <h3 class="origin-tile-name">Argan</h3>
@@ -3061,7 +3086,7 @@
 
         <article class="origin-tile">
           <div class="origin-tile-image">
-            <img src="grid-pomegranate.jpg" alt="Cut pomegranate on a Persian carpet with amber apothecary bottle">
+            <img src="photos/wax-seal-detail.jpg" alt="Cut pomegranate on a Persian carpet with amber apothecary bottle">
           </div>
           <p class="origin-tile-place">Persia &amp; Anatolia</p>
           <h3 class="origin-tile-name">Pomegranate</h3>
@@ -3071,7 +3096,7 @@
 
         <article class="origin-tile">
           <div class="origin-tile-image">
-            <img src="grid-seabuckthorn.jpg" alt="Sea buckthorn berries on a branch against dark Himalayan stone">
+            <img src="photos/banner-product.jpg" alt="Sea buckthorn berries on a branch against dark Himalayan stone">
           </div>
           <p class="origin-tile-place">Himalayan Foothills</p>
           <h3 class="origin-tile-name">Sea Buckthorn</h3>
@@ -3081,7 +3106,7 @@
 
         <article class="origin-tile">
           <div class="origin-tile-image">
-            <img src="grid-blackseed.jpg" alt="Nigella sativa seeds beside an apothecary bottle on aged parchment">
+            <img src="photos/founder-portrait-light.jpg" alt="Nigella sativa seeds beside an apothecary bottle on aged parchment">
           </div>
           <p class="origin-tile-place">Nile Delta</p>
           <h3 class="origin-tile-name">Black Seed</h3>
@@ -3091,7 +3116,7 @@
 
         <article class="origin-tile">
           <div class="origin-tile-image">
-            <img src="grid-castor.jpg" alt="Castor seed pod cracked open with seeds and clay vessel of dark oil">
+            <img src="photos/ame-de-vue-hero.jpg" alt="Castor seed pod cracked open with seeds and clay vessel of dark oil">
           </div>
           <p class="origin-tile-place">Indian Subcontinent</p>
           <h3 class="origin-tile-name">Castor</h3>
@@ -3101,7 +3126,7 @@
 
         <article class="origin-tile">
           <div class="origin-tile-image">
-            <img src="grid-vitamine.jpg" alt="Antique apothecary bottle of tocopherol with suspended golden drop">
+            <img src="photos/ritual-warm-palms.jpg" alt="Antique apothecary bottle of tocopherol with suspended golden drop">
           </div>
           <p class="origin-tile-place">Tocopherol Complex</p>
           <h3 class="origin-tile-name">Vitamin E</h3>
@@ -3111,7 +3136,7 @@
 
         <article class="origin-tile">
           <div class="origin-tile-image">
-            <img src="grid-sandalwood.jpg" alt="Australian sandalwood block with shavings, eucalyptus and amber oil drop">
+            <img src="photos/editorial-founder-desk.jpeg" alt="Australian sandalwood block with shavings, eucalyptus and amber oil drop">
           </div>
           <p class="origin-tile-place">Western Australia</p>
           <h3 class="origin-tile-name">Australian Sandalwood</h3>
@@ -3194,31 +3219,31 @@
         </div>
       </div>
 
-      <div class="review-form-wrap" id="reviewFormWrap">
-        <p class="review-form-label">Leave a Review</p>
-        <h3 class="review-form-headline">Share your experience.</h3>
-        <p class="review-form-sub">Tell us how you have lived with the elixir.</p>
+      <div class="review-form-wrap" id="reviewFormWrap" style="max-width:680px;margin:80px auto 0;border:1px solid rgba(194,161,91,0.28);background:#FAF8F4;padding:clamp(40px,6vw,64px);border-radius:2px;box-shadow:0 16px 40px rgba(0,0,0,0.03)">
+        <p class="review-form-label" style="font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:#8A6C2E;margin-bottom:14px;font-weight:500">Leave a Review</p>
+        <h3 class="review-form-headline" style="font-family:'Bodoni Moda',serif;font-size:clamp(28px,3vw,38px);font-weight:400;color:#0A0A0C;margin-bottom:10px">Share your experience.</h3>
+        <p class="review-form-sub" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:rgba(10,10,12,0.65);margin-bottom:36px">Tell us how you have lived with the elixir.</p>
 
-        <form class="review-form" id="reviewForm" novalidate>
-          <div class="review-stars-input" id="reviewStarsInput" role="radiogroup" aria-label="Rating">
-            <button type="button" class="review-star-btn" data-value="1" aria-label="1 star">&#9733;</button>
-            <button type="button" class="review-star-btn" data-value="2" aria-label="2 stars">&#9733;</button>
-            <button type="button" class="review-star-btn" data-value="3" aria-label="3 stars">&#9733;</button>
-            <button type="button" class="review-star-btn" data-value="4" aria-label="4 stars">&#9733;</button>
-            <button type="button" class="review-star-btn" data-value="5" aria-label="5 stars">&#9733;</button>
+        <form class="review-form" id="reviewForm" novalidate style="display:flex;flex-direction:column;gap:20px;text-align:left">
+          <div class="review-stars-input" id="reviewStarsInput" role="radiogroup" aria-label="Rating" style="display:flex;justify-content:center;gap:10px;margin-bottom:12px">
+            <button type="button" class="review-star-btn" data-value="1" aria-label="1 star" style="font-size:32px;color:#C2A15B">&#9733;</button>
+            <button type="button" class="review-star-btn" data-value="2" aria-label="2 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
+            <button type="button" class="review-star-btn" data-value="3" aria-label="3 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
+            <button type="button" class="review-star-btn" data-value="4" aria-label="4 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
+            <button type="button" class="review-star-btn" data-value="5" aria-label="5 stars" style="font-size:32px;color:#C2A15B">&#9733;</button>
           </div>
 
-          <input type="text" id="reviewName" name="reviewName" placeholder="First name" autocomplete="given-name" required>
-          <textarea id="reviewBody" name="reviewBody" placeholder="Tell us about your experience" required></textarea>
+          <input type="text" id="reviewName" name="reviewName" placeholder="First name" autocomplete="given-name" required style="width:100%;background:#FFFFFF;border:1px solid rgba(10,10,12,0.15);padding:16px 20px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;outline:none;border-radius:2px">
+          <textarea id="reviewBody" name="reviewBody" placeholder="Tell us about your experience" required style="width:100%;min-height:140px;background:#FFFFFF;border:1px solid rgba(10,10,12,0.15);padding:16px 20px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;outline:none;border-radius:2px;resize:vertical"></textarea>
 
-          <div class="hp" aria-hidden="true">
+          <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">
             <input type="text" id="reviewHp" name="reviewHp" tabindex="-1" autocomplete="off">
           </div>
 
-          <button type="submit" class="review-submit" id="reviewSubmit">Submit Review</button>
+          <button type="submit" class="review-submit" id="reviewSubmit" style="width:100%;padding:18px;background:#0A0A0C;color:#FDFBF8;border:1px solid #C2A15B;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;cursor:pointer;font-weight:500;transition:all 240ms ease">Submit Review</button>
         </form>
 
-        <p class="review-feedback" id="reviewFeedback" role="status" aria-live="polite"></p>
+        <p class="review-feedback" id="reviewFeedback" role="status" aria-live="polite" style="margin-top:16px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#8A6C2E"></p>
       </div>
 
     </div>
@@ -3266,144 +3291,121 @@
   }
   </script>
 
-  <section class="section faq" id="faq" aria-labelledby="faq-heading">
-    <div class="section-inner" style="max-width:780px;">
-      <p class="label">Considered</p>
-      <h2 class="display" id="faq-heading">Questions, answered.</h2>
-      <div class="faq-list">
-        <details>
-          <summary>
-            <span>Does a hair elixir help with hair growth?</span>
-            <span class="indicator" aria-hidden="true">+</span>
+  <section class="section faq" id="faq" aria-labelledby="faq-heading" style="padding:clamp(80px,10vh,120px) clamp(24px,5vw,64px);background:#FFFFFF">
+    <div class="section-inner" style="max-width:840px;margin:0 auto">
+      <p class="label" style="font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:#8A6C2E;font-weight:500;margin-bottom:12px">Considered</p>
+      <h2 class="display" id="faq-heading" style="font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(32px,4vw,48px);color:#0A0A0C;margin-bottom:44px">Questions, answered.</h2>
+      <div class="faq-list" style="border-top:1px solid rgba(194,161,91,0.25)">
+        <details style="border-bottom:1px solid rgba(194,161,91,0.25);padding:24px 0">
+          <summary style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none">
+            <span style="font-family:'Bodoni Moda',serif;font-size:clamp(19px,2.2vw,24px);color:#0A0A0C;font-weight:400">Does a hair elixir help with hair growth?</span>
+            <span class="indicator" aria-hidden="true" style="width:28px;height:28px;border-radius:50%;border:1px solid #C2A15B;color:#8A6C2E;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1">+</span>
           </summary>
-          <p>A hair elixir does not cause hair to grow. It creates the conditions hair needs to thrive &mdash; scalp comfort, length protection, breakage resistance. The Vue 14&trade; Hair Elixir is formulated to defend hair against the daily losses that prevent it from reaching its full length: friction, heat, color fatigue, and dryness at the ends.</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.75;color:rgba(10,10,12,0.78);margin-top:16px">A hair elixir does not cause hair to grow. It creates the conditions hair needs to thrive &mdash; scalp comfort, length protection, breakage resistance. The Vue 14&trade; Hair Elixir is formulated to defend hair against the daily losses that prevent it from reaching its full length: friction, heat, color fatigue, and dryness at the ends.</p>
         </details>
-        <details>
-          <summary>
-            <span>What is hair elixir good for?</span>
-            <span class="indicator" aria-hidden="true">+</span>
+        <details style="border-bottom:1px solid rgba(194,161,91,0.25);padding:24px 0">
+          <summary style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none">
+            <span style="font-family:'Bodoni Moda',serif;font-size:clamp(19px,2.2vw,24px);color:#0A0A0C;font-weight:400">What is hair elixir good for?</span>
+            <span class="indicator" aria-hidden="true" style="width:28px;height:28px;border-radius:50%;border:1px solid #C2A15B;color:#8A6C2E;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1">+</span>
           </summary>
-          <p>Strength. Shine. Softness. Scent. The Vue 14&trade; Hair Elixir restores devitalized lengths, smooths the cuticle for glass-like luminosity, and delivers weightless volume. It is buildable &mdash; worn as a pre-wash treatment, a finishing veil, or both throughout the day.</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.75;color:rgba(10,10,12,0.78);margin-top:16px">Strength. Shine. Softness. Scent. The Vue 14&trade; Hair Elixir restores devitalized lengths, smooths the cuticle for glass-like luminosity, and delivers weightless volume. It is buildable &mdash; worn as a pre-wash treatment, a finishing veil, or both throughout the day.</p>
         </details>
-        <details>
-          <summary>
-            <span>Do you use hair elixir on wet or dry hair?</span>
-            <span class="indicator" aria-hidden="true">+</span>
+        <details style="border-bottom:1px solid rgba(194,161,91,0.25);padding:24px 0">
+          <summary style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none">
+            <span style="font-family:'Bodoni Moda',serif;font-size:clamp(19px,2.2vw,24px);color:#0A0A0C;font-weight:400">Do you use hair elixir on wet or dry hair?</span>
+            <span class="indicator" aria-hidden="true" style="width:28px;height:28px;border-radius:50%;border:1px solid #C2A15B;color:#8A6C2E;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1">+</span>
           </summary>
-          <p>Both. Five drops on damp lengths after washing allow the essences to absorb at the cuticle while the hair is most receptive. Two drops on dry hair throughout the day refresh ends and tame flyaways. The Vue 14&trade; Hair Elixir layers without heaviness.</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.75;color:rgba(10,10,12,0.78);margin-top:16px">Both. Five drops on damp lengths after washing allow the essences to absorb at the cuticle while the hair is most receptive. Two drops on dry hair throughout the day refresh ends and tame flyaways. The Vue 14&trade; Hair Elixir layers without heaviness.</p>
         </details>
-        <details>
-          <summary>
-            <span>Is hair elixir the same as hair oil?</span>
-            <span class="indicator" aria-hidden="true">+</span>
+        <details style="border-bottom:1px solid rgba(194,161,91,0.25);padding:24px 0">
+          <summary style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none">
+            <span style="font-family:'Bodoni Moda',serif;font-size:clamp(19px,2.2vw,24px);color:#0A0A0C;font-weight:400">Is hair elixir the same as hair oil?</span>
+            <span class="indicator" aria-hidden="true" style="width:28px;height:28px;border-radius:50%;border:1px solid #C2A15B;color:#8A6C2E;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1">+</span>
           </summary>
-          <p>An elixir is a composed system of essences. The Vue 14&trade; Hair Elixir is fourteen &mdash; Bulgarian Rose, Moroccan Argan, Amazonian Ungurahua, Atlas prickly pear, and ten others &mdash; sealed into a single ceremony. An elixir holds the chord; an essence holds a single note.</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.75;color:rgba(10,10,12,0.78);margin-top:16px">An elixir is a composed system of essences. The Vue 14&trade; Hair Elixir is fourteen &mdash; Bulgarian Rose, Moroccan Argan, Amazonian Ungurahua, Atlas prickly pear, and ten others &mdash; sealed into a single ceremony. An elixir holds the chord; an essence holds a single note.</p>
         </details>
       </div>
     </div>
   </section>
 
   <!-- ═══ FINAL BUY ═══ -->
-  <section class="section final-buy" id="reserve">
-    <div class="section-inner">
-      <p class="label">August Allocation</p>
-      <h2 class="display">Reserve the Elixir.</h2>
-      <p class="copy">The Signature, in 30ml. The Voyage, in 10ml. Each bottle hand-sealed in limited volume, scented in &Acirc;me de Vue&trade;. When the allocation closes, the next batch begins.</p>
+  <section class="section final-buy" id="reserve" style="position:relative;padding:clamp(96px,12vh,150px) clamp(24px,5vw,64px);background:radial-gradient(120% 80% at 50% 30%,#0F1E33 0%,#080E1A 60%,#04070E 100%);color:#FDFBF8;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 0%,rgba(194,161,91,.18),rgba(4,7,14,0) 70%);pointer-events:none"></div>
+    <div class="section-inner" style="position:relative;z-index:2;max-width:960px;margin:0 auto;text-align:center">
+      <div style="display:inline-block;padding:7px 20px;border:1px solid rgba(194,161,91,0.4);border-radius:30px;font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:#C2A15B;margin-bottom:28px">AUGUST ALLOCATION &mdash; OPEN</div>
+      <h2 class="display" style="font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(36px,5vw,64px);line-height:1.08;color:#FDFBF8;margin-bottom:20px">Reserve the Elixir.</h2>
+      <p class="copy" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(19px,2.2vw,26px);line-height:1.6;color:rgba(253,251,248,0.85);max-width:620px;margin:0 auto 56px">The Signature in 30ml. The Voyage in 10ml. Each bottle hand-sealed in limited volume, scented in &Acirc;me de Vue&trade;. When the allocation closes, the next batch begins.</p>
 
-      <div class="final-card">
-        <div class="price-row">
-          <div style="text-align:left;">
-            <div class="price-title">The Signature</div>
-            <div class="price-sub">Vue 14&trade; &middot; 30 ml</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;max-width:880px;margin:0 auto">
+        
+        <!-- Signature 30ml Card -->
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(194,161,91,0.4);padding:40px 32px;display:flex;flex-direction:column;gap:20px;text-align:left;position:relative;backdrop-filter:blur(6px)">
+          <div style="position:absolute;top:-13px;right:24px;background:#C2A15B;color:#0A0A0C;font-size:9px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;padding:4px 12px;border-radius:2px">Signature Allocation</div>
+          <div>
+            <div style="font-family:'Bodoni Moda',serif;font-size:26px;color:#FDFBF8;margin-bottom:6px">The Signature</div>
+            <div style="font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(253,251,248,0.6)">VUE 14&trade; &middot; 30 ML</div>
           </div>
-          <div class="price">$125</div>
+          <div style="font-family:'Bodoni Moda',serif;font-size:42px;color:#C2A15B;font-weight:400;margin-top:auto">$125</div>
+          <form class="cta-form" method="post" action="https://shop.maisondvue.com/cart/add" style="width:100%">
+            <input type="hidden" name="id" value="48287241339128">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="return_to" value="/checkout">
+            <button type="submit" style="width:100%;padding:18px;background:#C2A15B;color:#0A0A0C;border:1px solid #C2A15B;font-family:'Jost',sans-serif;font-weight:500;font-size:11px;letter-spacing:.28em;text-transform:uppercase;cursor:pointer;transition:all 300ms ease">Reserve Signature</button>
+          </form>
         </div>
-        <form class="cta-form" method="post" action="https://shop.maisondvue.com/cart/add">
-          <input type="hidden" name="id" value="48287241339128">
-          <input type="hidden" name="quantity" value="1">
-          <input type="hidden" name="return_to" value="/checkout">
-          <button type="submit" class="cta">Reserve the Signature</button>
-        </form>
 
-        <div class="voyage-divider">or begin with</div>
-
-        <div class="price-row voyage">
-          <div style="text-align:left;">
-            <div class="price-title">The Voyage</div>
-            <div class="price-sub">Vue 14&trade; &middot; 10 ml</div>
+        <!-- Voyage 10ml Card -->
+        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(253,251,248,0.18);padding:40px 32px;display:flex;flex-direction:column;gap:20px;text-align:left;position:relative;backdrop-filter:blur(6px)">
+          <div>
+            <div style="font-family:'Bodoni Moda',serif;font-size:26px;color:#FDFBF8;margin-bottom:6px">The Voyage</div>
+            <div style="font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(253,251,248,0.6)">VUE 14&trade; &middot; 10 ML</div>
           </div>
-          <div class="price">$68</div>
+          <div style="font-family:'Bodoni Moda',serif;font-size:42px;color:#FDFBF8;font-weight:400;margin-top:auto">$68</div>
+          <form class="cta-form" method="post" action="https://shop.maisondvue.com/cart/add" style="width:100%">
+            <input type="hidden" name="id" value="49653578531064">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="return_to" value="/checkout">
+            <button type="submit" style="width:100%;padding:18px;background:transparent;color:#FDFBF8;border:1px solid rgba(253,251,248,0.4);font-family:'Jost',sans-serif;font-weight:500;font-size:11px;letter-spacing:.28em;text-transform:uppercase;cursor:pointer;transition:all 300ms ease">Reserve Voyage</button>
+          </form>
         </div>
-        <form class="cta-form" method="post" action="https://shop.maisondvue.com/cart/add">
-          <input type="hidden" name="id" value="49653578531064">
-          <input type="hidden" name="quantity" value="1">
-          <input type="hidden" name="return_to" value="/checkout">
-          <button type="submit" class="cta cta-ghost">Reserve the Voyage</button>
-        </form>
 
-        <p class="shipping-note">Hand-sealed &middot; Beverly Hills</p>
       </div>
+
+      <div style="margin-top:44px;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(253,251,248,0.5)">Hand-sealed &middot; Beverly Hills &middot; Complimentary US Shipping</div>
     </div>
   </section>
 
 </main>
 
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <div class="footer-inner">
-
-    <div class="footer-top">
-
-      <div class="footer-brand">
-        <div class="footer-logo">MAISON D&rsquo;VUE</div>
-        <p class="footer-category">The House of Affinity Compositions<span class="tm">&trade;</span></p>
-        <p class="footer-line">Rare by origin. Refined by design.</p>
-        <div class="footer-provenance">Hand-sealed &middot; Beverly Hills</div>
-      </div>
-
-      <div class="footer-nav">
-
-        <div class="footer-col">
-          <div class="footer-col-label">The House</div>
-          <a href="about.html#founder">Masiela Lusha</a>
-          <a href="about.html#house">The House of Vue</a>
-          <a href="about.html#inside">Inside MAISON D&rsquo;VUE</a>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-col-label">The Product</div>
-          <a href="gallery.html">The Story</a>
-          <a href="product.html#formulation">The Formula</a>
-          <a href="product.html#ritual">The Ritual</a>
-          <a href="product.html#origins">Origins</a>
-          <a href="product.html#reviews">Reviews</a>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-col-label">Access</div>
-          <a href="product.html#reserve">Reserve</a>
-          <a href="founders-circle.html">Join the Founder&rsquo;s Circle</a>
-          <a href="creators.html">Founding Creator Program</a>
-          <a href="mailto:hello@maisondvue.com">Contact</a>
-          <a href="mailto:hello@maisondvue.com">Press Inquiries</a>
-          <a href="shipping.html">Shipping &amp; Returns</a>
-          <a href="privacy.html">Privacy Notice</a>
-          <a href="terms.html">Terms</a>
-          <a href="https://www.google.com/preferences/source?q=maisondvue.com" target="_blank" rel="noopener" aria-label="Set MAISON D&rsquo;VUE as a preferred source on Google" title="Set MAISON D&rsquo;VUE as a preferred source on Google" style="display:inline-flex;align-items:center;line-height:0;border:0;margin-top:10px;padding:0;">
-            <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-              <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
-              <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
-              <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
-              <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
-            </svg>
-          </a>
-        </div>
-
-      </div>
+<!-- ═══ LUXURY EDITORIAL FOOTER ═══ -->
+<footer style="background:#fff;padding:clamp(64px,8vh,96px) clamp(20px,5vw,64px) 44px;border-top:1px solid rgba(20,20,26,.1)">
+  <div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:44px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-family:'Bodoni Moda',serif;font-weight:500;font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:#14141A">Maison D'Vue</div>
+      <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(20,20,26,.45);line-height:2">The House of Affinity Compositions&trade;</div>
     </div>
-
-    <div class="footer-bottom">&copy; 2026 MAISON D&rsquo;VUE &nbsp;&middot;&nbsp; hello@maisondvue.com &nbsp;&middot;&nbsp; Made in USA</div>
-
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:rgba(20,20,26,.62);line-height:1.9">
+      <div style="font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(20,20,26,.4)">The Maison</div>
+      <a href="mailto:hello@maisondvue.com" style="color:#8A6C2E;text-decoration:none">hello@maisondvue.com</a>
+      <a href="tel:+13109851449" style="color:rgba(20,20,26,.62);text-decoration:none">+1 (310) 985-1449</a>
+      <div>132 S Lasky Dr, Floor 2<br>Beverly Hills, CA 90212</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:rgba(20,20,26,.62);line-height:1.9">
+      <div style="font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(20,20,26,.4)">Follow</div>
+      <a href="https://instagram.com/maisondvue" target="_blank" rel="noopener" style="color:rgba(20,20,26,.62);text-decoration:none">Instagram &mdash; @maisondvue</a>
+      <a href="https://instagram.com/masielalusha" target="_blank" rel="noopener" style="color:rgba(20,20,26,.62);text-decoration:none">@masielalusha</a>
+      <a href="https://shop.maisondvue.com" style="color:rgba(20,20,26,.62);text-decoration:none">The Boutique</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:rgba(20,20,26,.62);line-height:1.9">
+      <div style="font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(20,20,26,.4)">Care</div>
+      <div>Complimentary US shipping, 5–10 business days</div>
+      <div>Express, $25 flat &mdash; 1–2 business days</div>
+      <div>All sales final except damage or defect</div>
+    </div>
+  </div>
+  <div style="max-width:1180px;margin:52px auto 0;padding-top:24px;border-top:1px solid rgba(20,20,26,.08);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(20,20,26,.4)">
+    <div>&copy; MMXXVI Maison D'Vue &mdash; Beverly Hills</div>
+    <div>&Acirc;me de Vue&trade; &middot; VUE Affinity Matrix&trade; &middot; Affinity Compositions&trade;</div>
   </div>
 </footer>
 
