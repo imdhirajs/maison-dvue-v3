@@ -76,6 +76,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/nav.css?v=15">
 
 <style>
   :root{
@@ -109,9 +110,9 @@
     --navy-charcoal:#050505;
     --navy-deeper:#000000;
 
-    --font-display:'Helvetica Neue',Helvetica,Arial,sans-serif;
-    --font-italic:'Helvetica Neue',Helvetica,Arial,sans-serif;
-    --font-sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --font-display:'Bodoni Moda', 'Didot', 'Bodoni MT', Georgia, serif;
+    --font-italic:'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+    --font-sans:'Jost', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
     --page:1180px;
     --nav-h:72px;
@@ -274,40 +275,6 @@
      ═══════════════════════════════════════════════════════════ */
   .promo-ribbon{ display:none !important; }
   .site-header{ display:none !important; }
-
-  .mdv-nav{
-    position:fixed; top:0; left:0; right:0; z-index:200; height:72px;
-    display:flex; align-items:center; justify-content:space-between; padding:0 40px;
-    border-bottom:1px solid transparent;
-    transition:background 320ms ease, border-color 320ms ease;
-  }
-  .mdv-nav .nav-logo{
-    font-family:var(--font-display); font-weight:500; font-size:20px;
-    letter-spacing:0.34em; text-transform:uppercase; color:#FFFFFF; white-space:nowrap;
-    transition:color 320ms ease;
-  }
-  .mdv-nav .nav-links{ display:flex; gap:40px; }
-  .mdv-nav .nav-links a, .mdv-nav .nav-right a{
-    font-size:11px; letter-spacing:0.26em; text-transform:uppercase; font-weight:400;
-    color:rgba(255, 255, 255,0.82); transition:color 220ms ease;
-  }
-  .mdv-nav .nav-right{ display:flex; align-items:center; gap:18px; }
-  .mdv-nav .nav-links a:hover, .mdv-nav .nav-right a:hover{ color:#fff; }
-  .mdv-nav.scrolled{
-    background:rgba(255, 255, 255,0.94); backdrop-filter:saturate(140%) blur(8px);
-    border-bottom-color:rgba(10, 10, 10,0.08);
-  }
-  .mdv-nav.scrolled .nav-logo{ color:var(--navy); }
-  .mdv-nav.scrolled .nav-links a, .mdv-nav.scrolled .nav-right a{ color:rgba(10, 10, 10,0.62); }
-  .mdv-nav.scrolled .nav-links a:hover, .mdv-nav.scrolled .nav-right a:hover{ color:var(--navy); }
-  @media (max-width:860px){
-    .mdv-nav{ padding:0 22px; }
-    .mdv-nav .nav-links{ display:none; }
-    .mdv-nav .nav-logo{ font-size:16px; letter-spacing:0.26em; }
-    /* The gate photo's monogram sits right of the frame's midpoint — recenter
-       the crop on narrow screens so it doesn't read as pushed to one side. */
-    #slide-house .slide-media{ object-position:68% center; }
-  }
 
   /* ═══════════════════════════════════════════════════════════
      MAIN — photograph band on top (16:9), reservation below
@@ -1628,17 +1595,10 @@
 <script>
   (function () {
     var nav = document.getElementById('mdvNav');
-    var lightSection = null;
-    /* Transparent (white) over every cinematic slide — the Saint Laurent way —
-       and only solid once the first light section rises to meet the nav.
-       (It is parsed after this script, so look it up lazily.) */
     function onScroll() {
-      if (!lightSection) lightSection = document.getElementById('testimonials');
-      var solid = lightSection && lightSection.getBoundingClientRect().top <= 72;
-      nav.classList.toggle('scrolled', !!solid);
+      nav.classList.toggle('scrolled', window.scrollY > 60);
     }
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('DOMContentLoaded', onScroll);
     onScroll();
   })();
 </script>
@@ -1771,18 +1731,18 @@
     <div class="wall-grid">
 
       <div class="wall-tile wall-tile--full-review">
-        <video class="wall-video" id="testimonial-6-video" src="testimonial-6.mp4?v=1" poster="testimonial-6-poster.jpg?v=1"
-          autoplay muted loop playsinline webkit-playsinline="true" preload="metadata"
-          disablepictureinpicture aria-hidden="true" onerror="this.style.display='none';"></video>
+        <video class="wall-video" id="testimonial-6-video" src="testimonial-6.mp4" poster="testimonial-6-poster.jpg"
+          autoplay muted loop playsinline webkit-playsinline="true" preload="auto"
+          disablepictureinpicture aria-hidden="true"></video>
         <button type="button" class="wall-sound-btn" data-video-target="testimonial-6-video" aria-label="Play full review with sound">
           <span class="wall-sound-icon">&#9658;</span> Watch full review
         </button>
       </div>
 
       <div class="wall-tile wall-tile--full-review">
-        <video class="wall-video" id="testimonial-7-video" src="testimonial-7.mp4?v=1" poster="testimonial-7-poster.jpg?v=1"
-          autoplay muted loop playsinline webkit-playsinline="true" preload="metadata"
-          disablepictureinpicture aria-hidden="true" onerror="this.style.display='none';"></video>
+        <video class="wall-video" id="testimonial-7-video" src="testimonial-7.mp4" poster="testimonial-7-poster.jpg"
+          autoplay muted loop playsinline webkit-playsinline="true" preload="auto"
+          disablepictureinpicture aria-hidden="true"></video>
         <button type="button" class="wall-sound-btn" data-video-target="testimonial-7-video" aria-label="Play full review with sound">
           <span class="wall-sound-icon">&#9658;</span> Watch full review
         </button>
@@ -1830,7 +1790,7 @@
       <video class="slide-media" src="world-banner.mp4?v=1" poster="world-banner-poster.jpg?v=1"
         autoplay muted loop playsinline webkit-playsinline="true" preload="metadata"
         disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
-        aria-hidden="true" onerror="this.style.display='none';"></video>
+        aria-hidden="true"></video>
       <div class="slide-scrim" aria-hidden="true"></div>
       <a class="slide-label" href="gallery.html">
         <span class="slide-title">World</span>
