@@ -2510,6 +2510,12 @@
         .then((bmp) => {
           this.frameBitmaps[n] = bmp;
           delete this.loadingPromises[n];
+          // Repaint immediately if this frame is what should currently be showing —
+          // don't wait for the next scroll event to notice it arrived.
+          const desiredFrame = Math.min(MDV_HERO_TOTAL_FRAMES, Math.max(1, Math.round(this.currentProgress * (MDV_HERO_TOTAL_FRAMES - 1)) + 1));
+          if (Math.abs(n - desiredFrame) <= 2) {
+            this.drawFrame(desiredFrame, true);
+          }
           return bmp;
         })
         .catch(() => {
