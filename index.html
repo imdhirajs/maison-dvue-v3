@@ -2359,12 +2359,12 @@
     });
   })();
 
-  /* ─── SCROLL-SCRUB HERO ENGINE (PORTED FROM V2) ─── */
+  /* ─── SCROLL-SCRUB HERO ENGINE (HIGH-PERFORMANCE LUXURY ARCHITECTURE) ─── */
   const MDV_HERO_TOTAL_FRAMES = 524;
-  const MDV_HERO_FRAME_PATH = (n) => "assets/hero-frames-webp/frame-" + String(n).padStart(4, "0") + ".webp?v=2";
+  const MDV_HERO_FRAME_PATH = (n) => "assets/hero-frames-webp/frame-" + String(n).padStart(4, "0") + ".webp?v=3";
   const MDV_HERO_MOBILE_VIDEO_SRC = "assets/hero-fallback/hero-mobile.mp4?v=2";
   const MDV_HERO_SCROLL_HEIGHT = "clamp(2800px, 460vh, 6200px)";
-  const MDV_HERO_PRELOAD_CONCURRENCY = 16;
+  const MDV_HERO_PRELOAD_CONCURRENCY = 4; // Optimized connection pool (prevents network saturation)
   const MDV_HERO_BEATS = [];
 
   class MdvHeroEngine {
@@ -2380,6 +2380,10 @@
       this.lastDrawnFrame = 0;
       this.currentProgress = 0;
       this.targetProgress = 0;
+      this.lastProgress = 0;
+      this.scrollDirection = 1;
+      this.isScrolling = false;
+      this.scrollTimer = null;
       this.renderRafId = null;
       this.resizeRafId = null;
       this.lenis = null;
@@ -2440,17 +2444,25 @@
       window.addEventListener("resize", this.onResize);
       this.resizeCanvas();
 
-      await this.loadFrame(1);
-      this.drawFrame(1, true);
+      // Phase 1: Instant First Frame & Immediate Buffer (Frames 1-35)
+      this.loadFrame(1, "high").then((bmp) => {
+        if (bmp) this.drawFrame(1, true);
+      });
+
+      // Rapidly buffer the first 35 frames so initial scroll is 100% buttery smooth with 0 wait
+      for (let f = 2; f <= 35; f++) {
+        this.loadFrame(f, "high");
+      }
 
       this.setupLenis();
-      this.onScroll = () => this.updateTargetProgress();
+      this.onScroll = () => this.onScrollHappened();
       window.addEventListener("scroll", this.onScroll, { passive: true });
       window.addEventListener("touchmove", this.onScroll, { passive: true });
       this.updateTargetProgress();
 
       this.startRenderLoop();
-      this.preloadAll();
+      // Phase 2: Start intelligent background preloader (outward expanding from current view)
+      this.startBackgroundPreloader();
     }
 
     scheduleResize() {
@@ -2469,13 +2481,17 @@
       if (this.lastDrawnFrame) this.drawFrame(this.lastDrawnFrame, true);
     }
 
-    loadFrame(n) {
+    loadFrame(n, priority = "auto") {
       if (n < 1 || n > MDV_HERO_TOTAL_FRAMES) return Promise.resolve(null);
       if (this.frameBitmaps[n]) return Promise.resolve(this.frameBitmaps[n]);
       if (this.loadingPromises[n]) return this.loadingPromises[n];
 
-      this.loadingPromises[n] = fetch(MDV_HERO_FRAME_PATH(n))
-        .then((r) => r.blob())
+      const fetchOpts = priority === "high" ? { priority: "high" } : {};
+      this.loadingPromises[n] = fetch(MDV_HERO_FRAME_PATH(n), fetchOpts)
+        .then((r) => {
+          if (!r.ok) throw new Error("Frame not found: " + n);
+          return r.blob();
+        })
         .then((b) => createImageBitmap(b))
         .then((bmp) => {
           this.frameBitmaps[n] = bmp;
@@ -2491,13 +2507,14 @@
 
     findNearestLoadedFrame(requested) {
       if (this.frameBitmaps[requested]) return requested;
-      for (let d = 1; d < MDV_HERO_TOTAL_FRAMES; d++) {
-        const lo = requested - d;
-        const hi = requested + d;
-        if (lo >= 1 && this.frameBitmaps[lo]) return lo;
-        if (hi <= MDV_HERO_TOTAL_FRAMES && this.frameBitmaps[hi]) return hi;
+      // Search outward for closest available frame
+      for (let d = 1; d <= 40; d++) {
+        const f1 = requested - d;
+        const f2 = requested + d;
+        if (f1 >= 1 && this.frameBitmaps[f1]) return f1;
+        if (f2 <= MDV_HERO_TOTAL_FRAMES && this.frameBitmaps[f2]) return f2;
       }
-      return null;
+      return this.lastDrawnFrame || 1;
     }
 
     drawFrame(n, force) {
@@ -2525,13 +2542,13 @@
     setupLenis() {
       if (typeof Lenis === "undefined") return;
       this.lenis = new Lenis({
-        lerp: 0.08,
+        lerp: 0.1,
         smoothWheel: true,
         wheelMultiplier: 0.9,
         touchMultiplier: 1.4
       });
       this.lenis.on('scroll', () => {
-        this.updateTargetProgress();
+        this.onScrollHappened();
       });
       const raf = (time) => {
         if (this.destroyed) return;
@@ -2541,6 +2558,15 @@
       this.lenisRafId = requestAnimationFrame(raf);
     }
 
+    onScrollHappened() {
+      this.updateTargetProgress();
+      this.isScrolling = true;
+      if (this.scrollTimer) clearTimeout(this.scrollTimer);
+      this.scrollTimer = setTimeout(() => {
+        this.isScrolling = false;
+      }, 250);
+    }
+
     updateTargetProgress() {
       if (!this.section) return;
       const rect = this.section.getBoundingClientRect();
@@ -2548,14 +2574,19 @@
       const heroHeight = this.section.offsetHeight;
       const viewportH = window.innerHeight;
       const raw = (window.scrollY - heroTop) / (heroHeight - viewportH);
-      this.targetProgress = Math.min(1, Math.max(0, raw || 0));
+      const newProgress = Math.min(1, Math.max(0, raw || 0));
+      this.scrollDirection = newProgress >= this.targetProgress ? 1 : -1;
+      this.targetProgress = newProgress;
     }
 
     prioritizeNear(current) {
-      for (let i = -3; i <= 8; i++) {
+      // High-priority sliding window: 20 frames ahead of scroll direction, 6 frames behind
+      const forwardCount = this.scrollDirection >= 0 ? 24 : 8;
+      const backwardCount = this.scrollDirection >= 0 ? 6 : 24;
+      for (let i = -backwardCount; i <= forwardCount; i++) {
         const f = current + i;
         if (f >= 1 && f <= MDV_HERO_TOTAL_FRAMES && !this.frameBitmaps[f] && !this.loadingPromises[f]) {
-          this.loadFrame(f);
+          this.loadFrame(f, "high");
         }
       }
     }
@@ -2565,9 +2596,9 @@
         if (this.destroyed) return;
 
         const diff = this.targetProgress - this.currentProgress;
-        if (Math.abs(diff) > 0.00005) {
-          // Liquid inertia: smoothly glides toward target scroll position
-          this.currentProgress += diff * 0.1;
+        if (Math.abs(diff) > 0.00004) {
+          // Liquid silky inertia: glides smoothly toward scroll target
+          this.currentProgress += diff * 0.13;
           const frame = Math.min(MDV_HERO_TOTAL_FRAMES, Math.max(1, Math.round(this.currentProgress * (MDV_HERO_TOTAL_FRAMES - 1)) + 1));
           this.drawFrame(frame);
           this.updateNarrative(this.currentProgress);
@@ -2594,26 +2625,43 @@
       if (this.ctaEl) this.ctaEl.classList.toggle("mdv-hero-cta-hidden", beat.id === "heroBeat5");
     }
 
-    preloadAll() {
-      const order = [];
-      // Fast stride 1: every 4th frame gives low-latency rough coverage
-      for (let i = 1; i <= MDV_HERO_TOTAL_FRAMES; i += 4) order.push(i);
-      // Fast stride 2: every 2nd frame
-      for (let i = 1; i <= MDV_HERO_TOTAL_FRAMES; i += 2) {
-        if (i % 4 !== 1) order.push(i);
-      }
-      // Stride 3: fill all remaining frames
-      for (let i = 1; i <= MDV_HERO_TOTAL_FRAMES; i++) {
-        if (i % 2 !== 1) order.push(i);
-      }
+    startBackgroundPreloader() {
+      // Outward expanding preloader: loads outward from current user position
+      // Pauses during active scroll so user gets 100% network bandwidth and CPU
+      let activeWorkers = 0;
 
-      let idx = 0;
-      const worker = () => {
-        if (this.destroyed || idx >= order.length) return;
-        const n = order[idx++];
-        this.loadFrame(n).finally(worker);
+      const getNextFrameToLoad = () => {
+        if (this.isScrolling) return null; // Yield completely during active scrolling
+        const currentFrame = Math.min(MDV_HERO_TOTAL_FRAMES, Math.max(1, Math.round(this.currentProgress * (MDV_HERO_TOTAL_FRAMES - 1)) + 1));
+        
+        // Outward search from currentFrame
+        for (let d = 1; d <= MDV_HERO_TOTAL_FRAMES; d++) {
+          const ahead = currentFrame + d;
+          if (ahead <= MDV_HERO_TOTAL_FRAMES && !this.frameBitmaps[ahead] && !this.loadingPromises[ahead]) {
+            return ahead;
+          }
+          const behind = currentFrame - d;
+          if (behind >= 1 && !this.frameBitmaps[behind] && !this.loadingPromises[behind]) {
+            return behind;
+          }
+        }
+        return null;
       };
-      for (let i = 0; i < MDV_HERO_PRELOAD_CONCURRENCY; i++) worker();
+
+      const step = () => {
+        if (this.destroyed) return;
+        while (activeWorkers < MDV_HERO_PRELOAD_CONCURRENCY) {
+          const next = getNextFrameToLoad();
+          if (!next) break;
+          activeWorkers++;
+          this.loadFrame(next, "auto").finally(() => {
+            activeWorkers--;
+          });
+        }
+        setTimeout(step, this.isScrolling ? 180 : 35);
+      };
+
+      setTimeout(step, 400); // Start background worker after initial buffer finishes
     }
 
     destroy() {
@@ -2621,6 +2669,7 @@
       if (this.renderRafId) cancelAnimationFrame(this.renderRafId);
       if (this.resizeRafId) cancelAnimationFrame(this.resizeRafId);
       if (this.lenisRafId) cancelAnimationFrame(this.lenisRafId);
+      if (this.scrollTimer) clearTimeout(this.scrollTimer);
       if (this.onResize) window.removeEventListener("resize", this.onResize);
       if (this.onScroll) {
         window.removeEventListener("scroll", this.onScroll);
