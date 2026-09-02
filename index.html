@@ -1716,15 +1716,206 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    z-index: 2;
+    z-index: 6;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
   }
   @keyframes dvDrift { 0%,100% { transform:translateY(0); opacity:.55 } 50% { transform:translateY(9px); opacity:1 } }
   @media (max-height: 780px) { .dv-cue { display:none !important } }
+
+  /* ─── LUXURY PRELOADER GATE ─── */
+  html.gate-locked, html.gate-locked body {
+    overflow: hidden !important;
+    height: 100% !important;
+    touch-action: none;
+  }
+  .luxury-gate {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
+    background: #0A0A0C;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 1.05s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.85s ease;
+    will-change: transform, opacity;
+  }
+  .luxury-gate.gate-dismissed {
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+  }
+  .luxury-gate-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 460px;
+  }
+  .luxury-gate-crest {
+    margin-bottom: 22px;
+    animation: gatePulse 2.6s ease-in-out infinite;
+  }
+  @keyframes gatePulse {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+  .luxury-gate-brand {
+    font-family: var(--font-display, 'Bodoni Moda', serif);
+    font-size: 13px;
+    letter-spacing: 0.46em;
+    text-transform: uppercase;
+    color: #EFE9DF;
+    margin-bottom: 28px;
+    padding-left: 0.46em; /* Optical centering */
+  }
+  .luxury-gate-track {
+    width: 150px;
+    height: 1.5px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .luxury-gate-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #8A6C2E 0%, #C2A15B 50%, #F5F1E8 100%);
+    transition: width 0.16s ease-out;
+  }
+  .luxury-gate-status {
+    font-family: var(--font-display, 'Bodoni Moda', serif);
+    font-size: 8.5px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(239, 233, 223, 0.52);
+    padding-left: 0.35em;
+  }
+
+  /* ─── STAGED STORY BEATS (HERO NARRATIVE OVERLAYS) ─── */
+  .mdv-hero-beat {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 9vw;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 5;
+  }
+  .mdv-hero-beat.mdv-hero-beat-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .mdv-hero-beat-left {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .mdv-hero-beat-right {
+    align-items: flex-end;
+    text-align: right;
+  }
+  .mdv-hero-beat-center {
+    align-items: center;
+    text-align: center;
+  }
+  .mdv-hero-eyebrow {
+    font-size: 9.5px;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: #C2A15B;
+    margin-bottom: 16px;
+    font-family: var(--font-display, 'Bodoni Moda', serif);
+    text-shadow: 0 2px 14px rgba(0,0,0,0.8);
+  }
+  .mdv-hero-title {
+    font-family: var(--font-display, 'Bodoni Moda', serif);
+    font-weight: 300;
+    font-size: clamp(32px, 4.5vw, 60px);
+    line-height: 1.14;
+    letter-spacing: 0.025em;
+    color: #EFE9DF;
+    margin: 0 0 18px;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.85);
+  }
+  .mdv-hero-desc {
+    font-family: var(--font-body, -apple-system, BlinkMacSystemFont, sans-serif);
+    font-size: clamp(13px, 1.1vw, 15.5px);
+    line-height: 1.9;
+    font-weight: 300;
+    color: rgba(239, 233, 223, 0.82);
+    max-width: 430px;
+    margin: 0;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.85);
+  }
+  .mdv-hero-btn-wrap {
+    margin-top: 26px;
+  }
+  .mdv-hero-btn {
+    display: inline-block;
+    background: #EFE9DF;
+    color: #0A0A0C;
+    padding: 14px 36px;
+    font-size: 9.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: var(--font-display, 'Bodoni Moda', serif);
+    transition: background 0.35s ease, color 0.35s ease, transform 0.25s ease;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+  .mdv-hero-btn:hover {
+    background: #C2A15B;
+    color: #0A0A0C;
+    transform: translateY(-2px);
+  }
+  @media (max-width: 768px) {
+    .mdv-hero-beat {
+      padding: 0 24px 110px !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+      justify-content: flex-end !important;
+    }
+    .mdv-hero-title {
+      font-size: clamp(26px, 7.2vw, 36px);
+      line-height: 1.2;
+    }
+    .mdv-hero-desc {
+    }
+  }
 </style>
 <link rel="stylesheet" href="assets/nav.css?v=13">
 <link rel="stylesheet" href="assets/house.css?v=4">
 </head>
 <body>
+
+<!-- ═══ LUXURY PRELOADER GATE ═══ -->
+<div id="luxuryGate" class="luxury-gate" aria-label="Loading Maison D'Vue Experience" role="dialog" aria-modal="true">
+  <div class="luxury-gate-inner">
+    <div class="luxury-gate-crest" aria-hidden="true">
+      <svg width="46" height="46" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 4L26.5 19L41.5 21.5L26.5 24L24 39L21.5 24L6.5 21.5L21.5 19L24 4Z" stroke="#C2A15B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="24" cy="24" r="14" stroke="#C2A15B" stroke-width="0.75" stroke-dasharray="2 3"/>
+      </svg>
+    </div>
+    <div class="luxury-gate-brand">MAISON D&rsquo;VUE</div>
+    <div class="luxury-gate-track">
+      <div id="luxuryGateFill" class="luxury-gate-fill"></div>
+    </div>
+    <div class="luxury-gate-status">
+      ENTERING THE HOUSE &middot; <span id="luxuryGatePercent">0</span>%
+    </div>
+  </div>
+</div>
 
 <!-- ═══ PROMO RIBBON ═══ -->
 <div class="promo-ribbon" id="promoRibbon">
@@ -1804,7 +1995,41 @@
 
       <div class="slide-scrim" aria-hidden="true"></div>
 
-      <div class="dv-cue">
+      <!-- ─── STAGED NARRATIVE STORY BEATS ─── -->
+      <div id="heroBeat0" class="mdv-hero-beat mdv-hero-beat-left mdv-hero-beat-active">
+        <span class="mdv-hero-eyebrow">The House of Affinity Compositions&trade;</span>
+        <h1 class="mdv-hero-title">Composed,<br>Never Blended</h1>
+        <p class="mdv-hero-desc">Fourteen rare botanical essences, selected for their affinity with hair. Anhydrous. Unhurried.</p>
+      </div>
+
+      <div id="heroBeat1" class="mdv-hero-beat mdv-hero-beat-right">
+        <span class="mdv-hero-eyebrow">Chapter I &mdash; The Formulation</span>
+        <h2 class="mdv-hero-title">Proportioned<br>by Hand</h2>
+        <p class="mdv-hero-desc">Crafted in Beverly Hills and sealed in cobalt glass. Made in the discipline of high skincare.</p>
+      </div>
+
+      <div id="heroBeat2" class="mdv-hero-beat mdv-hero-beat-left">
+        <span class="mdv-hero-eyebrow">Anhydrous Purity</span>
+        <h2 class="mdv-hero-title">Zero Water.<br>Pure Essence.</h2>
+        <p class="mdv-hero-desc">Zero water, silicone, or sulfate. Every golden droplet is active botanical nutrition.</p>
+      </div>
+
+      <div id="heroBeat3" class="mdv-hero-beat mdv-hero-beat-right">
+        <span class="mdv-hero-eyebrow">The Daily Ritual</span>
+        <h2 class="mdv-hero-title">Five Drops,<br>by Hand</h2>
+        <p class="mdv-hero-desc">Warmed between palms and smoothed through lengths for weightless, luminous luster.</p>
+      </div>
+
+      <div id="heroBeat4" class="mdv-hero-beat mdv-hero-beat-center">
+        <span class="mdv-hero-eyebrow">The Allocations &middot; Vue 14&trade;</span>
+        <h2 class="mdv-hero-title">Reserve The Elixir</h2>
+        <p class="mdv-hero-desc">Composed in monthly allocations, not mass inventory. Experience the transformation.</p>
+        <div class="mdv-hero-btn-wrap">
+          <a href="#buy" class="mdv-hero-btn">Explore The Allocations &darr;</a>
+        </div>
+      </div>
+
+      <div class="dv-cue" id="heroScrollCue">
         <div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(239,233,223,.42);font-family:var(--font-display)">Scroll</div>
         <div style="width:1px;height:52px;background:linear-gradient(180deg,rgba(194,161,91,.85),rgba(194,161,91,0));animation:dvDrift 3.4s ease-in-out infinite"></div>
       </div>
@@ -2379,7 +2604,13 @@
   const MDV_HERO_MOBILE_VIDEO_SRC = "assets/hero-fallback/hero-mobile.mp4?v=2";
   const MDV_HERO_SCROLL_HEIGHT = "clamp(2800px, 460vh, 6200px)";
   const MDV_HERO_PRELOAD_CONCURRENCY = 4; // Optimized connection pool (prevents network saturation)
-  const MDV_HERO_BEATS = [];
+  const MDV_HERO_BEATS = [
+    { id: "heroBeat0", from: 0.00, to: 0.18 },
+    { id: "heroBeat1", from: 0.18, to: 0.38 },
+    { id: "heroBeat2", from: 0.38, to: 0.58 },
+    { id: "heroBeat3", from: 0.58, to: 0.78 },
+    { id: "heroBeat4", from: 0.78, to: 1.00 },
+  ];
 
   class MdvHeroEngine {
     constructor(stickyEl) {
@@ -2403,7 +2634,7 @@
       this.lenis = null;
       this.lenisRafId = null;
       this.beatEls = [];
-      this.ctaEl = null;
+      this.cueEl = null;
       this.activeBeatId = null;
       this.destroyed = false;
     }
@@ -2417,18 +2648,38 @@
     }
 
     async init() {
+      const gate = document.getElementById("luxuryGate");
+      const gateFill = document.getElementById("luxuryGateFill");
+      const gatePercent = document.getElementById("luxuryGatePercent");
+
+      const dismissGate = () => {
+        if (!gate || gate.classList.contains("gate-dismissed")) return;
+        if (gateFill) gateFill.style.width = "100%";
+        if (gatePercent) gatePercent.textContent = "100";
+        setTimeout(() => {
+          gate.classList.add("gate-dismissed");
+          document.documentElement.classList.remove("gate-locked");
+          if (this.lenis) this.lenis.start();
+          setTimeout(() => {
+            gate.style.display = "none";
+          }, 1100);
+        }, 220);
+      };
+
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       if (reducedMotion) {
         this.showStaticPoster();
+        dismissGate();
         return;
       }
       if (this.isMobilePhone()) {
         this.showMobileVideo();
+        dismissGate();
         return;
       }
 
-      this.runCanvasEngine();
+      this.runCanvasEngine(dismissGate);
     }
 
     showStaticPoster() {
@@ -2446,37 +2697,86 @@
       this.video.play().catch(() => {});
     }
 
-    async runCanvasEngine() {
+    async runCanvasEngine(dismissGate) {
       if (!this.canvas || !this.ctx) return;
       if (this.section) this.section.style.height = MDV_HERO_SCROLL_HEIGHT;
 
+      document.documentElement.classList.add("gate-locked");
+
       this.beatEls = MDV_HERO_BEATS.map((b) => ({ ...b, el: this.sticky.querySelector("#" + b.id) }));
-      this.ctaEl = this.sticky.querySelector("#heroCta");
-      this.activeBeatId = null;
+      this.cueEl = this.sticky.querySelector("#heroScrollCue");
+      this.activeBeatId = "heroBeat0";
 
       this.onResize = () => this.scheduleResize();
       window.addEventListener("resize", this.onResize);
       this.resizeCanvas();
 
-      // Phase 1: Instant First Frame & Immediate Buffer (Frames 1-35)
-      this.loadFrame(1, "high").then((bmp) => {
-        if (bmp) this.drawFrame(1, true);
-      });
+      this.setupLenis();
+      if (this.lenis) this.lenis.stop(); // Lock Lenis smooth scroll while gate is visible
 
-      // Rapidly buffer the first 35 frames so initial scroll is 100% buttery smooth with 0 wait
-      for (let f = 2; f <= 35; f++) {
-        this.loadFrame(f, "high");
+      // Draw initial poster/frame 1 immediately
+      await this.loadFrame(1, "high");
+      this.drawFrame(1, true);
+
+      // SKELETON PRELOAD ARCHITECTURE:
+      // 1. Initial runway: frames 1 to 32 (instant scrub capability)
+      // 2. Timeline skeleton: every 4th frame across all 524 frames
+      const skeletonIndices = [];
+      for (let i = 1; i <= 32; i++) skeletonIndices.push(i);
+      for (let i = 36; i <= MDV_HERO_TOTAL_FRAMES; i += 4) {
+        if (!skeletonIndices.includes(i)) skeletonIndices.push(i);
       }
 
-      this.setupLenis();
+      const totalSkeleton = skeletonIndices.length;
+      let loadedCount = 0;
+      const targetThreshold = Math.min(36, totalSkeleton);
+      let gateOpened = false;
+
+      const updateGate = () => {
+        const pct = Math.min(100, Math.round((loadedCount / targetThreshold) * 100));
+        const fill = document.getElementById("luxuryGateFill");
+        const lbl = document.getElementById("luxuryGatePercent");
+        if (fill) fill.style.width = pct + "%";
+        if (lbl) lbl.textContent = String(pct);
+
+        if (loadedCount >= targetThreshold && !gateOpened) {
+          gateOpened = true;
+          dismissGate();
+        }
+      };
+
+      // Safety fail-safe: unlock gate after 2.8s max even on congested networks
+      const safetyTimer = setTimeout(() => {
+        if (!gateOpened) {
+          gateOpened = true;
+          dismissGate();
+        }
+      }, 2800);
+
+      // 8 Concurrent HTTP/2 streams for skeleton preloading
+      const concurrency = 8;
+      let qIndex = 0;
+      const workers = Array.from({ length: concurrency }, async () => {
+        while (qIndex < skeletonIndices.length) {
+          const f = skeletonIndices[qIndex++];
+          await this.loadFrame(f, "high");
+          loadedCount++;
+          updateGate();
+        }
+      });
+
       this.onScroll = () => this.onScrollHappened();
       window.addEventListener("scroll", this.onScroll, { passive: true });
       window.addEventListener("touchmove", this.onScroll, { passive: true });
       this.updateTargetProgress();
 
       this.startRenderLoop();
-      // Phase 2: Start intelligent background preloader (outward expanding from current view)
-      this.startBackgroundPreloader();
+
+      // Launch full background infill once skeleton workers finish
+      Promise.all(workers).then(() => {
+        clearTimeout(safetyTimer);
+        this.startBackgroundPreloader();
+      });
     }
 
     scheduleResize() {
@@ -2644,7 +2944,9 @@
       this.beatEls.forEach((b) => {
         if (b.el) b.el.classList.toggle("mdv-hero-beat-active", b.id === beat.id);
       });
-      if (this.ctaEl) this.ctaEl.classList.toggle("mdv-hero-cta-hidden", beat.id === "heroBeat5");
+      if (this.cueEl) {
+        this.cueEl.style.opacity = beat.id === "heroBeat4" ? "0" : "1";
+      }
     }
 
     startBackgroundPreloader() {
