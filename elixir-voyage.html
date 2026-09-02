@@ -142,6 +142,11 @@
     object-position:center center;
     padding:0;
   }
+  /* Keep bottle and gold cap 100% visible & legible in Hermès bag photo */
+  .pdp-photo.is-cover .pdp-photo-img[src*="voyage-hermes-bag"],
+  .pdp-thumb img[src*="voyage-hermes-bag"]{
+    object-position:center top !important;
+  }
   .pdp-photo-video{
     object-fit:cover;
     object-position:center center;
@@ -271,7 +276,7 @@
         <button class="pdp-thumb" type="button" data-media="video" data-fit="cover" data-src="voyage-portrait.mp4?v=1" data-poster="voyage-portrait-poster.jpg?v=1" aria-label="The Voyage, worn">
           <video src="voyage-portrait.mp4?v=1" muted loop autoplay playsinline webkit-playsinline="true" preload="metadata"></video>
         </button>
-        <button class="pdp-thumb" type="button" data-media="image" data-fit="cover" data-src="voyage-hermes-bag.jpg" aria-label="The Voyage, in the bag">
+        <button class="pdp-thumb" type="button" data-media="image" data-fit="cover" data-position="center top" data-src="voyage-hermes-bag.jpg" aria-label="The Voyage, in the bag">
           <img src="voyage-hermes-bag.jpg" alt="The Voyage — 10ml MAISON D'VUE Hair Elixir tucked in the pocket of a Hermès leather bag" loading="lazy">
         </button>
         <button class="pdp-thumb" type="button" data-media="image" data-fit="cover" data-src="house-code-dropper-macro.jpg" aria-label="The Voyage, dropper detail">
@@ -354,6 +359,8 @@
       t.classList.add('is-active');
       var isCover = t.dataset.fit === 'cover';
       photo.classList.toggle('is-cover', isCover);
+      var pos = t.dataset.position || (t.dataset.src && t.dataset.src.includes('voyage-hermes-bag') ? 'center top' : '');
+      if (img) img.style.objectPosition = pos;
 
       if (t.dataset.media === 'video'){
         if (img) img.style.display = 'none';

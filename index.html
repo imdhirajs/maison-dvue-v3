@@ -128,6 +128,22 @@
     padding:0;
   }
 
+  /* ─── LENIS BUTTERY SMOOTH SCROLL ENGINE CSS ─── */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
   /* No smooth-scroll on html element — smooth scroll is managed by Lenis JS engine. */
   html{ scroll-behavior:auto !important; }
 
@@ -1678,6 +1694,9 @@
     height: 100%;
     display: block;
     background: url('assets/hero-poster/hero-poster.webp') center/cover no-repeat;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
   .dv-hero-fallback-media {
     position: absolute;
@@ -1909,7 +1928,7 @@
 
     <section class="slide" id="slide-matrix">
       <video class="slide-media" src="matrix-generated-video.mp4?v=100" poster="slide-affinity-matrix.jpg"
-        autoplay muted loop playsinline webkit-playsinline="true" preload="auto"
+        muted loop playsinline webkit-playsinline="true" preload="metadata"
         disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
         aria-hidden="true"></video>
       <div class="slide-scrim" aria-hidden="true"></div>
@@ -1921,7 +1940,7 @@
 
     <section class="slide" id="slide-ritual">
       <video class="slide-media" src="ritual-generated-video.mp4?v=100" poster="slide-ritual.jpg"
-        autoplay muted loop playsinline webkit-playsinline="true" preload="auto"
+        muted loop playsinline webkit-playsinline="true" preload="metadata"
         disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
         aria-hidden="true"></video>
       <div class="slide-scrim" aria-hidden="true"></div>
@@ -1933,7 +1952,7 @@
 
     <section class="slide" id="slide-house">
       <video class="slide-media" src="hf_20260901_211626.mp4?v=100" poster="slide-house.jpg"
-        autoplay muted loop playsinline webkit-playsinline="true" preload="auto"
+        muted loop playsinline webkit-playsinline="true" preload="metadata"
         disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
         aria-hidden="true"></video>
       <div class="slide-scrim" aria-hidden="true"></div>
@@ -1945,7 +1964,7 @@
 
     <section class="slide" id="slide-world">
       <video class="slide-media" src="world-banner.mp4?v=100" poster="world-banner-poster.jpg"
-        autoplay muted loop playsinline webkit-playsinline="true" preload="auto"
+        muted loop playsinline webkit-playsinline="true" preload="metadata"
         disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
         aria-hidden="true"></video>
       <div class="slide-scrim" aria-hidden="true"></div>
@@ -2068,33 +2087,28 @@
      plus native in-page anchor scrolling — no JS needed. Cue links that point to
      other pages (patent, founder) navigate normally via the shared fade. */
 
-  /* ─── ALL VIDEOS — force autoplay where possible ─── */
+  /* ─── INTELLIGENT PERFORMANCE VIDEO CONTROLLER ─── */
   (function(){
-    var vids = document.querySelectorAll('video');
-    vids.forEach(function(v){
-      var attemptPlay = function(){
-        var p = v.play();
-        if (p && typeof p.catch === 'function') {
-          p.catch(function(){
-            var unlock = function(){
-              v.play().catch(function(){});
-              document.removeEventListener('touchstart', unlock);
-              document.removeEventListener('click', unlock);
-              document.removeEventListener('scroll', unlock);
-            };
-            document.addEventListener('touchstart', unlock, { passive: true, once: true });
-            document.addEventListener('click', unlock, { once: true });
-            document.addEventListener('scroll', unlock, { passive: true, once: true });
-          });
-        }
-      };
-      if (v.readyState >= 2) {
-        attemptPlay();
-      } else {
-        v.addEventListener('loadeddata', attemptPlay, { once: true });
-        v.addEventListener('canplay', attemptPlay, { once: true });
-      }
-    });
+    var vids = document.querySelectorAll('video:not(#heroMobileVideo)');
+    if (!vids.length) return;
+    if ('IntersectionObserver' in window) {
+      var videoObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          var v = entry.target;
+          if (entry.isIntersecting) {
+            v.play().catch(function(){});
+          } else {
+            v.pause();
+          }
+        });
+      }, { rootMargin: '120px 0px', threshold: 0.05 });
+      vids.forEach(function(v){
+        v.preload = 'metadata';
+        videoObserver.observe(v);
+      });
+    } else {
+      vids.forEach(function(v){ v.play().catch(function(){}); });
+    }
   })();
 
   /* ─── PROMO RIBBON DISMISS ─── */
@@ -2542,10 +2556,14 @@
     setupLenis() {
       if (typeof Lenis === "undefined") return;
       this.lenis = new Lenis({
-        lerp: 0.1,
+        duration: 1.15,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
         smoothWheel: true,
-        wheelMultiplier: 0.9,
-        touchMultiplier: 1.4
+        wheelMultiplier: 1.0,
+        touchMultiplier: 1.5,
+        infinite: false
       });
       this.lenis.on('scroll', () => {
         this.onScrollHappened();
@@ -2580,7 +2598,7 @@
     }
 
     prioritizeNear(current) {
-      // High-priority sliding window: 20 frames ahead of scroll direction, 6 frames behind
+      // High-priority sliding window: 24 frames ahead of scroll direction, 6 frames behind
       const forwardCount = this.scrollDirection >= 0 ? 24 : 8;
       const backwardCount = this.scrollDirection >= 0 ? 6 : 24;
       for (let i = -backwardCount; i <= forwardCount; i++) {
@@ -2596,13 +2614,17 @@
         if (this.destroyed) return;
 
         const diff = this.targetProgress - this.currentProgress;
-        if (Math.abs(diff) > 0.00004) {
-          // Liquid silky inertia: glides smoothly toward scroll target
-          this.currentProgress += diff * 0.13;
+        if (Math.abs(diff) > 0.00002) {
+          // Responsive tracking synchronized with Lenis smooth scroll
+          this.currentProgress += diff * 0.38;
           const frame = Math.min(MDV_HERO_TOTAL_FRAMES, Math.max(1, Math.round(this.currentProgress * (MDV_HERO_TOTAL_FRAMES - 1)) + 1));
           this.drawFrame(frame);
           this.updateNarrative(this.currentProgress);
-          this.prioritizeNear(frame);
+
+          if (Math.abs(frame - (this.lastPrioritizedFrame || 0)) >= 2) {
+            this.lastPrioritizedFrame = frame;
+            this.prioritizeNear(frame);
+          }
         } else if (this.currentProgress !== this.targetProgress) {
           this.currentProgress = this.targetProgress;
           const frame = Math.min(MDV_HERO_TOTAL_FRAMES, Math.max(1, Math.round(this.currentProgress * (MDV_HERO_TOTAL_FRAMES - 1)) + 1));
