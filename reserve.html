@@ -28,7 +28,7 @@
   :root{
     --paper:#FFFFFF; --paper-2:#F4F2EE; --ink:#0A0A0A; --navy-deep:#000000;
     --mid:rgba(10,10,10,0.60); --soft:rgba(10,10,10,0.42); --line:rgba(10,10,10,0.12);
-    --font-sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --font-sans:'Jost', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --font-serif:'Bodoni Moda','Didot','Bodoni MT',Georgia,serif;
     --nav-h:72px;
   }
@@ -45,7 +45,17 @@
   /* ══ CINEMATIC BANNER — placeholder; swap the media with a film or full-bleed image ══ */
   /* The frame holds the whole video at its native 16:9 — nothing cropped. */
   .shop-banner{ position:relative; background:var(--navy-deep); }
-  .shop-banner-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; }
+  .shop-banner-frame{
+    position:relative; width:100%; aspect-ratio:16/9; overflow:hidden;
+    background:var(--navy-deep);
+    background-image:url('reserve-banner-poster-alt.jpg?v=1');
+    background-size:cover;
+    background-position:center center;
+  }
+  .shop-banner-poster{
+    position:absolute; inset:0; z-index:0;
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
   .shop-banner-media{
     position:absolute; inset:0; z-index:1;
     width:100%; height:100%; object-fit:cover; display:block;
@@ -177,11 +187,55 @@
        full-bleed image or looping video when the final banner is ready ═══ -->
   <section class="shop-banner">
     <div class="shop-banner-frame">
-      <video class="shop-banner-media" src="signature-banner.mp4?v=1" poster="reserve-banner-poster-alt.jpg?v=1"
+      <img class="shop-banner-poster" src="reserve-banner-poster-alt.jpg?v=1" alt="" aria-hidden="true">
+      <video class="shop-banner-media" id="reserveBannerVideo" src="signature-banner.mp4?v=1" poster="reserve-banner-poster-alt.jpg?v=1"
         muted loop autoplay playsinline webkit-playsinline="true" preload="auto"
-        disablepictureinpicture aria-hidden="true"
-        onloadedmetadata="this.currentTime=30"
-        onerror="this.style.display='none';"></video>
+        disablepictureinpicture aria-hidden="true"></video>
+      <script>
+        (function () {
+          var video = document.getElementById('reserveBannerVideo');
+          if (!video) return;
+          var targetTime = 30;
+          var hasSeeked = false;
+
+          function doSeek() {
+            if (hasSeeked) return;
+            try {
+              if (video.duration && video.duration >= targetTime) {
+                video.currentTime = targetTime;
+                hasSeeked = true;
+              }
+            } catch (err) {
+              console.warn('Could not seek reserve banner video:', err);
+            }
+          }
+
+          video.addEventListener('timeupdate', function () {
+            if (hasSeeked && video.currentTime < 1 && !video.seeking) {
+              try { video.currentTime = targetTime; } catch (e) {}
+            }
+          });
+
+          video.addEventListener('canplaythrough', function () {
+            doSeek();
+          }, { once: true });
+
+          if (video.readyState >= 4) {
+            doSeek();
+          }
+
+          video.addEventListener('error', function (e) {
+            console.warn('Reserve banner video error, keeping poster visible:', e);
+            video.style.opacity = '0';
+          });
+
+          setTimeout(function () {
+            if (video.readyState < 2 || video.error) {
+              console.warn('Reserve banner video load timeout, poster remains visible');
+            }
+          }, 3000);
+        })();
+      </script>
     </div>
     <div class="shop-banner-inner">
       <p class="shop-banner-eyebrow">The Collection</p>

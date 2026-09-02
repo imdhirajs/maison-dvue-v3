@@ -1,79 +1,108 @@
-/* MAISON D'VUE — unified centred nav (identical on every page)
-   Render-blocking stylesheet, linked AFTER each page's inline <style> so it
-   overrides any older per-page nav rules. Logo dead-centre, tabs split left
-   and right; transparent light over a dark hero, solid navy on scroll. Pages
-   with no dark hero behind the nav add the class `mdv-nav--light` for a solid
-   navy bar from the top. */
+/* MAISON D'VUE — Master Unified Luxury Navigation Bar */
 
 .mdv-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 72px;
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   padding: 0 40px; border-bottom: 1px solid transparent;
-  transition: background 320ms ease, border-color 320ms ease;
+  background: transparent;
+  transition: background 320ms ease, border-color 320ms ease, box-shadow 320ms ease;
 }
+
 .mdv-nav .nav-logo {
-  font-family: 'Bodoni Moda','Didot','Bodoni MT',Georgia,serif; font-weight: 500;
-  font-size: 30px; letter-spacing: 0.22em; text-transform: uppercase;
-  color: #FFFFFF; white-space: nowrap; justify-self: center;
-  /* The wordmark is the hero: larger than the tabs and lifted a touch above
-     their row, the way the Saint Laurent logo rides above its nav links. */
-  align-self: center; transform: translateY(-3px);
-  transition: color 320ms ease;
+  font-family: 'Bodoni Moda', 'Didot', 'Bodoni MT', Georgia, serif !important;
+  font-weight: 500 !important;
+  font-size: 26px !important;
+  letter-spacing: 0.28em !important;
+  text-transform: uppercase !important;
+  color: #FFFFFF !important;
+  white-space: nowrap !important;
+  justify-self: center !important;
+  align-self: center !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+  transition: color 320ms ease !important;
 }
-.mdv-nav .nav-group { display: flex; gap: 40px; }
+
+.mdv-nav .nav-group { display: flex; gap: 36px; align-items: center; }
 .mdv-nav .nav-group-left { justify-self: start; }
-/* Right cluster: the two right-hand tabs, then the bag at the far edge —
-   mirrors the left group so the wordmark sits centred with even air on both sides. */
-.mdv-nav .nav-right-cluster { justify-self: end; display: flex; align-items: center; gap: 40px; }
+.mdv-nav .nav-right-cluster { justify-self: end; display: flex; align-items: center; gap: 36px; }
 .mdv-nav .nav-group-right { justify-self: end; }
+
 .mdv-nav .nav-group a {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400;
-  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255, 255, 255,0.82); white-space: nowrap; transition: color 220ms ease;
+  font-family: 'Jost', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.24em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+  transition: color 240ms ease !important;
 }
-.mdv-nav .nav-group a:hover { color: #fff; }
-/* WORLD carries a small filled square — the house's cultural-universe mark. */
+.mdv-nav .nav-group a:hover { color: #FFFFFF !important; }
+
+/* WORLD indicator square */
 .mdv-nav .nav-group a[href="gallery.html"] { display: inline-flex; align-items: center; }
 .mdv-nav .nav-group a[href="gallery.html"]::before {
-  content: ""; flex: 0 0 auto; width: 10px; height: 10px;
-  background: currentColor; margin-right: 9px;
+  content: ""; flex: 0 0 auto; width: 6px; height: 6px;
+  background: currentColor; margin-right: 8px; border-radius: 1px;
 }
+
 .mdv-nav .nav-bag {
   position: relative;
-  display: inline-flex; justify-self: end; align-items: center; color: #FFFFFF;
-  transition: color 320ms ease;
+  display: inline-flex !important;
+  justify-self: end !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+  width: 24px !important;
+  height: 24px !important;
+  transition: color 320ms ease !important;
 }
-.mdv-nav .nav-bag svg { width: 19px; height: 19px; display: block; }
-/* Small "believed" cart-count badge — updated by assets/cart.js */
+
+/* Strictly enforce Cart Icon Size (18px x 18px) to prevent giant unstyled SVGs */
+.mdv-nav .nav-bag svg {
+  width: 18px !important;
+  height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+}
+
 .mdv-nav .nav-bag-count {
-  position: absolute; top: -6px; right: -9px; min-width: 15px; height: 15px; padding: 0 3px;
-  border-radius: 50%; background: #0A0A0A; color: #FFFFFF; border: 1.5px solid #FFFFFF;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 9px; font-weight: 600;
+  position: absolute; top: -5px; right: -8px; min-width: 15px; height: 15px; padding: 0 3px;
+  border-radius: 50%; background: #0A0A0C; color: #FFFFFF; border: 1.5px solid #FFFFFF;
+  font-family: 'Jost', sans-serif; font-size: 9px; font-weight: 600;
   line-height: 15px; text-align: center; display: none;
 }
 .mdv-nav .nav-bag-count.is-visible { display: block; }
-.mdv-nav .mdv-burger { justify-self: start; }
 
-/* Scrolled past the hero → solid navy-on-paper */
-.mdv-nav.scrolled {
-  background: rgba(255, 255, 255,0.94); backdrop-filter: saturate(140%) blur(8px);
-  border-bottom-color: rgba(10, 10, 10,0.08);
-}
-.mdv-nav.scrolled .nav-logo, .mdv-nav.scrolled .nav-bag, .mdv-nav.scrolled .nav-reserve-m { color: #0A0A0A !important; }
-.mdv-nav.scrolled .nav-group a { color: rgba(10, 10, 10,0.62) !important; }
-.mdv-nav.scrolled .nav-group a:hover { color: #0A0A0A !important; }
-
-/* Light pages (no dark hero behind the nav): solid navy from the top */
+/* ══ Scrolled State (Past Hero): Solid White with Navy Text ══ */
+.mdv-nav.scrolled,
 .mdv-nav.mdv-nav--light {
-  background: rgba(255, 255, 255,0.94); backdrop-filter: saturate(140%) blur(8px);
-  border-bottom-color: rgba(10, 10, 10,0.08);
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: saturate(140%) blur(10px) !important;
+  -webkit-backdrop-filter: saturate(140%) blur(10px) !important;
+  border-bottom: 1px solid rgba(10, 10, 12, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
 }
-.mdv-nav.mdv-nav--light .nav-logo, .mdv-nav.mdv-nav--light .nav-bag, .mdv-nav.mdv-nav--light .nav-reserve-m { color: #0A0A0A !important; }
-.mdv-nav.mdv-nav--light .nav-group a { color: rgba(10, 10, 10,0.62) !important; }
-.mdv-nav.mdv-nav--light .nav-group a:hover { color: #0A0A0A !important; }
+
+.mdv-nav.scrolled .nav-logo,
+.mdv-nav.mdv-nav--light .nav-logo { color: #0A0A0C !important; }
+
+.mdv-nav.scrolled .nav-group a,
+.mdv-nav.mdv-nav--light .nav-group a { color: rgba(10, 10, 12, 0.68) !important; }
+
+.mdv-nav.scrolled .nav-group a:hover,
+.mdv-nav.mdv-nav--light .nav-group a:hover { color: #0A0A0C !important; }
+
+.mdv-nav.scrolled .nav-bag,
+.mdv-nav.mdv-nav--light .nav-bag { color: #0A0A0C !important; }
 
 @media (max-width: 860px) {
-  .mdv-nav { padding: 0 22px; }
-  .mdv-nav .nav-group { display: none; }
-  .mdv-nav .nav-logo { font-size: 19px; letter-spacing: 0.24em; transform: translateY(-2px); }
+  .mdv-nav { padding: 0 20px; grid-template-columns: auto 1fr auto; }
+  .mdv-nav .nav-group { display: none !important; }
+  .mdv-nav .nav-logo { font-size: 19px !important; letter-spacing: 0.22em !important; }
 }

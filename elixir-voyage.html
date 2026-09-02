@@ -23,7 +23,7 @@
   :root{
     --paper:#FFFFFF; --paper-2:#F1EFEB; --ink:#0A0A0A; --navy-deep:#000000;
     --mid:rgba(10,10,10,0.58); --soft:rgba(10,10,10,0.42); --line:rgba(10,10,10,0.12);
-    --font-sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --font-sans:'Jost', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --font-serif:'Bodoni Moda','Didot','Bodoni MT',Georgia,serif;
     --font-italic:'EB Garamond',Georgia,serif;
   }
@@ -38,30 +38,152 @@
   a{ color:inherit; text-decoration:none; }
   img{ display:block; }
 
-  .pdp{ max-width:1320px; margin:0 auto; padding:clamp(28px,4vw,64px) clamp(20px,4vw,56px) 40px; }
-  .pdp-grid{ display:grid; grid-template-columns:1.15fr 1fr; gap:clamp(28px,4vw,72px); align-items:start; }
-
-  .pdp-gallery{ display:grid; grid-template-columns:66px 1fr; gap:16px; }
-  .pdp-thumbs{ display:flex; flex-direction:column; gap:14px; }
-  .pdp-thumb, .pdp-photo{ position:relative; background:var(--paper-2); overflow:hidden; }
-  .pdp-thumb{ aspect-ratio:1; }
-  .pdp-photo{ aspect-ratio:1/1; }
-  .pdp-thumb::after, .pdp-photo::after{
-    content:""; position:absolute; top:50%; left:50%; width:22px; height:22px;
-    transform:translate(-50%,-50%) rotate(45deg); border:1px solid rgba(10,10,10,0.16);
+  /* ── PRODUCT LAYOUT (HAUTE COUTURE REGISTER) ── */
+  .pdp{ max-width:1380px; margin:0 auto; padding:clamp(36px,4.5vw,72px) clamp(24px,4.5vw,64px) 60px; }
+  .pdp-grid{
+    display:grid;
+    grid-template-columns:minmax(0, 1.25fr) minmax(360px, 480px);
+    gap:clamp(36px,5vw,88px);
+    align-items:start;
   }
-  .pdp-photo::after{ width:46px; height:46px; }
-  .pdp-thumb.is-active{ outline:1px solid var(--ink); outline-offset:-1px; }
-  /* Media (video or photo) fills its box, cropped to cover; hide the placeholder mark. */
-  .pdp-thumb video, .pdp-thumb img, .pdp-photo-video, .pdp-photo-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center center; display:block; }
-  /* Tall lifestyle shot — hold the bottle in frame rather than centering on the bag's hardware. */
-  .pdp-thumb img[src="voyage-hermes-bag.jpg"], .pdp-photo-img[src="voyage-hermes-bag.jpg"]{ object-position:center top; }
-  /* Tall portrait clip — keep the top of the head in frame instead of centering on the shoulders. */
-  .pdp-thumb video[src*="voyage-portrait"], .pdp-photo-video[src*="voyage-portrait"]{ object-position:center top; }
-  .pdp-thumb:has(video)::after, .pdp-thumb:has(img)::after, .pdp-photo.has-media::after{ display:none; }
-  .pdp-thumb{ border:0; padding:0; cursor:pointer; -webkit-tap-highlight-color:transparent; }
 
-  .pdp-info{ padding-top:6px; max-width:520px; }
+  /* Left — photo gallery */
+  .pdp-gallery{
+    display:grid;
+    grid-template-columns:84px 1fr;
+    gap:20px;
+    align-items:start;
+    position:relative;
+  }
+
+  /* Thumbnails side-rail */
+  .pdp-thumbs{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    max-height:clamp(520px, 72vh, 780px);
+    overflow-y:auto;
+    padding-right:4px;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(10,10,10,0.18) transparent;
+  }
+  .pdp-thumbs::-webkit-scrollbar{ width:3px; }
+  .pdp-thumbs::-webkit-scrollbar-track{ background:transparent; }
+  .pdp-thumbs::-webkit-scrollbar-thumb{ background:rgba(10,10,10,0.18); border-radius:2px; }
+
+  .pdp-thumb{
+    position:relative;
+    width:100%;
+    aspect-ratio:4/5;
+    background:var(--paper-2);
+    border:1px solid rgba(10,10,10,0.08);
+    border-radius:2px;
+    overflow:hidden;
+    padding:0;
+    cursor:pointer;
+    flex-shrink:0;
+    -webkit-tap-highlight-color:transparent;
+    transition:transform 260ms cubic-bezier(0.16,1,0.3,1), border-color 260ms ease, box-shadow 260ms ease;
+  }
+  .pdp-thumb:hover{
+    transform:translateY(-1px);
+    border-color:rgba(10,10,10,0.28);
+    box-shadow:0 4px 12px rgba(0,0,0,0.06);
+  }
+  .pdp-thumb.is-active{
+    border-color:var(--ink);
+    box-shadow:0 0 0 1px var(--ink), 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .pdp-thumb img, .pdp-thumb video{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; display:block;
+    transition:transform 400ms cubic-bezier(0.16,1,0.3,1);
+  }
+  .pdp-thumb[data-fit="contain"] img{
+    object-fit:contain; padding:4px;
+  }
+  .pdp-thumb:hover img{
+    transform:scale(1.05);
+  }
+
+  /* Main Photo Stage — Ultra luxury 4:5 aspect ratio */
+  .pdp-photo{
+    position:relative;
+    width:100%;
+    aspect-ratio:4/5;
+    background:var(--paper-2);
+    border-radius:2px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:zoom-in;
+    user-select:none;
+    box-shadow:0 2px 24px rgba(0,0,0,0.03);
+  }
+
+  /* Image & Video elements inside Main Photo */
+  .pdp-photo-img, .pdp-photo-video{
+    position:absolute; inset:0; width:100%; height:100%;
+    display:block;
+    transform-origin:center center;
+    transition:transform 350ms cubic-bezier(0.16,1,0.3,1), opacity 300ms ease;
+  }
+
+  /* Contain mode: completely prevents clipping on studio product bottles */
+  .pdp-photo-img{
+    object-fit:contain;
+    padding:clamp(20px, 3.5vw, 44px);
+  }
+
+  /* Cover mode: for full-bleed editorial/model lifestyle imagery */
+  .pdp-photo.is-cover .pdp-photo-img{
+    object-fit:cover;
+    object-position:center center;
+    padding:0;
+  }
+  .pdp-photo-video{
+    object-fit:cover;
+    object-position:center center;
+  }
+
+  /* Interactive Zoom State */
+  .pdp-photo.is-zoomed .pdp-photo-img{
+    transform:scale(1.75);
+    transition:transform 80ms linear;
+  }
+  .pdp-photo.is-zoomed{
+    cursor:zoom-out;
+  }
+
+  /* Soft fade transition on media swap */
+  @keyframes pdpMediaReveal {
+    0%{ opacity:0; transform:scale(0.985); }
+    100%{ opacity:1; transform:scale(1); }
+  }
+  .pdp-photo-img.is-revealing, .pdp-photo-video.is-revealing{
+    animation:pdpMediaReveal 360ms cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+
+  /* Luxury Zoom Hint Badge */
+  .pdp-photo-hint{
+    position:absolute; bottom:16px; right:16px; z-index:2;
+    background:rgba(255,255,255,0.85); backdrop-filter:blur(8px);
+    border:1px solid rgba(10,10,10,0.08); border-radius:20px;
+    padding:6px 14px; display:inline-flex; align-items:center; gap:6px;
+    font-family:var(--font-sans); font-size:10px; font-weight:500;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--mid);
+    pointer-events:none; opacity:0.85; transition:opacity 200ms ease;
+  }
+  .pdp-photo:hover .pdp-photo-hint{ opacity:0; }
+
+  /* Right — sticky info column */
+  .pdp-info{
+    padding-top:4px;
+    position:sticky;
+    top:96px;
+    align-self:start;
+  }
   .pdp-name{ font-family:var(--font-serif); font-weight:500; font-size:clamp(38px,4.6vw,60px); letter-spacing:0.01em; line-height:1; color:var(--ink); }
   .pdp-subrow{ display:flex; align-items:center; justify-content:space-between; gap:20px; margin-top:22px; padding-bottom:26px; border-bottom:1px solid var(--line); }
   .pdp-cat{ font-family:var(--font-sans); font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--soft); }
@@ -81,7 +203,7 @@
   .pdp-cross-label{ font-family:var(--font-serif); font-weight:500; font-size:19px; letter-spacing:0.02em; color:var(--ink); margin-bottom:18px; }
   .pdp-cross-item{ display:flex; align-items:center; gap:18px; border:1px solid var(--line); padding:16px 18px; background:var(--paper); transition:border-color 220ms ease; }
   .pdp-cross-item:hover{ border-color:rgba(10,10,10,0.30); }
-  .pdp-cross-thumb{ display:block; flex:0 0 auto; width:64px; height:76px; background:var(--paper-2); overflow:hidden; }
+  .pdp-cross-thumb{ display:block; flex:0 0 auto; width:64px; height:80px; background:var(--paper-2); overflow:hidden; border-radius:2px; }
   .pdp-cross-thumb img{ width:100%; height:100%; object-fit:cover; }
   .pdp-cross-text{ flex:1 1 auto; display:flex; flex-direction:column; gap:5px; }
   .pdp-cross-name{ font-family:var(--font-sans); font-size:13px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink); width:fit-content; }
@@ -100,8 +222,21 @@
   .footer-logo{ font-family:var(--font-serif); font-size:20px; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:16px; }
   footer a{ color:#FFFFFF; } footer a:hover{ opacity:0.75; }
 
-  @media (max-width:860px){ .pdp-grid{ grid-template-columns:1fr; gap:32px; } .pdp-info{ max-width:none; } }
-  @media (max-width:520px){ .pdp-gallery{ grid-template-columns:52px 1fr; } }
+  @media (max-width:860px){
+    .pdp-grid{ grid-template-columns:1fr; gap:36px; }
+    .pdp-info{ position:static; max-width:none; }
+    .pdp-gallery{ grid-template-columns:1fr; gap:14px; }
+    .pdp-photo{ order:1; }
+    .pdp-thumbs{
+      order:2;
+      flex-direction:row;
+      max-height:none;
+      overflow-x:auto;
+      padding-bottom:6px;
+      gap:10px;
+    }
+    .pdp-thumb{ width:64px; aspect-ratio:4/5; flex-shrink:0; }
+  }
 </style>
 
 <link rel="stylesheet" href="assets/nav.css?v=13">
@@ -127,28 +262,35 @@
 <main class="pdp">
   <div class="pdp-grid">
 
-    <!-- LEFT — PHOTO PLACEHOLDERS: swap remaining boxes with product photography -->
+    <!-- LEFT — PRODUCT GALLERY -->
     <div class="pdp-gallery">
-      <div class="pdp-thumbs">
-        <button class="pdp-thumb is-active" type="button" data-media="image" data-src="maison-dvue-elixir-voyage.jpg" aria-label="The Voyage bottle">
-          <img src="maison-dvue-elixir-voyage.jpg" alt="The Voyage — 10ml MAISON D'VUE Hair Elixir held in hand" loading="lazy">
+      <div class="pdp-thumbs" role="tablist" aria-label="Product thumbnails">
+        <button class="pdp-thumb is-active" type="button" data-media="image" data-fit="contain" data-src="photos/ritual-holding-voyage.jpg" aria-label="The Voyage bottle">
+          <img src="photos/ritual-holding-voyage.jpg" alt="The Voyage — gloved hand holding the 10ml MAISON D'VUE Hair Elixir travel bottle on white background" loading="lazy">
         </button>
-        <button class="pdp-thumb" type="button" data-media="video" data-src="voyage-portrait.mp4?v=1" data-poster="voyage-portrait-poster.jpg?v=1" aria-label="The Voyage, worn">
+        <button class="pdp-thumb" type="button" data-media="video" data-fit="cover" data-src="voyage-portrait.mp4?v=1" data-poster="voyage-portrait-poster.jpg?v=1" aria-label="The Voyage, worn">
           <video src="voyage-portrait.mp4?v=1" muted loop autoplay playsinline webkit-playsinline="true" preload="metadata"></video>
         </button>
-        <button class="pdp-thumb" type="button" data-media="image" data-src="voyage-hermes-bag.jpg" aria-label="The Voyage, in the bag">
+        <button class="pdp-thumb" type="button" data-media="image" data-fit="cover" data-src="voyage-hermes-bag.jpg" aria-label="The Voyage, in the bag">
           <img src="voyage-hermes-bag.jpg" alt="The Voyage — 10ml MAISON D'VUE Hair Elixir tucked in the pocket of a Hermès leather bag" loading="lazy">
         </button>
-        <button class="pdp-thumb" type="button" data-media="image" data-src="house-code-dropper-macro.jpg" aria-label="The Voyage, dropper detail">
+        <button class="pdp-thumb" type="button" data-media="image" data-fit="cover" data-src="house-code-dropper-macro.jpg" aria-label="The Voyage, dropper detail">
           <img src="house-code-dropper-macro.jpg" alt="A drop of MAISON D'VUE Hair Elixir forming at the tip of the gold dropper, above the cobalt bottle" loading="lazy">
         </button>
+        <button class="pdp-thumb" type="button" data-media="image" data-fit="contain" data-src="photos/shop-voyage-studio.jpg" aria-label="The Voyage, studio photograph">
+          <img src="photos/shop-voyage-studio.jpg" alt="The Voyage — 10ml MAISON D'VUE Hair Elixir travel bottle studio photograph on white background" loading="lazy">
+        </button>
       </div>
-      <div class="pdp-photo has-media">
-        <img class="pdp-photo-img" src="maison-dvue-elixir-voyage.jpg" alt="The Voyage — 10ml MAISON D'VUE Hair Elixir held in hand">
+      <div class="pdp-photo" id="pdpPhotoStage">
+        <img class="pdp-photo-img" src="photos/ritual-holding-voyage.jpg" alt="The Voyage — gloved hand holding the 10ml MAISON D'VUE Hair Elixir travel bottle on white background">
         <video class="pdp-photo-video" src="voyage-portrait.mp4?v=1" poster="voyage-portrait-poster.jpg?v=1"
           muted loop autoplay playsinline webkit-playsinline="true" preload="auto"
           disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"
-          style="display:none;" onerror="this.style.display='none';"></video>
+          style="display:none;"></video>
+        <div class="pdp-photo-hint" aria-hidden="true">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+          <span>Inspect</span>
+        </div>
       </div>
     </div>
 
@@ -174,7 +316,7 @@
       <div class="pdp-cross">
         <p class="pdp-cross-label">The Signature, in full</p>
         <div class="pdp-cross-item">
-          <a class="pdp-cross-thumb" href="elixir-signature.html" aria-label="View The Signature"><img src="maison-dvue-elixir-studio.jpg" alt="The Signature — 30ml MAISON D'VUE Hair Elixir"></a>
+          <a class="pdp-cross-thumb" href="elixir-signature.html" aria-label="View The Signature"><img src="photos/shop-signature.jpg" alt="The Signature — 30ml MAISON D'VUE Hair Elixir"></a>
           <span class="pdp-cross-text">
             <a class="pdp-cross-name" href="elixir-signature.html">The Signature</a>
             <span class="pdp-cross-sub">Thirty millilitres, in full.</span>
@@ -197,43 +339,94 @@
 </footer>
 
 <script>
-  /* Gallery — click a thumbnail to show it in the main frame. */
+  /* Haute Couture Gallery — seamless transitions, pan-and-zoom inspection */
   (function(){
-    var thumbs = document.querySelectorAll('.pdp-gallery .pdp-thumb');
-    var photo = document.querySelector('.pdp-photo');
+    var gallery = document.querySelector('.pdp-gallery');
+    if (!gallery) return;
+    var thumbs = gallery.querySelectorAll('.pdp-thumb');
+    var photo = gallery.querySelector('.pdp-photo');
+    var img = photo ? photo.querySelector('.pdp-photo-img') : null;
+    var v = photo ? photo.querySelector('.pdp-photo-video') : null;
     if (!thumbs.length || !photo) return;
+
+    function applyMedia(t){
+      thumbs.forEach(function(x){ x.classList.remove('is-active'); });
+      t.classList.add('is-active');
+      var isCover = t.dataset.fit === 'cover';
+      photo.classList.toggle('is-cover', isCover);
+
+      if (t.dataset.media === 'video'){
+        if (img) img.style.display = 'none';
+        if (v){
+          v.style.display = '';
+          v.classList.remove('is-revealing');
+          void v.offsetWidth;
+          v.classList.add('is-revealing');
+          if ((v.getAttribute('src') || '') !== t.dataset.src){
+            v.setAttribute('src', t.dataset.src);
+            if (t.dataset.poster) v.setAttribute('poster', t.dataset.poster);
+            v.load();
+          }
+          v.play().catch(function(){});
+        }
+      } else {
+        if (v){ v.pause(); v.style.display = 'none'; }
+        if (img){
+          img.style.display = '';
+          img.classList.remove('is-revealing');
+          void img.offsetWidth;
+          img.classList.add('is-revealing');
+          if (img.getAttribute('src') !== t.dataset.src){
+            img.setAttribute('src', t.dataset.src);
+            var thumbImg = t.querySelector('img');
+            if (thumbImg) {
+              img.setAttribute('alt', thumbImg.getAttribute('alt') || '');
+            }
+          }
+        }
+      }
+    }
+
     thumbs.forEach(function(t){
       t.addEventListener('click', function(){
-        thumbs.forEach(function(x){ x.classList.remove('is-active'); });
-        t.classList.add('is-active');
-        var v = photo.querySelector('.pdp-photo-video');
-        var img = photo.querySelector('.pdp-photo-img');
-        if (t.dataset.media === 'video'){
-          photo.classList.add('has-media');
-          if (img) img.style.display = 'none';
-          if (v){
-            v.style.display = '';
-            if ((v.getAttribute('src') || '') !== t.dataset.src){
-              v.setAttribute('src', t.dataset.src);
-              if (t.dataset.poster) v.setAttribute('poster', t.dataset.poster);
-              v.load();
-            }
-            v.play().catch(function(){});
-          }
-        } else if (t.dataset.media === 'image'){
-          photo.classList.add('has-media');
-          if (v){ v.pause(); v.style.display = 'none'; }
-          if (img){
-            img.style.display = '';
-            if (img.getAttribute('src') !== t.dataset.src) img.setAttribute('src', t.dataset.src);
-          }
-        } else {
-          photo.classList.remove('has-media');   // reveal the placeholder mark
-          if (v) v.style.display = 'none';
-          if (img) img.style.display = 'none';
-        }
+        applyMedia(t);
       });
     });
+
+    /* Luxury Pan-and-Zoom on Main Image */
+    var isHovering = false;
+    photo.addEventListener('mouseenter', function(e){
+      if (v && v.style.display !== 'none') return;
+      isHovering = true;
+      photo.classList.add('is-zoomed');
+      updateZoomOrigin(e);
+    });
+
+    photo.addEventListener('mousemove', function(e){
+      if (!isHovering) return;
+      updateZoomOrigin(e);
+    });
+
+    photo.addEventListener('mouseleave', function(){
+      isHovering = false;
+      photo.classList.remove('is-zoomed');
+      if (img){
+        img.style.transformOrigin = 'center center';
+      }
+    });
+
+    function updateZoomOrigin(e){
+      if (!img) return;
+      var rect = photo.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top) / rect.height) * 100;
+      img.style.transformOrigin = x + '% ' + y + '%';
+    }
+
+    var initialActive = gallery.querySelector('.pdp-thumb.is-active');
+    if (initialActive) {
+      photo.classList.toggle('is-cover', initialActive.dataset.fit === 'cover');
+    }
   })();
 </script>
 <script src="assets/chat.js?v=5" defer></script>

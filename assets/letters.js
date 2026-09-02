@@ -285,8 +285,8 @@
   }
 
   // ── Open / close ────────────────────────────────────────────────────────────
-  function show() {
-    if (getCookie(COOKIE)) return;
+  function show(force) {
+    if (!force && getCookie(COOKIE)) return;
     overlay.classList.add("visible");
     overlay.setAttribute("aria-hidden", "false");
     setCookie(COOKIE, "shown", DISMISS_DAYS);
@@ -295,6 +295,18 @@
     overlay.classList.remove("visible");
     overlay.setAttribute("aria-hidden", "true");
   }
+
+  window.openLettersPopup = function (force) {
+    show(force !== false);
+  };
+
+  document.addEventListener("click", function (e) {
+    var target = e.target.closest('a[href="#necklace"], a[href="#giveaway"], a[href="#letters"], .js-open-giveaway');
+    if (target) {
+      e.preventDefault();
+      window.openLettersPopup(true);
+    }
+  });
 
   closeBtn.addEventListener("click", close);
   overlay.addEventListener("click", function (e) { if (e.target === overlay) close(); });
