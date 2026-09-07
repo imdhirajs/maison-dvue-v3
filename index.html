@@ -1677,7 +1677,7 @@
   }
 
   /* ═══════════════════════════════════════════════════════════
-     SCROLL-SCRUB HERO (PORTED FROM V2)
+     SCROLL-SCRUB HERO — real <video> element, scrubbed via currentTime
      ═══════════════════════════════════════════════════════════ */
   .dv-hero-sticky {
     position: sticky;
@@ -1685,7 +1685,7 @@
     height: 100vh;
     height: 100svh;
     overflow: hidden;
-    background: #0A0A0C url('data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAABwBACdASoYAA4APu1iqU2ppaOiMAgBMB2JbACdMoRwAB8aaiBaskZRoEtpAAD+7p9CyiudmrWopqFpf29+Xg2bEXYsfrz+TkYCBXhBqiS1DvtXUMNjIQIzKyzDN+DllvSevlzwyZlAZe3J0p0Qt9++GGzQHBXpQs0wlo8uckDwcnz2AAA=') center/cover no-repeat;
+    background: #000;
   }
   .dv-hero-canvas {
     position: absolute;
@@ -1693,19 +1693,9 @@
     width: 100%;
     height: 100%;
     display: block;
-    background: url('assets/hero-poster/hero-poster.webp') center/cover no-repeat;
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-  .dv-hero-fallback-media {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
     object-fit: cover;
     object-position: center;
-    display: none;
+    pointer-events: none;
   }
   .dv-cue {
     position: absolute;
@@ -1720,6 +1710,51 @@
   }
   @keyframes dvDrift { 0%,100% { transform:translateY(0); opacity:.55 } 50% { transform:translateY(9px); opacity:1 } }
   @media (max-height: 780px) { .dv-cue { display:none !important } }
+
+  /* Fullscreen preloader gate */
+  .hero-loader {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    z-index: 9999;
+    transition: opacity .65s cubic-bezier(.16,1,.3,1), visibility .65s cubic-bezier(.16,1,.3,1);
+    user-select: none;
+  }
+  .hero-loader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
+  .hero-loader-inner { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 480px; padding: 0 24px; }
+  .hero-loader-rule { width: 34px; height: 1px; background: rgba(239,233,223,.4); margin-bottom: 22px; }
+  .hero-loader-brand {
+    font-family: var(--font-display); font-weight: 400; font-size: 13px; line-height: 1.1;
+    letter-spacing: .32em; text-transform: uppercase; color: #EFE9DF; margin-bottom: 20px;
+  }
+  .hero-loader-status {
+    font-family: var(--font-italic); font-style: italic; font-weight: 400;
+    font-size: clamp(15px, 1.6vw, 18px); letter-spacing: .01em; color: rgba(239,233,223,.72);
+    min-height: 24px; margin-bottom: 26px; transition: opacity .25s ease; line-height: 1.4;
+  }
+  .hero-loader-track { width: clamp(180px, 25vw, 260px); height: 1px; background: rgba(239,233,223,.16); overflow: hidden; position: relative; }
+  .hero-loader-fill { width: 0%; height: 100%; background: #EFE9DF; transition: width .12s ease-out; }
+  .hero-loader-percent { font-family: var(--font-sans); font-weight: 400; font-size: 10px; color: rgba(239,233,223,.6); letter-spacing: .18em; margin-top: 16px; }
+
+  /* Choreographed narrative beats (opacity only) */
+  .dv-hero-beats { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+  .dv-hero-beat {
+    position: absolute; inset: 0; opacity: 0; display: flex; align-items: flex-end; justify-content: center;
+    padding: 0 clamp(20px,4vw,64px) clamp(70px,10vh,140px);
+    transition: opacity .4s cubic-bezier(.2,.7,.2,1);
+  }
+  .dv-hero-beat.is-active { opacity: 1; }
+  .dv-hero-beat p {
+    font-family: var(--font-italic); font-style: italic; font-weight: 400; color: #EFE9DF;
+    font-size: clamp(20px, 2.6vw, 30px); line-height: 1.35; max-width: 620px; text-align: center; margin: 0;
+    text-shadow: 0 2px 24px rgba(0,0,0,.5);
+  }
 </style>
 <link rel="stylesheet" href="assets/nav.css?v=13">
 <link rel="stylesheet" href="assets/house.css?v=4">
@@ -1796,13 +1831,35 @@
 
 
   <!-- ═══ SCROLL-SCRUB HERO REGION (PORTED FROM V2) ═══ -->
-  <section id="slide-elixir" data-hero-region style="position:relative;height:clamp(2800px, 460vh, 6200px);background:#0A0A0C;scroll-snap-align:start;">
+  <section id="slide-elixir" data-hero-region style="position:relative;height:clamp(2800px, 460vh, 6200px);background:#000;scroll-snap-align:start;">
     <div id="heroSticky" class="dv-hero-sticky">
-      <canvas id="heroCanvas" class="dv-hero-canvas" aria-hidden="true"></canvas>
-      <video id="heroMobileVideo" class="dv-hero-fallback-media" muted loop playsinline preload="none" aria-hidden="true"></video>
-      <img id="heroStaticPoster" class="dv-hero-fallback-media" src="assets/hero-poster/hero-poster.webp?v=2" alt="MAISON D'VUE Hair Elixir — signature video sequence">
+
+      <!-- Fullscreen preloader gate -->
+      <div id="hero-loader" class="hero-loader" aria-live="polite" aria-label="Loading experience">
+        <div class="hero-loader-inner">
+          <div class="hero-loader-rule"></div>
+          <div class="hero-loader-brand">MAISON D&rsquo;VUE</div>
+          <div id="hero-loader-status" class="hero-loader-status">Beverly Hills &middot; the ritual begins</div>
+          <div class="hero-loader-track"><div id="hero-loader-fill" class="hero-loader-fill"></div></div>
+          <div id="hero-loader-percent" class="hero-loader-percent">0%</div>
+        </div>
+      </div>
+
+      <!-- Start / end poster frames & scrubbed video -->
+      <img id="heroStaticPoster" class="dv-hero-canvas" src="assets/hero-scrub/hero-poster-start.webp" width="1920" height="1080" fetchpriority="high" decoding="async" alt="MAISON D'VUE Hair Elixir — signature ritual film">
+      <img id="heroEndPoster" class="dv-hero-canvas" src="assets/hero-scrub/hero-poster-end.webp" width="1920" height="1080" decoding="async" alt="MAISON D'VUE Hair Elixir — final frame" style="opacity:0;pointer-events:none;transition:opacity .2s ease">
+      <video id="heroVideo" class="dv-hero-canvas" data-src="assets/hero-scrub/hero-scrub.mp4" muted playsinline preload="auto" disablepictureinpicture aria-label="MAISON D'VUE Hair Elixir ritual film" style="opacity:0"></video>
 
       <div class="slide-scrim" aria-hidden="true"></div>
+
+      <!-- Choreographed narrative beats -->
+      <div class="dv-hero-beats">
+        <div class="dv-hero-beat" data-start="0.06" data-end="0.16"><p>Beverly Hills. Where the ritual begins.</p></div>
+        <div class="dv-hero-beat" data-start="0.28" data-end="0.38"><p><em>&Acirc;me de Vue</em> &mdash; our signature scent, sealed within.</p></div>
+        <div class="dv-hero-beat" data-start="0.48" data-end="0.58"><p>A single dropper, warmed between the palms.</p></div>
+        <div class="dv-hero-beat" data-start="0.68" data-end="0.78"><p>Drawn through hair, strand by strand.</p></div>
+        <div class="dv-hero-beat" data-start="0.88" data-end="0.97"><p>The Hair Elixir.</p></div>
+      </div>
 
       <div class="dv-cue">
         <div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(239,233,223,.42);font-family:var(--font-display)">Scroll</div>
@@ -2089,7 +2146,7 @@
 
   /* ─── INTELLIGENT PERFORMANCE VIDEO CONTROLLER ─── */
   (function(){
-    var vids = document.querySelectorAll('video:not(#heroMobileVideo)');
+    var vids = document.querySelectorAll('video:not(#heroVideo)');
     if (!vids.length) return;
     if ('IntersectionObserver' in window) {
       var videoObserver = new IntersectionObserver(function(entries){
@@ -2373,348 +2430,7 @@
     });
   })();
 
-  /* ─── SCROLL-SCRUB HERO ENGINE (HIGH-PERFORMANCE LUXURY ARCHITECTURE) ─── */
-  const MDV_HERO_TOTAL_FRAMES = 524;
-  const MDV_HERO_FRAME_PATH = (n) => "assets/hero-frames-webp/frame-" + String(n).padStart(4, "0") + ".webp?v=3";
-  const MDV_HERO_MOBILE_VIDEO_SRC = "assets/hero-fallback/hero-mobile.mp4?v=2";
-  const MDV_HERO_SCROLL_HEIGHT = "clamp(2800px, 460vh, 6200px)";
-  const MDV_HERO_PRELOAD_CONCURRENCY = 4; // Optimized connection pool (prevents network saturation)
-  const MDV_HERO_BEATS = [];
-
-  class MdvHeroEngine {
-    constructor(stickyEl) {
-      this.sticky = stickyEl;
-      this.section = stickyEl.closest("[data-hero-region]");
-      this.canvas = stickyEl.querySelector("#heroCanvas");
-      this.video = stickyEl.querySelector("#heroMobileVideo");
-      this.poster = stickyEl.querySelector("#heroStaticPoster");
-      this.ctx = this.canvas ? this.canvas.getContext("2d", { alpha: false, desynchronized: true }) : null;
-      this.frameBitmaps = new Array(MDV_HERO_TOTAL_FRAMES + 1);
-      this.loadingPromises = {};
-      this.lastDrawnFrame = 0;
-      this.currentProgress = 0;
-      this.targetProgress = 0;
-      this.lastProgress = 0;
-      this.scrollDirection = 1;
-      this.isScrolling = false;
-      this.scrollTimer = null;
-      this.renderRafId = null;
-      this.resizeRafId = null;
-      this.lenis = null;
-      this.lenisRafId = null;
-      this.beatEls = [];
-      this.ctaEl = null;
-      this.activeBeatId = null;
-      this.destroyed = false;
-    }
-
-    isMobilePhone() {
-      const ua = navigator.userAgent || "";
-      const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-      const narrow = window.innerWidth <= 820;
-      const uaMobile = /Android|iPhone|iPod|Mobile/i.test(ua);
-      return uaMobile || (isTouch && narrow);
-    }
-
-    async init() {
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      if (reducedMotion) {
-        this.showStaticPoster();
-        return;
-      }
-      if (this.isMobilePhone()) {
-        this.showMobileVideo();
-        return;
-      }
-
-      this.runCanvasEngine();
-    }
-
-    showStaticPoster() {
-      if (this.canvas) this.canvas.style.display = "none";
-      if (this.video) this.video.style.display = "none";
-      if (this.poster) this.poster.style.display = "block";
-    }
-
-    showMobileVideo() {
-      if (this.canvas) this.canvas.style.display = "none";
-      if (this.poster) this.poster.style.display = "none";
-      if (!this.video) return;
-      this.video.src = MDV_HERO_MOBILE_VIDEO_SRC;
-      this.video.style.display = "block";
-      this.video.play().catch(() => {});
-    }
-
-    async runCanvasEngine() {
-      if (!this.canvas || !this.ctx) return;
-      if (this.section) this.section.style.height = MDV_HERO_SCROLL_HEIGHT;
-
-      this.beatEls = MDV_HERO_BEATS.map((b) => ({ ...b, el: this.sticky.querySelector("#" + b.id) }));
-      this.ctaEl = this.sticky.querySelector("#heroCta");
-      this.activeBeatId = null;
-
-      this.onResize = () => this.scheduleResize();
-      window.addEventListener("resize", this.onResize);
-      this.resizeCanvas();
-
-      // Phase 1: Instant First Frame & Immediate Buffer (Frames 1-35)
-      this.loadFrame(1, "high").then((bmp) => {
-        if (bmp) this.drawFrame(1, true);
-      });
-
-      // Rapidly buffer the first 35 frames so initial scroll is 100% buttery smooth with 0 wait
-      for (let f = 2; f <= 35; f++) {
-        this.loadFrame(f, "high");
-      }
-
-      this.setupLenis();
-      this.onScroll = () => this.onScrollHappened();
-      window.addEventListener("scroll", this.onScroll, { passive: true });
-      window.addEventListener("touchmove", this.onScroll, { passive: true });
-      this.updateTargetProgress();
-
-      this.startRenderLoop();
-      // Phase 2: Start intelligent background preloader (outward expanding from current view)
-      this.startBackgroundPreloader();
-    }
-
-    scheduleResize() {
-      if (this.resizeRafId) return;
-      this.resizeRafId = requestAnimationFrame(() => {
-        this.resizeRafId = null;
-        this.resizeCanvas();
-      });
-    }
-
-    resizeCanvas() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      const box = this.sticky.getBoundingClientRect();
-      this.canvas.width = Math.round(box.width * dpr);
-      this.canvas.height = Math.round(box.height * dpr);
-      if (this.lastDrawnFrame) this.drawFrame(this.lastDrawnFrame, true);
-    }
-
-    loadFrame(n, priority = "auto") {
-      if (n < 1 || n > MDV_HERO_TOTAL_FRAMES) return Promise.resolve(null);
-      if (this.frameBitmaps[n]) return Promise.resolve(this.frameBitmaps[n]);
-      if (this.loadingPromises[n]) return this.loadingPromises[n];
-
-      const fetchOpts = priority === "high" ? { priority: "high" } : {};
-      this.loadingPromises[n] = fetch(MDV_HERO_FRAME_PATH(n), fetchOpts)
-        .then((r) => {
-          if (!r.ok) throw new Error("Frame not found: " + n);
-          return r.blob();
-        })
-        .then((b) => createImageBitmap(b))
-        .then((bmp) => {
-          this.frameBitmaps[n] = bmp;
-          delete this.loadingPromises[n];
-          // Repaint immediately if this frame is what should currently be showing —
-          // don't wait for the next scroll event to notice it arrived.
-          const desiredFrame = Math.min(MDV_HERO_TOTAL_FRAMES, Math.max(1, Math.round(this.currentProgress * (MDV_HERO_TOTAL_FRAMES - 1)) + 1));
-          if (Math.abs(n - desiredFrame) <= 2) {
-            this.drawFrame(desiredFrame, true);
-          }
-          return bmp;
-        })
-        .catch(() => {
-          delete this.loadingPromises[n];
-          return null;
-        });
-      return this.loadingPromises[n];
-    }
-
-    findNearestLoadedFrame(requested) {
-      if (this.frameBitmaps[requested]) return requested;
-      // Search outward for closest available frame
-      for (let d = 1; d <= 40; d++) {
-        const f1 = requested - d;
-        const f2 = requested + d;
-        if (f1 >= 1 && this.frameBitmaps[f1]) return f1;
-        if (f2 <= MDV_HERO_TOTAL_FRAMES && this.frameBitmaps[f2]) return f2;
-      }
-      return this.lastDrawnFrame || 1;
-    }
-
-    drawFrame(n, force) {
-      const target = this.frameBitmaps[n] ? n : this.findNearestLoadedFrame(n);
-      if (target === null || target === undefined) return;
-      if (!force && target === this.lastDrawnFrame) return;
-      const bmp = this.frameBitmaps[target];
-      if (!bmp) return;
-
-      const cw = this.canvas.width;
-      const ch = this.canvas.height;
-      const canvasRatio = cw / ch;
-      const imgRatio = bmp.width / bmp.height;
-      let dw, dh, dx, dy;
-      if (imgRatio > canvasRatio) {
-        dh = ch; dw = ch * imgRatio; dx = (cw - dw) / 2; dy = 0;
-      } else {
-        dw = cw; dh = cw / imgRatio; dx = 0; dy = 0;
-      }
-      this.ctx.clearRect(0, 0, cw, ch);
-      this.ctx.drawImage(bmp, dx, dy, dw, dh);
-      this.lastDrawnFrame = target;
-    }
-
-    setupLenis() {
-      if (typeof Lenis === "undefined") return;
-      this.lenis = new Lenis({
-        duration: 1.15,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
-        smoothWheel: true,
-        wheelMultiplier: 1.0,
-        touchMultiplier: 1.5,
-        infinite: false
-      });
-      this.lenis.on('scroll', () => {
-        this.onScrollHappened();
-      });
-      const raf = (time) => {
-        if (this.destroyed) return;
-        this.lenis.raf(time);
-        this.lenisRafId = requestAnimationFrame(raf);
-      };
-      this.lenisRafId = requestAnimationFrame(raf);
-    }
-
-    onScrollHappened() {
-      this.updateTargetProgress();
-      this.isScrolling = true;
-      if (this.scrollTimer) clearTimeout(this.scrollTimer);
-      this.scrollTimer = setTimeout(() => {
-        this.isScrolling = false;
-      }, 250);
-    }
-
-    updateTargetProgress() {
-      if (!this.section) return;
-      const rect = this.section.getBoundingClientRect();
-      const heroTop = rect.top + window.scrollY;
-      const heroHeight = this.section.offsetHeight;
-      const viewportH = window.innerHeight;
-      const raw = (window.scrollY - heroTop) / (heroHeight - viewportH);
-      const newProgress = Math.min(1, Math.max(0, raw || 0));
-      this.scrollDirection = newProgress >= this.targetProgress ? 1 : -1;
-      this.targetProgress = newProgress;
-    }
-
-    prioritizeNear(current) {
-      // High-priority sliding window: 24 frames ahead of scroll direction, 6 frames behind
-      const forwardCount = this.scrollDirection >= 0 ? 24 : 8;
-      const backwardCount = this.scrollDirection >= 0 ? 6 : 24;
-      for (let i = -backwardCount; i <= forwardCount; i++) {
-        const f = current + i;
-        if (f >= 1 && f <= MDV_HERO_TOTAL_FRAMES && !this.frameBitmaps[f] && !this.loadingPromises[f]) {
-          this.loadFrame(f, "high");
-        }
-      }
-    }
-
-    startRenderLoop() {
-      const tick = () => {
-        if (this.destroyed) return;
-
-        const diff = this.targetProgress - this.currentProgress;
-        if (Math.abs(diff) > 0.00002) {
-          // Responsive tracking synchronized with Lenis smooth scroll
-          this.currentProgress += diff * 0.38;
-          const frame = Math.min(MDV_HERO_TOTAL_FRAMES, Math.max(1, Math.round(this.currentProgress * (MDV_HERO_TOTAL_FRAMES - 1)) + 1));
-          this.drawFrame(frame);
-          this.updateNarrative(this.currentProgress);
-
-          if (Math.abs(frame - (this.lastPrioritizedFrame || 0)) >= 2) {
-            this.lastPrioritizedFrame = frame;
-            this.prioritizeNear(frame);
-          }
-        } else if (this.currentProgress !== this.targetProgress) {
-          this.currentProgress = this.targetProgress;
-          const frame = Math.min(MDV_HERO_TOTAL_FRAMES, Math.max(1, Math.round(this.currentProgress * (MDV_HERO_TOTAL_FRAMES - 1)) + 1));
-          this.drawFrame(frame);
-          this.updateNarrative(this.currentProgress);
-        }
-
-        this.renderRafId = requestAnimationFrame(tick);
-      };
-      this.renderRafId = requestAnimationFrame(tick);
-    }
-
-    updateNarrative(progress) {
-      const beat = this.beatEls.find((b) => progress >= b.from && progress < b.to) || this.beatEls[this.beatEls.length - 1];
-      if (!beat || beat.id === this.activeBeatId) return;
-      this.activeBeatId = beat.id;
-      this.beatEls.forEach((b) => {
-        if (b.el) b.el.classList.toggle("mdv-hero-beat-active", b.id === beat.id);
-      });
-      if (this.ctaEl) this.ctaEl.classList.toggle("mdv-hero-cta-hidden", beat.id === "heroBeat5");
-    }
-
-    startBackgroundPreloader() {
-      // Outward expanding preloader: loads outward from current user position
-      // Pauses during active scroll so user gets 100% network bandwidth and CPU
-      let activeWorkers = 0;
-
-      const getNextFrameToLoad = () => {
-        if (this.isScrolling) return null; // Yield completely during active scrolling
-        const currentFrame = Math.min(MDV_HERO_TOTAL_FRAMES, Math.max(1, Math.round(this.currentProgress * (MDV_HERO_TOTAL_FRAMES - 1)) + 1));
-        
-        // Outward search from currentFrame
-        for (let d = 1; d <= MDV_HERO_TOTAL_FRAMES; d++) {
-          const ahead = currentFrame + d;
-          if (ahead <= MDV_HERO_TOTAL_FRAMES && !this.frameBitmaps[ahead] && !this.loadingPromises[ahead]) {
-            return ahead;
-          }
-          const behind = currentFrame - d;
-          if (behind >= 1 && !this.frameBitmaps[behind] && !this.loadingPromises[behind]) {
-            return behind;
-          }
-        }
-        return null;
-      };
-
-      const step = () => {
-        if (this.destroyed) return;
-        while (activeWorkers < MDV_HERO_PRELOAD_CONCURRENCY) {
-          const next = getNextFrameToLoad();
-          if (!next) break;
-          activeWorkers++;
-          this.loadFrame(next, "auto").finally(() => {
-            activeWorkers--;
-          });
-        }
-        setTimeout(step, this.isScrolling ? 180 : 35);
-      };
-
-      setTimeout(step, 400); // Start background worker after initial buffer finishes
-    }
-
-    destroy() {
-      this.destroyed = true;
-      if (this.renderRafId) cancelAnimationFrame(this.renderRafId);
-      if (this.resizeRafId) cancelAnimationFrame(this.resizeRafId);
-      if (this.lenisRafId) cancelAnimationFrame(this.lenisRafId);
-      if (this.scrollTimer) clearTimeout(this.scrollTimer);
-      if (this.onResize) window.removeEventListener("resize", this.onResize);
-      if (this.onScroll) {
-        window.removeEventListener("scroll", this.onScroll);
-        window.removeEventListener("touchmove", this.onScroll);
-      }
-      this.lenis?.destroy();
-    }
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
-    var heroSticky = document.getElementById("heroSticky");
-    if (heroSticky) {
-      var heroEngine = new MdvHeroEngine(heroSticky);
-      window.heroEngine = heroEngine;
-      heroEngine.init();
-    }
-
     document.querySelectorAll('.wall-sound-btn').forEach(function(btn){
       btn.addEventListener('click', function(){
         var video = document.getElementById(btn.getAttribute('data-video-target'));
@@ -2731,6 +2447,8 @@
 
 </script>
 
+<script src="video-scrubber.js" defer></script>
+<script src="hero.js" defer></script>
 <script src="assets/letters.js?v=3" defer></script>
 <script src="assets/chat.js?v=5" defer></script>
 <script src="assets/menu.js?v=10" defer></script>
