@@ -4,6 +4,7 @@
 name = "maisondvue-chat"
 main = "worker.js"
 compatibility_date = "2024-11-01"
+account_id = "615f3a03e688cc4c3c8cd7198f94625b"
 
 # The Anthropic API key is NOT stored here. It is set as an encrypted secret:
 #   npx wrangler secret put ANTHROPIC_API_KEY

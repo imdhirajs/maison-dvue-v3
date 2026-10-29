@@ -2797,6 +2797,10 @@
         this.loader.classList.add('loaded');
         setTimeout(() => { if (this.loader) this.loader.style.display = 'none'; }, 700);
       }
+      // If hero blob has not landed yet when loader dismisses, stream immediately so seeking works without delay
+      if (!this.heroSrc && (!this.heroData || !this.heroData.done)) {
+        this.useStream();
+      }
     }
 
     checkLoader() {

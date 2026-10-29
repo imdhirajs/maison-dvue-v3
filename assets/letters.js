@@ -47,8 +47,9 @@
 
   .letters-modal {
     position: relative;
-    width: 100%;
+    width: calc(100vw - 32px);
     max-width: 520px;
+    box-sizing: border-box;
     background: var(--warm-white);
     border: 1px solid rgba(10, 10, 10, 0.12);
     padding: 64px 56px 48px;
@@ -219,7 +220,7 @@
   }
 
   @media (max-width: 768px) {
-    .letters-modal { padding: 48px 28px 36px; }
+    .letters-modal { width: calc(100vw - 32px); max-width: 100%; box-sizing: border-box; padding: 44px 20px 32px; }
   }`;
 
   var styleEl = document.createElement("style");
